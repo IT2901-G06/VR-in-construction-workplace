@@ -10,10 +10,10 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 public class ElectricityScript : MonoBehaviour
 {
     [SerializeField] private bool requiresBothHands = true;
-    [SerializeField] private float secondsBetweenElectricitySteps = 0.2f;
+    [SerializeField] private float secondsBetweenElectricitySteps = 0.1f;
     [Range(1, 100)]
     [SerializeField]
-    private int motorStrength = 20;
+    private int motorStrength = 100;
 
     private bool _electricityIsOn = false;
     private IXRSelectInteractable _leftHandSelectInteractable;
@@ -65,6 +65,10 @@ public class ElectricityScript : MonoBehaviour
 
         foreach (MotorEvent motorEvent in events)
         {
+            // If the stop has already started, we need to break out of this loop as the stop loop will
+            // not be able to stop requests that hasn't already started.
+            if (_stopElectricityCoroutine != null) break;
+
             int requestId = BhapticsLibrary.PlayMotors((int)motorEvent.PositionType, MagnifyMotorStrengths(motorEvent.MotorValues, motorStrength), 99999999);
             _bhapticsRequestIds.Add(requestId);
             yield return new WaitForSeconds(secondsBetweenElectricitySteps);
