@@ -13,9 +13,11 @@ public class HapticController : MonoBehaviour
 
     public static HapticController instance;
 
-    private int[] AllMaxTopVest;
-    private int[] AllMaxFrontVest;
-    private int[] AllMaxBackVest;
+    private int[] VestTop;
+    private int[] VestFront;
+    private int[] VestBack;
+    private int[] VestLeft;
+    private int[] VestRight;
 
     void Awake()
     {
@@ -28,7 +30,7 @@ public class HapticController : MonoBehaviour
             Destroy(this);
         }
 
-    AllMaxTopVest = new int[] {
+    VestTop = new int[] {
         motorStrength, motorStrength, motorStrength, motorStrength,
         0, 0, 0, 0,
         0, 0, 0, 0,
@@ -40,7 +42,7 @@ public class HapticController : MonoBehaviour
         0, 0, 0, 0,
     };
 
-    AllMaxFrontVest = new int[] {
+    VestFront = new int[] {
         motorStrength, motorStrength, motorStrength, motorStrength,
         motorStrength, motorStrength, motorStrength, motorStrength,
         motorStrength, motorStrength, motorStrength, motorStrength,
@@ -52,7 +54,7 @@ public class HapticController : MonoBehaviour
         0, 0, 0, 0,
     };
 
-    AllMaxBackVest = new int[] {
+    VestBack = new int[] {
         0, 0, 0, 0,
         0, 0, 0, 0,
         0, 0, 0, 0,
@@ -62,6 +64,30 @@ public class HapticController : MonoBehaviour
         motorStrength, motorStrength, motorStrength, motorStrength,
         motorStrength, motorStrength, motorStrength, motorStrength,
         motorStrength, motorStrength, motorStrength, motorStrength,
+    };
+
+    VestLeft = new int[] {
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+    };
+
+    VestRight = new int[] {
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
     };
     }
 
@@ -70,18 +96,31 @@ public class HapticController : MonoBehaviour
     public void RunHead ()
     {
         Debug.Log("head");
-        BhapticsLibrary.PlayMotors((int) PositionType.Vest, AllMaxTopVest, motorRunTimeMs);
+        BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestTop, motorRunTimeMs);
     }
 
     public void RunFront ()
     {
         Debug.Log("front");
-        BhapticsLibrary.PlayMotors((int) PositionType.Vest, AllMaxFrontVest, motorRunTimeMs);
+        BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestFront, motorRunTimeMs);
     }
 
     public void RunBack ()
     {
         Debug.Log("back");
-        BhapticsLibrary.PlayMotors((int) PositionType.Vest, AllMaxBackVest, motorRunTimeMs);
+        BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestBack, motorRunTimeMs);
+    }
+
+    public void RunLeft ()
+    {
+        Debug.Log("left");
+        BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestLeft, motorRunTimeMs);
+    }
+
+    public void RunRight ()
+    {
+        Debug.Log("right");
+        BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestRight, motorRunTimeMs);
+
     }
 }
