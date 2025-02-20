@@ -4,7 +4,8 @@ public class RightController : MonoBehaviour
 {
     void Update()
     {
-        transform.rotation = Quaternion.Euler(0, transform.rotation.y, transform.rotation.z);
+        Quaternion cameraRotation = GameObject.FindGameObjectWithTag("MainCamera").transform.rotation;
+        transform.rotation = new Quaternion(0, cameraRotation.y, 0, cameraRotation.w);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -66,30 +66,31 @@ public class HapticController : MonoBehaviour
         motorStrength, motorStrength, motorStrength, motorStrength,
     };
 
-    VestLeft = new int[] {
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
 
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
+    VestLeft = new int[] {
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
     };
 
     VestRight = new int[] {
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
 
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
     };
-    }
+}
 
 
 
