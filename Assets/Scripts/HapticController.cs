@@ -1,5 +1,6 @@
 using Bhaptics.SDK2;
 using UnityEngine;
+using static BodyTriggerController;
 
 public class HapticController : MonoBehaviour
 {
@@ -66,62 +67,51 @@ public class HapticController : MonoBehaviour
         motorStrength, motorStrength, motorStrength, motorStrength,
     };
 
-
     VestLeft = new int[] {
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
 
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
+        motorStrength, 0, 0, 0,
     };
 
     VestRight = new int[] {
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
 
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
+        0, 0, 0, motorStrength,
     };
-}
-
-
-
-    public void RunHead ()
-    {
-        Debug.Log("head");
-        BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestTop, motorRunTimeMs);
     }
 
-    public void RunFront ()
+    public void RunMotors (TriggerPositionType position)
     {
-        Debug.Log("front");
-        BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestFront, motorRunTimeMs);
-    }
-
-    public void RunBack ()
-    {
-        Debug.Log("back");
-        BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestBack, motorRunTimeMs);
-    }
-
-    public void RunLeft ()
-    {
-        Debug.Log("left");
-        BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestLeft, motorRunTimeMs);
-    }
-
-    public void RunRight ()
-    {
-        Debug.Log("right");
-        BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestRight, motorRunTimeMs);
-
+        Debug.Log(position);
+        switch(position)
+        {
+            case TriggerPositionType.Front:
+                BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestFront, motorRunTimeMs);
+                break;
+            case TriggerPositionType.Back:
+                BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestBack, motorRunTimeMs);
+                break;
+            case TriggerPositionType.Left:
+                BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestLeft, motorRunTimeMs);
+                break;
+            case TriggerPositionType.Right:
+                BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestRight, motorRunTimeMs);
+                break;
+            case TriggerPositionType.Head:
+                BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestTop, motorRunTimeMs);
+                break;
+        }
     }
 }
