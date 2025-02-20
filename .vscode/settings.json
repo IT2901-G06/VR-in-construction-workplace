@@ -56,5 +56,7 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "VR-in-construction-workplace.sln"
+    "dotnet.defaultSolution": "VR-in-construction-workplace.sln",
+    "editor.defaultFormatter": "ms-dotnettools.csharp",
+    "editor.formatOnSave": true
 }
