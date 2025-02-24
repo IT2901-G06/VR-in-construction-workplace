@@ -73,3 +73,9 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 .gitignore
+/Assets/IGBlocks/
+/Assets/Garage/
+/Assets/Obi/
+/Assets/ScaffoldingKit/
+/Assets/SimpliCity_Construction_Yard/
+/Assets/Plugins/CW/
