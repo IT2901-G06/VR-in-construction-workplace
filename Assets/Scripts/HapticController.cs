@@ -6,9 +6,13 @@ public class HapticController : MonoBehaviour
 {
 
     [SerializeField]
-    private int motorRunTimeMs = 500;
+    [Range(0, 100)]
+    private int _minimumMotorStrength = 10;
 
-    public static HapticController instance;
+    [SerializeField]
+    private int _motorRunTimeMs = 500;
+
+    public static HapticController Instance;
 
     private int[] VestTop;
     private int[] VestFront;
@@ -18,10 +22,10 @@ public class HapticController : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(instance);
+            Instance = this;
+            DontDestroyOnLoad(Instance);
         }
         else
         {
@@ -94,6 +98,11 @@ public class HapticController : MonoBehaviour
         };
     }
 
+    public int GetMinimumMotorStrength()
+    {
+        return _minimumMotorStrength;
+    }
+
     private int[] MagnifyMotorStrengths(int[] motorValues, int magnificationFactor)
     {
         int[] newMotorValues = new int[motorValues.Length];
@@ -110,19 +119,19 @@ public class HapticController : MonoBehaviour
         switch (position)
         {
             case TriggerPositionType.Front:
-                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestFront, motorStrength), motorRunTimeMs);
+                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestFront, motorStrength), _motorRunTimeMs);
                 break;
             case TriggerPositionType.Back:
-                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestBack, motorStrength), motorRunTimeMs);
+                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestBack, motorStrength), _motorRunTimeMs);
                 break;
             case TriggerPositionType.Left:
-                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestLeft, motorStrength), motorRunTimeMs);
+                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestLeft, motorStrength), _motorRunTimeMs);
                 break;
             case TriggerPositionType.Right:
-                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestRight, motorStrength), motorRunTimeMs);
+                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestRight, motorStrength), _motorRunTimeMs);
                 break;
             case TriggerPositionType.Head:
-                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestTop, motorStrength), motorRunTimeMs);
+                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestTop, motorStrength), _motorRunTimeMs);
                 break;
         }
     }

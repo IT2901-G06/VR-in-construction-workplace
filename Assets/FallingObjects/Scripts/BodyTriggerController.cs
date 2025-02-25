@@ -5,7 +5,7 @@ public class BodyTriggerController : MonoBehaviour
 
     [Tooltip("Select the position for the haptic feedback")]
     [SerializeField]
-    private TriggerPositionType position;
+    private TriggerPositionType _position;
 
     public enum TriggerPositionType
     {
@@ -26,8 +26,9 @@ public class BodyTriggerController : MonoBehaviour
     {
         if (other.CompareTag("FallingObject"))
         {
-            int motorStrength = Mathf.Clamp((int)(other.attachedRigidbody.linearVelocity.magnitude * 10), 10, 100);
-            HapticController.instance.RunMotors(position, motorStrength);
+            HapticController hapticController = HapticController.Instance;
+            int motorStrength = Mathf.Clamp((int)(other.attachedRigidbody.linearVelocity.magnitude * 10), hapticController.GetMinimumMotorStrength(), 100);
+            hapticController.RunMotors(_position, motorStrength);
         }
     }
 
