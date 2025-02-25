@@ -689,8 +689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46fb7ed93175d45d095254999436b892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  motorStrength: 100
-  motorRunTimeMs: 500
+  _minimumMotorStrength: 10
+  _motorRunTimeMs: 500
 --- !u!4 &1167870812
 Transform:
   m_ObjectHideFlags: 0
