@@ -6,10 +6,6 @@ public class HapticController : MonoBehaviour
 {
 
     [SerializeField]
-    [Range(0, 100)]
-    private int motorStrength;
-
-    [SerializeField]
     private int motorRunTimeMs = 500;
 
     public static HapticController instance;
@@ -26,91 +22,107 @@ public class HapticController : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(instance);
-        } else
+        }
+        else
         {
             Destroy(this);
         }
 
-    VestTop = new int[] {
-        motorStrength, motorStrength, motorStrength, motorStrength,
-        0, 0, 0, 0,
-        0, 0, 0, 0,
-        0, 0, 0, 0,
+        VestTop = new int[]
+        {
+            1, 1, 1, 1,
+            0, 0, 0, 0,
+            0, 0, 0, 0,
+            0, 0, 0, 0,
 
-        motorStrength, motorStrength, motorStrength, motorStrength,
-        0, 0, 0, 0,
-        0, 0, 0, 0,
-        0, 0, 0, 0,
-    };
+            1, 1, 1, 1,
+            0, 0, 0, 0,
+            0, 0, 0, 0,
+            0, 0, 0, 0,
+        };
 
-    VestFront = new int[] {
-        motorStrength, motorStrength, motorStrength, motorStrength,
-        motorStrength, motorStrength, motorStrength, motorStrength,
-        motorStrength, motorStrength, motorStrength, motorStrength,
-        motorStrength, motorStrength, motorStrength, motorStrength,
+        VestFront = new int[]
+        {
+            1, 1, 1, 1,
+            1, 1, 1, 1,
+            1, 1, 1, 1,
+            1, 1, 1, 1,
 
-        0, 0, 0, 0,
-        0, 0, 0, 0,
-        0, 0, 0, 0,
-        0, 0, 0, 0,
-    };
+            0, 0, 0, 0,
+            0, 0, 0, 0,
+            0, 0, 0, 0,
+            0, 0, 0, 0,
+        };
 
-    VestBack = new int[] {
-        0, 0, 0, 0,
-        0, 0, 0, 0,
-        0, 0, 0, 0,
-        0, 0, 0, 0,
+        VestBack = new int[]
+        {
+            0, 0, 0, 0,
+            0, 0, 0, 0,
+            0, 0, 0, 0,
+            0, 0, 0, 0,
 
-        motorStrength, motorStrength, motorStrength, motorStrength,
-        motorStrength, motorStrength, motorStrength, motorStrength,
-        motorStrength, motorStrength, motorStrength, motorStrength,
-        motorStrength, motorStrength, motorStrength, motorStrength,
-    };
+            1, 1, 1, 1,
+            1, 1, 1, 1,
+            1, 1, 1, 1,
+            1, 1, 1, 1,
+        };
 
-    VestLeft = new int[] {
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
+        VestLeft = new int[]
+        {
+            1, 0, 0, 0,
+            1, 0, 0, 0,
+            1, 0, 0, 0,
+            1, 0, 0, 0,
 
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-        motorStrength, 0, 0, 0,
-    };
+            1, 0, 0, 0,
+            1, 0, 0, 0,
+            1, 0, 0, 0,
+            1, 0, 0, 0,
+        };
 
-    VestRight = new int[] {
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
+        VestRight = new int[]
+        {
+            0, 0, 0, 1,
+            0, 0, 0, 1,
+            0, 0, 0, 1,
+            0, 0, 0, 1,
 
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-        0, 0, 0, motorStrength,
-    };
+            0, 0, 0, 1,
+            0, 0, 0, 1,
+            0, 0, 0, 1,
+            0, 0, 0, 1,
+        };
     }
 
-    public void RunMotors (TriggerPositionType position)
+    private int[] MagnifyMotorStrengths(int[] motorValues, int magnificationFactor)
     {
-        Debug.Log(position);
-        switch(position)
+        int[] newMotorValues = new int[motorValues.Length];
+        for (int i = 0; i < motorValues.Length; i++)
+        {
+            newMotorValues[i] = motorValues[i] * magnificationFactor;
+        }
+        return newMotorValues;
+    }
+
+    public void RunMotors(TriggerPositionType position, int motorStrength)
+    {
+        Debug.Log(position + " " + motorStrength);
+        switch (position)
         {
             case TriggerPositionType.Front:
-                BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestFront, motorRunTimeMs);
+                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestFront, motorStrength), motorRunTimeMs);
                 break;
             case TriggerPositionType.Back:
-                BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestBack, motorRunTimeMs);
+                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestBack, motorStrength), motorRunTimeMs);
                 break;
             case TriggerPositionType.Left:
-                BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestLeft, motorRunTimeMs);
+                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestLeft, motorStrength), motorRunTimeMs);
                 break;
             case TriggerPositionType.Right:
-                BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestRight, motorRunTimeMs);
+                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestRight, motorStrength), motorRunTimeMs);
                 break;
             case TriggerPositionType.Head:
-                BhapticsLibrary.PlayMotors((int) PositionType.Vest, VestTop, motorRunTimeMs);
+                BhapticsLibrary.PlayMotors((int)PositionType.Vest, MagnifyMotorStrengths(VestTop, motorStrength), motorRunTimeMs);
                 break;
         }
     }

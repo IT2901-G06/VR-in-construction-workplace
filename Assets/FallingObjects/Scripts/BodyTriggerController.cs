@@ -26,7 +26,8 @@ public class BodyTriggerController : MonoBehaviour
     {
         if (other.CompareTag("FallingObject"))
         {
-            HapticController.instance.RunMotors(position);
+            int motorStrength = Mathf.Clamp((int)(other.attachedRigidbody.linearVelocity.magnitude * 10), 10, 100);
+            HapticController.instance.RunMotors(position, motorStrength);
         }
     }
 
