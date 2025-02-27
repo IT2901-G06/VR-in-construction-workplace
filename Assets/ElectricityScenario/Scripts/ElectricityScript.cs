@@ -16,18 +16,16 @@ public class ElectricityScript : MonoBehaviour
     private int motorStrength = 100;
 
     private bool _electricityIsOn = false;
-    private IXRSelectInteractable _leftHandSelectInteractable;
-    private IXRSelectInteractable _rightHandSelectInteractable;
+    private IXRHoverInteractable _leftHandHoverInteractable;
+    private IXRHoverInteractable _rightHandHoverInteractable;
     private readonly List<int> _bhapticsRequestIds = new();
     private Coroutine _startElectricityCoroutine;
     private Coroutine _stopElectricityCoroutine;
 
-    private bool _leftHandSelected => _leftHandSelectInteractable != null;
-    private bool _rightHandSelected => _rightHandSelectInteractable != null;
-    private bool _hasGrabbedTwoOfSameDirection => _leftHandSelectInteractable?.transform.tag.Length > 0 && _leftHandSelectInteractable?.transform.tag == _rightHandSelectInteractable?.transform.tag;
-    private bool _rightToLeft => isElectricityFromSource(_rightHandSelectInteractable) && !isElectricityFromSource(_leftHandSelectInteractable);
-
-
+    private bool _leftHandHovered => _leftHandHoverInteractable != null;
+    private bool _rightHandHovered => _rightHandHoverInteractable != null;
+    private bool _hasGrabbedTwoOfSameDirection => _leftHandHoverInteractable?.transform.tag.Length > 0 && _leftHandHoverInteractable?.transform.tag == _rightHandHoverInteractable?.transform.tag;
+    private bool _rightToLeft => isElectricityFromSource(_rightHandHoverInteractable) && !isElectricityFromSource(_leftHandHoverInteractable);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,12 +34,12 @@ public class ElectricityScript : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             XRGrabInteractable childGrabInteractable = transform.GetChild(i).GetComponent<XRGrabInteractable>();
-            childGrabInteractable.selectEntered.AddListener(OnSelectedEnter);
-            childGrabInteractable.selectExited.AddListener(OnSelectedExit);
+            childGrabInteractable.hoverEntered.AddListener(OnHoveredEnter);
+            childGrabInteractable.hoverExited.AddListener(OnHoveredExit);
         }
     }
 
-    private bool isElectricityFromSource(IXRSelectInteractable interactable)
+    private bool isElectricityFromSource(IXRHoverInteractable interactable)
     {
         return interactable.transform.tag == "ElectricitySourceFrom";
     }
@@ -51,7 +49,7 @@ public class ElectricityScript : MonoBehaviour
         int[] newMotorValues = new int[motorValues.Length];
         for (int i = 0; i < motorValues.Length; i++)
         {
-            newMotorValues[i] = motorValues[i] * motorStrength;
+            newMotorValues[i] = motorValues[i] * magnificationFactor;
         }
         return newMotorValues;
     }
@@ -97,18 +95,18 @@ public class ElectricityScript : MonoBehaviour
         Debug.Log("Electricity is off!");
     }
 
-    private void OnSelectedEnter(SelectEnterEventArgs args)
+    private void OnHoveredEnter(HoverEnterEventArgs args)
     {
-        Debug.Log("ElectricityScript.OnSelectedEnter");
+        Debug.Log("ElectricityScript.OnHoveredEnter");
         bool isLeftHand = args.interactorObject.handedness == InteractorHandedness.Left;
 
         if (isLeftHand)
         {
-            _leftHandSelectInteractable = args.interactableObject;
+            _leftHandHoverInteractable = args.interactableObject;
         }
         else
         {
-            _rightHandSelectInteractable = args.interactableObject;
+            _rightHandHoverInteractable = args.interactableObject;
         }
 
         if (_electricityIsOn) return;
@@ -118,26 +116,26 @@ public class ElectricityScript : MonoBehaviour
             _startElectricityCoroutine = StartCoroutine(StartElectricity(isLeftHand));
         }
         else {
-            if (_leftHandSelected && _rightHandSelected && !_hasGrabbedTwoOfSameDirection)
+            if (_leftHandHovered && _rightHandHovered && !_hasGrabbedTwoOfSameDirection)
             {
                 _startElectricityCoroutine = StartCoroutine(StartElectricity(!_rightToLeft));
             }
         }
     }
 
-    private void OnSelectedExit(SelectExitEventArgs args)
+    private void OnHoveredExit(HoverExitEventArgs args)
     {
-        Debug.Log("ElectricityScript.OnSelectedExit");
+        Debug.Log("ElectricityScript.OnHoveredExit");
 
         bool isLeftHand = args.interactorObject.handedness == InteractorHandedness.Left;
 
         if (isLeftHand)
         {
-            _leftHandSelectInteractable = null;
+            _leftHandHoverInteractable = null;
         }
         else
         {
-            _rightHandSelectInteractable = null;
+            _rightHandHoverInteractable = null;
         }
 
         if (_electricityIsOn)
