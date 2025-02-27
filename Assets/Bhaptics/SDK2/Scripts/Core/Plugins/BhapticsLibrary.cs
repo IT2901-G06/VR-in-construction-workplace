@@ -156,10 +156,8 @@ namespace Bhaptics.SDK2
                     android.Dispose();
                     android = null;
                 }
-
-                return;
             }
-
+            
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
             BhapticsLogManager.LogFormat("Destroy()");
             bhaptics_library.wsClose();
@@ -1003,50 +1001,5 @@ namespace Bhaptics.SDK2
         {
             Destroy();
         }
-
-#if UNITY_EDITOR
-        public static List<MappingMetaData> EditorGetEventList(string appId, string apiKey, int lastVersion, out int status)
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                status = 0;
-                return new List<MappingMetaData>();
-            }
-
-            var res = bhaptics_library.EditorGetEventList(appId, apiKey, lastVersion, out int code);
-            status = code;
-            return res;
-        }
-
-        public static string EditorGetSettings(string appId, string apiKey, int lastVersion, out int status)
-        {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                status = 0;
-                return "";
-            }
-
-            var bytes = bhaptics_library.EditorGetSettings(appId, apiKey, lastVersion, out int code);
-            BhapticsLogManager.LogFormat("EditorGetSettings {0} {1}", code, bytes);
-            status = code;
-            return bytes;
-        }
-
-        public static bool EditorReInitialize(string appId, string apiKey, string json)
-        {
-            lock (Lock)
-            {
-                _initialized = true;
-            }
-
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                return false;
-            }
-
-            BhapticsLogManager.LogFormat("[bHaptics] BhapticsLibrary - ReInitialize() {0} {1}", apiKey, appId);
-            return bhaptics_library.reInitMessage(apiKey, appId, json);
-        }
-#endif
     }
 }

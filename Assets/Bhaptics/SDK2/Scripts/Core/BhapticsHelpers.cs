@@ -46,18 +46,7 @@ namespace Bhaptics.SDK2
         public long updateTime;
         public string[] positions;
     }
-
-    [Serializable]
-    internal class MappingMessage
-    {
-        public bool status;
-        public List<MappingMetaData> message;
-
-        public static MappingMessage CreateFromJSON(string jsonString)
-        {
-            return JsonUtility.FromJson<MappingMessage>(jsonString);
-        }
-    }
+    
 
     [Serializable]
     public class DeployMessage

@@ -90,6 +90,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 76647
   packageName: bHaptics Haptic Plugin
-  packageVersion: 2.3.1
+  packageVersion: 2.4.0
   assetPath: Assets/Bhaptics/SDK2/Images/bHapticsAndroidDeviceUI/icon-product-tal-disable.png
-  uploadId: 719386
+  uploadId: 735645

@@ -113,36 +113,6 @@ namespace Bhaptics.SDK2
             return BhapticsHelpers.Convert(hapticDevices.devices);
         }
 
-        public static List<MappingMetaData> EditorGetEventList(string appId, string apiKey, int lastVersion, out int status)
-        {
-            var bytes = bHapticsGetHapticMappings(apiKey, appId, lastVersion, out int code);
-            status = code;
-            if (code == 0)
-            {
-                string str = PtrToStringUtf8(bytes);
-                var mappingMessage = MappingMessage.CreateFromJSON(str);
-                return mappingMessage.message;
-            }
-
-            BhapticsLogManager.LogFormat("EditorGetEventList {0}", status);
-            return new List<MappingMetaData>();
-        }
-
-        public static string EditorGetSettings(string appId, string apiKey, int lastVersion, out int status2)
-        {
-            var bytes = bHapticsGetHapticMessage(apiKey, appId, lastVersion, out int status);
-
-            status2 = status;
-            if (status == 0)
-            {
-
-                string str = PtrToStringUtf8(bytes);
-                return str;
-            }
-
-            return "";
-        }
-
         private static string PtrToStringUtf8(IntPtr ptr)
         {
             if (ptr == IntPtr.Zero)
