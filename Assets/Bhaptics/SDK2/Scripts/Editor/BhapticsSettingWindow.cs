@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using Bhaptics.SDK2.Scripts.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,12 +11,16 @@ namespace Bhaptics.SDK2.Editor
     {
         private enum NavigationButtonType
         {
-            Home = 0, Events = 1, Documentation = 2
+            Home = 0,
+            Events = 1,
+            Documentation = 2
         }
 
         public enum DocumentationButtonType
         {
-            Unity, bHaptics, MetaQuest2
+            Unity,
+            bHaptics,
+            MetaQuest2
         }
 
         private const string DeveloperPortalGuideUrl = "https://docs.bhaptics.com/portal/app-and-event";
@@ -51,6 +55,7 @@ namespace Bhaptics.SDK2.Editor
         private SerializedObject so;
 
         #region Images
+
         private Texture2D whiteImage;
         private Texture2D latestDeployedVersionBox;
         private Texture2D homeIcon;
@@ -65,9 +70,11 @@ namespace Bhaptics.SDK2.Editor
         private Texture2D unityDocumentationImage;
         private Texture2D bHapticsDocumentationImage;
         private Texture2D metaQuest2DocumentationImage;
+
         #endregion
 
         #region GUIStyle
+
         private GUIStyle fontBoldStyle;
         private GUIStyle fontMediumStyle;
         private GUIStyle fontRegularStyle;
@@ -107,6 +114,7 @@ namespace Bhaptics.SDK2.Editor
         private GUIStyle viewGridSelectedStyle;
         private GUIStyle viewListStyle;
         private GUIStyle viewListSelectedStyle;
+
         #endregion
 
         private GUISkin bHapticsSkin;
@@ -134,7 +142,8 @@ namespace Bhaptics.SDK2.Editor
             }
 
             var windowSize = new Vector2(WindowWidth, WindowHeight);
-            var bHapticsWindow = EditorWindow.GetWindowWithRect(typeof(BhapticsSettingWindow), new Rect(new Vector2(WindowPositionX, WindowPositionY), windowSize), true, WindowTitle);
+            var bHapticsWindow = EditorWindow.GetWindowWithRect(typeof(BhapticsSettingWindow),
+                new Rect(new Vector2(WindowPositionX, WindowPositionY), windowSize), true, WindowTitle);
             bHapticsWindow.position = new Rect(new Vector2(WindowPositionX, WindowPositionY), windowSize);
             bHapticsWindow.minSize = windowSize;
             bHapticsWindow.Show();
@@ -194,22 +203,34 @@ namespace Bhaptics.SDK2.Editor
         }
 
         #region Initialize Method
+
         private void InitializeImages()
         {
             whiteImage = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.WhiteImage, typeof(Texture2D));
-            latestDeployedVersionBox = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.LatestDeployedVersionBox, typeof(Texture2D));
+            latestDeployedVersionBox = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.LatestDeployedVersionBox,
+                typeof(Texture2D));
             homeIcon = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.HomeIcon, typeof(Texture2D));
             hapticEventsIcon = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.EventsIcon, typeof(Texture2D));
-            documentationIcon = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.DocumentationIcon, typeof(Texture2D));
-            homeSelectedIcon = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.HomeSelectedIcon, typeof(Texture2D));
-            hapticEventsSelectedIcon = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.EventsSelectedIcon, typeof(Texture2D));
-            documentationSelectedIcon = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.DocumentationSelectedIcon, typeof(Texture2D));
-            sampleGuidesImage = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.SampleGuidesImage, typeof(Texture2D));
-            appIdApiKeyOutlineImage = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.AppIdApiKeyOutlineImage, typeof(Texture2D));
-            eventsButtonAudioIcon = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.EventsButtonAudioIcon, typeof(Texture2D));
-            unityDocumentationImage = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.UnityDocumentationImage, typeof(Texture2D));
-            bHapticsDocumentationImage = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.BhapticsDocumentationImage, typeof(Texture2D));
-            metaQuest2DocumentationImage = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.MetaQuest2DocumentationImage, typeof(Texture2D));
+            documentationIcon =
+                (Texture2D)Resources.Load(BhapticsSettingWindowAssets.DocumentationIcon, typeof(Texture2D));
+            homeSelectedIcon =
+                (Texture2D)Resources.Load(BhapticsSettingWindowAssets.HomeSelectedIcon, typeof(Texture2D));
+            hapticEventsSelectedIcon =
+                (Texture2D)Resources.Load(BhapticsSettingWindowAssets.EventsSelectedIcon, typeof(Texture2D));
+            documentationSelectedIcon = (Texture2D)Resources.Load(BhapticsSettingWindowAssets.DocumentationSelectedIcon,
+                typeof(Texture2D));
+            sampleGuidesImage =
+                (Texture2D)Resources.Load(BhapticsSettingWindowAssets.SampleGuidesImage, typeof(Texture2D));
+            appIdApiKeyOutlineImage =
+                (Texture2D)Resources.Load(BhapticsSettingWindowAssets.AppIdApiKeyOutlineImage, typeof(Texture2D));
+            eventsButtonAudioIcon =
+                (Texture2D)Resources.Load(BhapticsSettingWindowAssets.EventsButtonAudioIcon, typeof(Texture2D));
+            unityDocumentationImage =
+                (Texture2D)Resources.Load(BhapticsSettingWindowAssets.UnityDocumentationImage, typeof(Texture2D));
+            bHapticsDocumentationImage =
+                (Texture2D)Resources.Load(BhapticsSettingWindowAssets.BhapticsDocumentationImage, typeof(Texture2D));
+            metaQuest2DocumentationImage =
+                (Texture2D)Resources.Load(BhapticsSettingWindowAssets.MetaQuest2DocumentationImage, typeof(Texture2D));
         }
 
         private void InitializeGUIStyles(GUISkin targetSkin)
@@ -221,40 +242,71 @@ namespace Bhaptics.SDK2.Editor
             fontRegularStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.FontRegular));
             fontLightStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.FontLight));
             divideStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.DivideStyle));
-            navigationButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.NavigationButtonStyle));
-            selectedNavigationButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.SelectedNavigationButtonStyle));
-            setupInputFieldStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.SetupInputFieldStyle));
-            setupButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.SetupButtonStyle));
-            visitTextButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.VisitTextButtonStyle));
-            visitButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.VisitButtonStyle));
-            resetButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.ResetButtonStyle));
-            hapticEventsButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.HapticEventsButtonStyle));
-            setupErrorTextStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.SetupErrorTextStyle));
-            appTitleTextStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.AppTitleTextStyle));
-            blackBackgroundStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.BlackBackgroundStyle));
-            latestDeployedVersionTextStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.LatestDeployedVersionTextStyle));
-            refreshDeployedVersionButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.RefreshDeployedVersionButtonStyle));
-            mainTapTitleStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.MainTapTitleStyle));
-            sampleGuideButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.SampleGuideButtonStyle));
-            copyClipboardButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.CopyClipboardButtonStyle));
-            viewAllTextStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.ViewAllTextStyle));
-            eventsButtonDetailStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonDetailStyle));
-            eventsButtonDetailSelectedStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonDetailSelectedStyle));
-            eventsButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonStyle));
-            eventsButtonSelectedStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonSelectedStyle));
-            eventsButtonTitleStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonTitleStyle));
-            eventsButtonDeviceStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonDeviceStyle));
-            eventsButtonDurationStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonDurationStyle));
-            documentationButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.DocumentationButtonStyle));
-            lastUpdatedToggleStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.LastUpdatedToggleStyle));
-            lastUpdatedToggleSelectedStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.LastUpdatedToggleSelectedStyle));
+            navigationButtonStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.NavigationButtonStyle));
+            selectedNavigationButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin,
+                BhapticsSettingWindowAssets.SelectedNavigationButtonStyle));
+            setupInputFieldStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.SetupInputFieldStyle));
+            setupButtonStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.SetupButtonStyle));
+            visitTextButtonStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.VisitTextButtonStyle));
+            visitButtonStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.VisitButtonStyle));
+            resetButtonStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.ResetButtonStyle));
+            hapticEventsButtonStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.HapticEventsButtonStyle));
+            setupErrorTextStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.SetupErrorTextStyle));
+            appTitleTextStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.AppTitleTextStyle));
+            blackBackgroundStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.BlackBackgroundStyle));
+            latestDeployedVersionTextStyle = new GUIStyle(GetCustomGUIStyle(targetSkin,
+                BhapticsSettingWindowAssets.LatestDeployedVersionTextStyle));
+            refreshDeployedVersionButtonStyle = new GUIStyle(GetCustomGUIStyle(targetSkin,
+                BhapticsSettingWindowAssets.RefreshDeployedVersionButtonStyle));
+            mainTapTitleStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.MainTapTitleStyle));
+            sampleGuideButtonStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.SampleGuideButtonStyle));
+            copyClipboardButtonStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.CopyClipboardButtonStyle));
+            viewAllTextStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.ViewAllTextStyle));
+            eventsButtonDetailStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonDetailStyle));
+            eventsButtonDetailSelectedStyle = new GUIStyle(GetCustomGUIStyle(targetSkin,
+                BhapticsSettingWindowAssets.EventsButtonDetailSelectedStyle));
+            eventsButtonStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonStyle));
+            eventsButtonSelectedStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonSelectedStyle));
+            eventsButtonTitleStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonTitleStyle));
+            eventsButtonDeviceStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonDeviceStyle));
+            eventsButtonDurationStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.EventsButtonDurationStyle));
+            documentationButtonStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.DocumentationButtonStyle));
+            lastUpdatedToggleStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.LastUpdatedToggleStyle));
+            lastUpdatedToggleSelectedStyle = new GUIStyle(GetCustomGUIStyle(targetSkin,
+                BhapticsSettingWindowAssets.LastUpdatedToggleSelectedStyle));
             aZToggleStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.AZToggleStyle));
-            aZToggleSelectedStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.AZToggleSelectedStyle));
+            aZToggleSelectedStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.AZToggleSelectedStyle));
             viewGridStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.ViewGridStyle));
-            viewGridSelectedStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.ViewGridSelectedStyle));
+            viewGridSelectedStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.ViewGridSelectedStyle));
             viewListStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.ViewListStyle));
-            viewListSelectedStyle = new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.ViewListSelectedStyle));
+            viewListSelectedStyle =
+                new GUIStyle(GetCustomGUIStyle(targetSkin, BhapticsSettingWindowAssets.ViewListSelectedStyle));
         }
+
         #endregion
 
         private void DrawSetupPage()
@@ -269,20 +321,24 @@ namespace Bhaptics.SDK2.Editor
 
             GUILayout.Label("App ID", new GUIStyle(fontBoldStyle) { fontSize = 14 });
             GUILayout.Space(14f);
-            appIdProperty.stringValue = EditorGUILayout.TextField(appIdProperty.stringValue, setupInputFieldStyle, GUILayout.Height(setupInputFieldStyle.fixedHeight));
+            appIdProperty.stringValue = EditorGUILayout.TextField(appIdProperty.stringValue, setupInputFieldStyle,
+                GUILayout.Height(setupInputFieldStyle.fixedHeight));
             if (appIdProperty.stringValue.Equals(string.Empty))
             {
-                GUI.Label(new Rect(14f, 124f, 111f, 18f), "<color=#cccccc>Enter your App ID</color>", new GUIStyle(fontRegularStyle) { fontSize = 14 });
+                GUI.Label(new Rect(14f, 124f, 111f, 18f), "<color=#cccccc>Enter your App ID</color>",
+                    new GUIStyle(fontRegularStyle) { fontSize = 14 });
             }
 
             GUILayout.Space(14f);
 
             GUILayout.Label("API Key", new GUIStyle(fontBoldStyle) { fontSize = 14 });
             GUILayout.Space(14f);
-            apiKeyProperty.stringValue = EditorGUILayout.TextField(apiKeyProperty.stringValue, setupInputFieldStyle, GUILayout.Height(setupInputFieldStyle.fixedHeight));
+            apiKeyProperty.stringValue = EditorGUILayout.TextField(apiKeyProperty.stringValue, setupInputFieldStyle,
+                GUILayout.Height(setupInputFieldStyle.fixedHeight));
             if (apiKeyProperty.stringValue.Equals(string.Empty))
             {
-                GUI.Label(new Rect(14f, 220f, 111f, 18f), "<color=#cccccc>Enter your API Key</color>", new GUIStyle(fontRegularStyle) { fontSize = 14 });
+                GUI.Label(new Rect(14f, 220f, 111f, 18f), "<color=#cccccc>Enter your API Key</color>",
+                    new GUIStyle(fontRegularStyle) { fontSize = 14 });
             }
 
             if (!setupErrorText.Equals(string.Empty))
@@ -305,7 +361,8 @@ namespace Bhaptics.SDK2.Editor
             GUILayout.BeginHorizontal();
             GUILayout.Space(138f - 12f);
 
-            if (GUILayout.Button("Forgot your App ID & API Key?", visitTextButtonStyle, GUILayout.Width(138f + 12f), GUILayout.Height(18f)))
+            if (GUILayout.Button("Forgot your App ID & API Key?", visitTextButtonStyle, GUILayout.Width(138f + 12f),
+                    GUILayout.Height(18f)))
             {
                 Application.OpenURL("https://developer.bhaptics.com");
             }
@@ -330,6 +387,7 @@ namespace Bhaptics.SDK2.Editor
             {
                 Application.OpenURL("https://developer.bhaptics.com");
             }
+
             GUILayout.Space(20f);
             GUILayout.EndHorizontal();
             GUILayout.EndArea();
@@ -380,7 +438,7 @@ namespace Bhaptics.SDK2.Editor
                 }
                 else
                 {
-                    BhapticsLibrary.EditorReInitialize(settings.AppId, settings.ApiKey, settings.DefaultDeploy);
+                    BhapticsEditorUtils.EditorReInitialize(settings.AppId, settings.ApiKey, settings.DefaultDeploy);
                 }
             }
 
@@ -498,7 +556,8 @@ namespace Bhaptics.SDK2.Editor
                     padding = new RectOffset(20, 0, 20, 0)
                 });
 
-            GUILayout.Label("<color=#646464>It is recommended that you view the\nGuide documentation before you begin.</color>",
+            GUILayout.Label(
+                "<color=#646464>It is recommended that you view the\nGuide documentation before you begin.</color>",
                 new GUIStyle(fontRegularStyle)
                 {
                     fontSize = 14,
@@ -536,6 +595,7 @@ namespace Bhaptics.SDK2.Editor
             {
                 SelectNavigationButton(NavigationButtonType.Events);
             }
+
             GUILayout.EndHorizontal();
             GUILayout.EndArea();
 
@@ -593,6 +653,7 @@ namespace Bhaptics.SDK2.Editor
                 IsSortLastUpdated = false;
                 sortedEventData = GetSortedEventData(1);
             }
+
             GUI.Label(new Rect(452f, 9f, 79f, 16f), "A-Z", new GUIStyle(fontRegularStyle) { fontSize = 13 });
             GUILayout.Space(10f);
             if (GUILayout.Button("", IsSortLastUpdated ? lastUpdatedToggleSelectedStyle : lastUpdatedToggleStyle))
@@ -600,6 +661,7 @@ namespace Bhaptics.SDK2.Editor
                 IsSortLastUpdated = true;
                 sortedEventData = GetSortedEventData(0);
             }
+
             GUI.Label(new Rect(509f, 9f, 79f, 16f), "Last Updated", new GUIStyle(fontRegularStyle) { fontSize = 13 });
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
@@ -609,6 +671,7 @@ namespace Bhaptics.SDK2.Editor
             {
                 IsViewGrid = true;
             }
+
             GUILayout.Space(4f);
             if (GUILayout.Button("", IsViewGrid ? viewListStyle : viewListSelectedStyle))
             {
@@ -674,9 +737,12 @@ namespace Bhaptics.SDK2.Editor
             GUILayout.Label("Documentation", new GUIStyle(mainTapTitleStyle) { fontSize = 22 });
 
             GUILayout.BeginArea(new Rect(0f, 60f, 720f, 570f));
-            DrawDocumentationButton(GetDocumentationButtonPos(0), DocumentationButtonType.bHaptics, "Create haptic events", "(bHaptics Developer Portal)", DeveloperPortalGuideUrl);
-            DrawDocumentationButton(GetDocumentationButtonPos(1), DocumentationButtonType.Unity, "Unity SDK Guide", "(Unity)", UnityHowToStartUrl);
-            DrawDocumentationButton(GetDocumentationButtonPos(2), DocumentationButtonType.Unity, "How to migrate from SDK1(old) to SDK2(new)", "(Unity)", UnityMigrateUrl);
+            DrawDocumentationButton(GetDocumentationButtonPos(0), DocumentationButtonType.bHaptics,
+                "Create haptic events", "(bHaptics Developer Portal)", DeveloperPortalGuideUrl);
+            DrawDocumentationButton(GetDocumentationButtonPos(1), DocumentationButtonType.Unity, "Unity SDK Guide",
+                "(Unity)", UnityHowToStartUrl);
+            DrawDocumentationButton(GetDocumentationButtonPos(2), DocumentationButtonType.Unity,
+                "How to migrate from SDK1(old) to SDK2(new)", "(Unity)", UnityMigrateUrl);
             //DrawDocumentationButton(GetDocumentationButtonPos(3), DocumentationButtonType.MetaQuest2, "Getting Started", "(Unity Meta Quest2)");
             GUILayout.EndArea();
         }
@@ -689,10 +755,10 @@ namespace Bhaptics.SDK2.Editor
 
         private int GetAppSettings(out string errorMessage)
         {
-            var json = BhapticsLibrary.EditorGetSettings(appIdProperty.stringValue, apiKeyProperty.stringValue, -1, out int code);
+            var json = BhapticsEditorUtils.EditorGetSettings(appIdProperty.stringValue, apiKeyProperty.stringValue, -1, out int code);
             if (code == 0)
             {
-                var events = BhapticsLibrary.EditorGetEventList(appIdProperty.stringValue, apiKeyProperty.stringValue, -1, out code);
+                var events = BhapticsEditorUtils.EditorGetEventList(appIdProperty.stringValue, apiKeyProperty.stringValue, -1, out code);
                 if (code == 0)
                 {
                     try
@@ -714,6 +780,7 @@ namespace Bhaptics.SDK2.Editor
                                 eventNames[i] = events[i].key;
                                 eventDataArr[i] = events[i];
                             }
+
                             settings.EventData = eventDataArr;
 
                             errorMessage = string.Empty;
@@ -772,6 +839,7 @@ namespace Bhaptics.SDK2.Editor
                 GUIUtility.systemCopyBuffer = value;
                 BhapticsLogManager.LogFormat("[bHaptics] Copy to Clipboard: {0}", value);
             }
+
             GUILayout.EndVertical();
 
             GUILayout.Space(20f);
@@ -782,7 +850,8 @@ namespace Bhaptics.SDK2.Editor
 
         private void DrawEventsButtonDetail(int index, MappingMetaData eventData)
         {
-            if (GUILayout.Button("", eventData.Equals(selectedEvent) ? eventsButtonDetailSelectedStyle : eventsButtonDetailStyle))
+            if (GUILayout.Button("",
+                    eventData.Equals(selectedEvent) ? eventsButtonDetailSelectedStyle : eventsButtonDetailStyle))
             {
                 selectedEvent = eventData;
 
@@ -795,14 +864,16 @@ namespace Bhaptics.SDK2.Editor
             GUI.Label(new Rect(64f, additionalHeight + 16f, 480f, 18f), eventData.key, eventsButtonTitleStyle);
 
             string deviceString = ConvertOrderToDeviceType(eventData.positions);
-            GUI.Label(new Rect(64f, additionalHeight + 44f, 500f, 12f), deviceString.TrimEnd(), eventsButtonDeviceStyle);
+            GUI.Label(new Rect(64f, additionalHeight + 44f, 500f, 12f), deviceString.TrimEnd(),
+                eventsButtonDeviceStyle);
 
             if (eventData.isAudio)
             {
                 GUI.Label(new Rect(569f, additionalHeight + 28f, 40f * 1.2f, 16f * 1.2f), eventsButtonAudioIcon);
             }
 
-            GUI.Label(new Rect(629f, additionalHeight + 29f, 32f, 14f), (eventData.durationMillis * 0.001f).ToString("0.00") + " s", eventsButtonDurationStyle);
+            GUI.Label(new Rect(629f, additionalHeight + 29f, 32f, 14f),
+                (eventData.durationMillis * 0.001f).ToString("0.00") + " s", eventsButtonDurationStyle);
         }
 
         private void DrawEventsButton(int index, MappingMetaData eventData)
@@ -826,10 +897,12 @@ namespace Bhaptics.SDK2.Editor
             float additionalWidth = mtp1 * EventsButtonWidth + mtp1 * EventsButtonSpacing;
             float additionalHeight = mtp2 * EventsButtonHeight + mtp2 * EventsButtonSpacing;
 
-            GUI.Label(new Rect(additionalWidth + 16f, additionalHeight + 12f, 256f, 36f), eventData.key, eventsButtonTitleStyle);
+            GUI.Label(new Rect(additionalWidth + 16f, additionalHeight + 12f, 256f, 36f), eventData.key,
+                eventsButtonTitleStyle);
 
             string deviceString = ConvertOrderToDeviceType(eventData.positions);
-            GUI.Label(new Rect(additionalWidth + 16f, additionalHeight + 54f, 310f, 26f), deviceString.TrimEnd(), eventsButtonDeviceStyle);
+            GUI.Label(new Rect(additionalWidth + 16f, additionalHeight + 54f, 310f, 26f), deviceString.TrimEnd(),
+                eventsButtonDeviceStyle);
 
             if (mtp1 == 1 || index == settings.EventData.Length - 1)
             {
@@ -859,7 +932,8 @@ namespace Bhaptics.SDK2.Editor
             return unityDocumentationImage;
         }
 
-        private void DrawDocumentationButton(Vector2 pos, DocumentationButtonType buttonType, string mainText, string subText, string url)
+        private void DrawDocumentationButton(Vector2 pos, DocumentationButtonType buttonType, string mainText,
+            string subText, string url)
         {
             GUILayout.BeginArea(new Rect(pos.x, pos.y, DocumentationButtonWidth, DocumentationButtonHeight));
 
@@ -867,7 +941,8 @@ namespace Bhaptics.SDK2.Editor
             imageStyle.normal.background = GetDocumentationImage(buttonType);
             GUI.Label(new Rect(0f, 0f, 130f, 70f), "", imageStyle);
 
-            GUI.Label(new Rect(144f, 26f, 436f, 18f), mainText + " " + "<color=#959595>" + subText + "</color>", new GUIStyle(fontRegularStyle) { fontSize = 14 });
+            GUI.Label(new Rect(144f, 26f, 436f, 18f), mainText + " " + "<color=#959595>" + subText + "</color>",
+                new GUIStyle(fontRegularStyle) { fontSize = 14 });
 
             if (GUILayout.Button("", documentationButtonStyle))
             {
@@ -954,4 +1029,5 @@ namespace Bhaptics.SDK2.Editor
             return res.Trim();
         }
     }
+
 }
