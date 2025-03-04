@@ -18,66 +18,83 @@ public class ElectricityScript : MonoBehaviour
     private int motorStrength = 100;
 
     private bool _electricityIsOn = false;
-    private XRPokeInteractor _leftHandPokeInteractor;
-    private XRPokeInteractor _rightHandPokeInteractor;
 
-
-    private BoxCollider _leftHandBoxCollider;
-    private BoxCollider _rightHandBoxCollider;
     private readonly List<int> _bhapticsRequestIds = new();
     private Coroutine _startElectricityCoroutine;
     private Coroutine _stopElectricityCoroutine;
 
-    // private bool _leftHandSelected => _leftHandSelectInteractable != null;
-    // private bool _rightHandSelected => _rightHandSelectInteractable != null;
-    // private bool _hasGrabbedTwoOfSameDirection => _leftHandSelectInteractable?.transform.tag.Length > 0 && _leftHandSelectInteractable?.transform.tag == _rightHandSelectInteractable?.transform.tag;
-    // private bool _rightToLeft => isElectricityFromSource(_rightHandSelectInteractable) && !isElectricityFromSource(_leftHandSelectInteractable);
+    private Transform _leftHandCollidingChild;
+    private Transform _rightHandCollidingChild;
+
+    private bool _leftHandSelected => _leftHandCollidingChild != null;
+    private bool _rightHandSelected => _rightHandCollidingChild != null;
+    private bool _hasGrabbedTwoOfSameDirection => _leftHandCollidingChild?.tag.Length > 0 && _leftHandCollidingChild?.tag == _rightHandCollidingChild?.tag;
+    private bool _rightToLeft => IsElectricityFromSource(_rightHandCollidingChild) && !IsElectricityFromSource(_leftHandCollidingChild);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        // Debug.Log(GameObject.FindGameObjectsWithTag("LeftHandPokeInteractor"));
-        // _leftHandPokeInteractor = GameObject.FindGameObjectWithTag("LeftHandPokeInteractor").GetComponent<XRPokeInteractor>();
-        // _rightHandPokeInteractor = GameObject.FindGameObjectWithTag("RightHandPokeInteractor").GetComponent<XRPokeInteractor>();
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Colliding: " + collision.collider.tag);
 
+    internal void OnTriggerEnterFromChild(Transform child, Collider collider)
+    {
         // Find out which hand is poking
-        if (collision.collider.CompareTag("LeftHandPokeInteractor"))
+        if (collider.CompareTag("LeftHandIndexFingerTip"))
         {
-            _leftHandBoxCollider = collision.collider as BoxCollider;
+            _leftHandCollidingChild = child;
             Debug.Log("Left hand poking");
         }
-        else if (collision.collider.CompareTag("RightHandPokeInteractor"))
+        else if (collider.CompareTag("RightHandIndexFingerTip"))
         {
-            _rightHandBoxCollider = collision.collider as BoxCollider;
+            _rightHandCollidingChild = child;
             Debug.Log("Right hand poking");
         }
+        else {
+            return;
+        }
+
+        if (_electricityIsOn) return;
+
+        bool isLeftHand = collider.CompareTag("LeftHandIndexFingerTip");
+
+        if (!requiresBothHands)
+        {
+            _startElectricityCoroutine = StartCoroutine(StartElectricity(isLeftHand));
+        }
+        else {
+            if (_leftHandSelected && _rightHandSelected && !_hasGrabbedTwoOfSameDirection)
+            {
+                _startElectricityCoroutine = StartCoroutine(StartElectricity(!_rightToLeft));
+            }
+        }
     }
 
-    private void OnCollisionExit(Collision collision)
+    internal void OnTriggerExitFromChild(Transform _, Collider collider)
     {
-        Debug.Log("Not colliding: " + collision.collider.tag);
-
         // Find out which hand is poking
-        if (collision.collider.CompareTag("LeftHandPokeInteractor"))
+        if (collider.CompareTag("LeftHandIndexFingerTip"))
         {
-            _leftHandBoxCollider = null;
+            _leftHandCollidingChild = null;
             Debug.Log("Left hand stopped poking");
         }
-        else if (collision.collider.CompareTag("RightHandPokeInteractor"))
+        else if (collider.CompareTag("RightHandIndexFingerTip"))
         {
-            _rightHandBoxCollider = null;
+            _rightHandCollidingChild = null;
             Debug.Log("Right hand stopped poking");
+        }
+        else {
+            return;
+        }
+
+        bool isLeftHand = collider.CompareTag("LeftHandIndexFingerTip");
+
+        if (_electricityIsOn)
+        {
+            _stopElectricityCoroutine = StartCoroutine(StopElectricity());
         }
     }
 
-    private bool isElectricityFromSource(IXRSelectInteractable interactable)
+    private bool IsElectricityFromSource(Transform source)
     {
-        return interactable.transform.tag == "ElectricitySourceFrom";
+        return source.CompareTag("ElectricitySourceFrom");
     }
 
     private int[] MagnifyMotorStrengths(int[] motorValues, int magnificationFactor)
