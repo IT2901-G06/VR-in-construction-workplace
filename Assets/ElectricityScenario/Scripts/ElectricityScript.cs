@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Bhaptics.SDK2;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -16,34 +18,83 @@ public class ElectricityScript : MonoBehaviour
     private int motorStrength = 100;
 
     private bool _electricityIsOn = false;
-    private IXRSelectInteractable _leftHandSelectInteractable;
-    private IXRSelectInteractable _rightHandSelectInteractable;
+
     private readonly List<int> _bhapticsRequestIds = new();
     private Coroutine _startElectricityCoroutine;
     private Coroutine _stopElectricityCoroutine;
 
-    private bool _leftHandSelected => _leftHandSelectInteractable != null;
-    private bool _rightHandSelected => _rightHandSelectInteractable != null;
-    private bool _hasGrabbedTwoOfSameDirection => _leftHandSelectInteractable?.transform.tag.Length > 0 && _leftHandSelectInteractable?.transform.tag == _rightHandSelectInteractable?.transform.tag;
-    private bool _rightToLeft => isElectricityFromSource(_rightHandSelectInteractable) && !isElectricityFromSource(_leftHandSelectInteractable);
+    private Transform _leftHandCollidingChild;
+    private Transform _rightHandCollidingChild;
 
-
+    private bool _leftHandSelected => _leftHandCollidingChild != null;
+    private bool _rightHandSelected => _rightHandCollidingChild != null;
+    private bool _hasGrabbedTwoOfSameDirection => _leftHandCollidingChild?.tag.Length > 0 && _leftHandCollidingChild?.tag == _rightHandCollidingChild?.tag;
+    private bool _rightToLeft => IsElectricityFromSource(_rightHandCollidingChild) && !IsElectricityFromSource(_leftHandCollidingChild);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+
+    internal void OnTriggerEnterFromChild(Transform child, Collider collider)
     {
-        // Register the event handlers
-        for (int i = 0; i < transform.childCount; i++)
+        // Find out which hand is poking
+        if (collider.CompareTag("LeftHandIndexFingerTip"))
         {
-            XRGrabInteractable childGrabInteractable = transform.GetChild(i).GetComponent<XRGrabInteractable>();
-            childGrabInteractable.selectEntered.AddListener(OnSelectedEnter);
-            childGrabInteractable.selectExited.AddListener(OnSelectedExit);
+            _leftHandCollidingChild = child;
+            Debug.Log("Left hand poking");
+        }
+        else if (collider.CompareTag("RightHandIndexFingerTip"))
+        {
+            _rightHandCollidingChild = child;
+            Debug.Log("Right hand poking");
+        }
+        else {
+            return;
+        }
+
+        if (_electricityIsOn) return;
+
+        bool isLeftHand = collider.CompareTag("LeftHandIndexFingerTip");
+
+        if (!requiresBothHands)
+        {
+            _startElectricityCoroutine = StartCoroutine(StartElectricity(isLeftHand));
+        }
+        else {
+            if (_leftHandSelected && _rightHandSelected && !_hasGrabbedTwoOfSameDirection)
+            {
+                _startElectricityCoroutine = StartCoroutine(StartElectricity(!_rightToLeft));
+            }
         }
     }
 
-    private bool isElectricityFromSource(IXRSelectInteractable interactable)
+    internal void OnTriggerExitFromChild(Transform _, Collider collider)
     {
-        return interactable.transform.tag == "ElectricitySourceFrom";
+        // Find out which hand is poking
+        if (collider.CompareTag("LeftHandIndexFingerTip"))
+        {
+            _leftHandCollidingChild = null;
+            Debug.Log("Left hand stopped poking");
+        }
+        else if (collider.CompareTag("RightHandIndexFingerTip"))
+        {
+            _rightHandCollidingChild = null;
+            Debug.Log("Right hand stopped poking");
+        }
+        else {
+            return;
+        }
+
+        bool isLeftHand = collider.CompareTag("LeftHandIndexFingerTip");
+
+        if (_electricityIsOn)
+        {
+            _stopElectricityCoroutine = StartCoroutine(StopElectricity());
+        }
+    }
+
+    private bool IsElectricityFromSource(Transform source)
+    {
+        return source.CompareTag("ElectricitySourceFrom");
     }
 
     private int[] MagnifyMotorStrengths(int[] motorValues, int magnificationFactor)
@@ -51,7 +102,7 @@ public class ElectricityScript : MonoBehaviour
         int[] newMotorValues = new int[motorValues.Length];
         for (int i = 0; i < motorValues.Length; i++)
         {
-            newMotorValues[i] = motorValues[i] * motorStrength;
+            newMotorValues[i] = motorValues[i] * magnificationFactor;
         }
         return newMotorValues;
     }
@@ -97,52 +148,52 @@ public class ElectricityScript : MonoBehaviour
         Debug.Log("Electricity is off!");
     }
 
-    private void OnSelectedEnter(SelectEnterEventArgs args)
-    {
-        Debug.Log("ElectricityScript.OnSelectedEnter");
-        bool isLeftHand = args.interactorObject.handedness == InteractorHandedness.Left;
+    // private void OnSelectedEnter(SelectEnterEventArgs args)
+    // {
+    //     Debug.Log("ElectricityScript.OnSelectedEnter");
+    //     bool isLeftHand = args.interactorObject.handedness == InteractorHandedness.Left;
 
-        if (isLeftHand)
-        {
-            _leftHandSelectInteractable = args.interactableObject;
-        }
-        else
-        {
-            _rightHandSelectInteractable = args.interactableObject;
-        }
+    //     if (isLeftHand)
+    //     {
+    //         _leftHandSelectInteractable = args.interactableObject;
+    //     }
+    //     else
+    //     {
+    //         _rightHandSelectInteractable = args.interactableObject;
+    //     }
 
-        if (_electricityIsOn) return;
+    //     if (_electricityIsOn) return;
 
-        if (!requiresBothHands)
-        {
-            _startElectricityCoroutine = StartCoroutine(StartElectricity(isLeftHand));
-        }
-        else {
-            if (_leftHandSelected && _rightHandSelected && !_hasGrabbedTwoOfSameDirection)
-            {
-                _startElectricityCoroutine = StartCoroutine(StartElectricity(!_rightToLeft));
-            }
-        }
-    }
+    //     if (!requiresBothHands)
+    //     {
+    //         _startElectricityCoroutine = StartCoroutine(StartElectricity(isLeftHand));
+    //     }
+    //     else {
+    //         if (_leftHandSelected && _rightHandSelected && !_hasGrabbedTwoOfSameDirection)
+    //         {
+    //             _startElectricityCoroutine = StartCoroutine(StartElectricity(!_rightToLeft));
+    //         }
+    //     }
+    // }
 
-    private void OnSelectedExit(SelectExitEventArgs args)
-    {
-        Debug.Log("ElectricityScript.OnSelectedExit");
+    // private void OnSelectedExit(SelectExitEventArgs args)
+    // {
+    //     Debug.Log("ElectricityScript.OnSelectedExit");
 
-        bool isLeftHand = args.interactorObject.handedness == InteractorHandedness.Left;
+    //     bool isLeftHand = args.interactorObject.handedness == InteractorHandedness.Left;
 
-        if (isLeftHand)
-        {
-            _leftHandSelectInteractable = null;
-        }
-        else
-        {
-            _rightHandSelectInteractable = null;
-        }
+    //     if (isLeftHand)
+    //     {
+    //         _leftHandSelectInteractable = null;
+    //     }
+    //     else
+    //     {
+    //         _rightHandSelectInteractable = null;
+    //     }
 
-        if (_electricityIsOn)
-        {
-            _stopElectricityCoroutine = StartCoroutine(StopElectricity());
-        }
-    }
+    //     if (_electricityIsOn)
+    //     {
+    //         _stopElectricityCoroutine = StartCoroutine(StopElectricity());
+    //     }
+    // }
 }
