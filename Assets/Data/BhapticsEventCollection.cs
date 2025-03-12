@@ -2,7 +2,7 @@ using Bhaptics.SDK2;
 
 // This class exists solely to hold information about common haptic events. More information
 // about the Bhaptics SDK and what each motor value represents, visit https://docs.bhaptics.com/sdk/further/motor
-public class BhapticsEvent
+public class BhapticsEventCollection
 {
     public static MotorEvent VestTop = new(PositionType.Vest, new int[] {
         1, 1, 1, 1,

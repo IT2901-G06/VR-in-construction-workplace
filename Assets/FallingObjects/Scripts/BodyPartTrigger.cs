@@ -26,12 +26,12 @@ public class BodyPartTrigger : MonoBehaviour
     {
         return position switch
         {
-            TriggerPositionType.Front => BhapticsEvent.VestFront,
-            TriggerPositionType.Back => BhapticsEvent.VestBack,
-            TriggerPositionType.Left => BhapticsEvent.VestFarLeft,
-            TriggerPositionType.Right => BhapticsEvent.VestFarLeft,
-            TriggerPositionType.Head => BhapticsEvent.VestTop,
-            _ => BhapticsEvent.VestFront,
+            TriggerPositionType.Front => BhapticsEventCollection.VestFront,
+            TriggerPositionType.Back => BhapticsEventCollection.VestBack,
+            TriggerPositionType.Left => BhapticsEventCollection.VestFarLeft,
+            TriggerPositionType.Right => BhapticsEventCollection.VestFarLeft,
+            TriggerPositionType.Head => BhapticsEventCollection.VestTop,
+            _ => BhapticsEventCollection.VestFront,
         };
     }
 
