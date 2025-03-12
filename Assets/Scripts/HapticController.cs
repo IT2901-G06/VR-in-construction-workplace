@@ -1,6 +1,5 @@
 using Bhaptics.SDK2;
 using UnityEngine;
-using static BodyTriggerController;
 
 public class HapticController : MonoBehaviour
 {

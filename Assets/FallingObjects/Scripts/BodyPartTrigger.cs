@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BodyTriggerController : MonoBehaviour
+public class BodyPartTrigger : MonoBehaviour
 {
 
     [Tooltip("Select the position for the haptic feedback")]

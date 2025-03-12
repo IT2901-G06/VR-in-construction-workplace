@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ElectricityScript : MonoBehaviour
+public class ElectricityManager : MonoBehaviour
 {
     [SerializeField] private bool requiresBothHands = true;
     [SerializeField] private float secondsBetweenElectricitySteps = 0.1f;
