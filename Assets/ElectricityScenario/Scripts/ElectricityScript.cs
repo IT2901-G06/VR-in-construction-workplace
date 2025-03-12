@@ -2,12 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Bhaptics.SDK2;
-using NUnit.Framework.Constraints;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
-using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class ElectricityScript : MonoBehaviour
 {
@@ -20,19 +15,27 @@ public class ElectricityScript : MonoBehaviour
     private bool _electricityIsOn = false;
 
     private readonly List<int> _bhapticsRequestIds = new();
-    private Coroutine _startElectricityCoroutine;
     private Coroutine _stopElectricityCoroutine;
 
     private Transform _leftHandCollidingChild;
     private Transform _rightHandCollidingChild;
 
-    private bool _leftHandSelected => _leftHandCollidingChild != null;
-    private bool _rightHandSelected => _rightHandCollidingChild != null;
-    private bool _hasGrabbedTwoOfSameDirection => _leftHandCollidingChild?.tag.Length > 0 && _leftHandCollidingChild?.tag == _rightHandCollidingChild?.tag;
-    private bool _rightToLeft => IsElectricityFromSource(_rightHandCollidingChild) && !IsElectricityFromSource(_leftHandCollidingChild);
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
+    private bool IsLeftHandSelected()
+    {
+        return _leftHandCollidingChild != null;
+    }
+    private bool IsRightHandSelected()
+    {
+        return _rightHandCollidingChild != null;
+    }
+    private bool HasGrabbedTwoOfSameDirection()
+    {
+        return _leftHandCollidingChild != null && _leftHandCollidingChild.tag.Length > 0 && _leftHandCollidingChild.CompareTag(_rightHandCollidingChild.tag);
+    }
+    private bool IsRightToLeft()
+    {
+        return IsElectricityFromSource(_rightHandCollidingChild) && !IsElectricityFromSource(_leftHandCollidingChild);
+    }
 
     internal void OnTriggerEnterFromChild(Transform child, Collider collider)
     {
@@ -47,7 +50,8 @@ public class ElectricityScript : MonoBehaviour
             _rightHandCollidingChild = child;
             Debug.Log("Right hand poking");
         }
-        else {
+        else
+        {
             return;
         }
 
@@ -57,12 +61,13 @@ public class ElectricityScript : MonoBehaviour
 
         if (!requiresBothHands)
         {
-            _startElectricityCoroutine = StartCoroutine(StartElectricity(isLeftHand));
+            StartCoroutine(StartElectricitySequence(isLeftHand));
         }
-        else {
-            if (_leftHandSelected && _rightHandSelected && !_hasGrabbedTwoOfSameDirection)
+        else
+        {
+            if (IsLeftHandSelected() && IsRightHandSelected() && !HasGrabbedTwoOfSameDirection())
             {
-                _startElectricityCoroutine = StartCoroutine(StartElectricity(!_rightToLeft));
+                StartCoroutine(StartElectricitySequence(!IsRightToLeft()));
             }
         }
     }
@@ -80,15 +85,14 @@ public class ElectricityScript : MonoBehaviour
             _rightHandCollidingChild = null;
             Debug.Log("Right hand stopped poking");
         }
-        else {
+        else
+        {
             return;
         }
 
-        bool isLeftHand = collider.CompareTag("LeftHandIndexFingerTip");
-
         if (_electricityIsOn)
         {
-            _stopElectricityCoroutine = StartCoroutine(StopElectricity());
+            _stopElectricityCoroutine = StartCoroutine(StopElectricitySequence());
         }
     }
 
@@ -97,22 +101,14 @@ public class ElectricityScript : MonoBehaviour
         return source.CompareTag("ElectricitySourceFrom");
     }
 
-    private int[] MagnifyMotorStrengths(int[] motorValues, int magnificationFactor)
+    private IEnumerator StartElectricitySequence(bool reverse = false)
     {
-        int[] newMotorValues = new int[motorValues.Length];
-        for (int i = 0; i < motorValues.Length; i++)
-        {
-            newMotorValues[i] = motorValues[i] * magnificationFactor;
-        }
-        return newMotorValues;
-    }
+        HapticController hapticController = HapticController.Instance;
 
-    private IEnumerator StartElectricity(bool reverse = false)
-    {
-        Debug.Log("Electricity starting!");      
+        Debug.Log("Electricity starting!");
         _electricityIsOn = true;
 
-        MotorEvent[] events = reverse ? ElectricityEvent.EventSteps.Reverse().ToArray() : ElectricityEvent.EventSteps;
+        MotorEvent[] events = reverse ? ElectricityEventSequence.EventSteps.Reverse().ToArray() : ElectricityEventSequence.EventSteps;
 
         foreach (MotorEvent motorEvent in events)
         {
@@ -120,17 +116,18 @@ public class ElectricityScript : MonoBehaviour
             // not be able to stop requests that hasn't already started.
             if (_stopElectricityCoroutine != null) break;
 
-            int requestId = BhapticsLibrary.PlayMotors((int)motorEvent.PositionType, MagnifyMotorStrengths(motorEvent.MotorValues, motorStrength), 99999999);
+            int requestId = hapticController.RunMotors(motorEvent, motorStrength, 99999999);
             _bhapticsRequestIds.Add(requestId);
             yield return new WaitForSeconds(secondsBetweenElectricitySteps);
         }
 
-        _startElectricityCoroutine = null;
-        Debug.Log("Electricity on!");      
+        Debug.Log("Electricity on!");
     }
 
-    private IEnumerator StopElectricity()
+    private IEnumerator StopElectricitySequence()
     {
+        HapticController hapticController = HapticController.Instance;
+
         Debug.Log("Electricity off is starting!");
 
         var copiedRequestIds = new int[_bhapticsRequestIds.Count];
@@ -139,7 +136,7 @@ public class ElectricityScript : MonoBehaviour
 
         foreach (int requestId in copiedRequestIds)
         {
-            BhapticsLibrary.StopInt(requestId);
+            hapticController.StopByRequestId(requestId);
             yield return new WaitForSeconds(secondsBetweenElectricitySteps);
         }
 
@@ -147,53 +144,4 @@ public class ElectricityScript : MonoBehaviour
         _stopElectricityCoroutine = null;
         Debug.Log("Electricity is off!");
     }
-
-    // private void OnSelectedEnter(SelectEnterEventArgs args)
-    // {
-    //     Debug.Log("ElectricityScript.OnSelectedEnter");
-    //     bool isLeftHand = args.interactorObject.handedness == InteractorHandedness.Left;
-
-    //     if (isLeftHand)
-    //     {
-    //         _leftHandSelectInteractable = args.interactableObject;
-    //     }
-    //     else
-    //     {
-    //         _rightHandSelectInteractable = args.interactableObject;
-    //     }
-
-    //     if (_electricityIsOn) return;
-
-    //     if (!requiresBothHands)
-    //     {
-    //         _startElectricityCoroutine = StartCoroutine(StartElectricity(isLeftHand));
-    //     }
-    //     else {
-    //         if (_leftHandSelected && _rightHandSelected && !_hasGrabbedTwoOfSameDirection)
-    //         {
-    //             _startElectricityCoroutine = StartCoroutine(StartElectricity(!_rightToLeft));
-    //         }
-    //     }
-    // }
-
-    // private void OnSelectedExit(SelectExitEventArgs args)
-    // {
-    //     Debug.Log("ElectricityScript.OnSelectedExit");
-
-    //     bool isLeftHand = args.interactorObject.handedness == InteractorHandedness.Left;
-
-    //     if (isLeftHand)
-    //     {
-    //         _leftHandSelectInteractable = null;
-    //     }
-    //     else
-    //     {
-    //         _rightHandSelectInteractable = null;
-    //     }
-
-    //     if (_electricityIsOn)
-    //     {
-    //         _stopElectricityCoroutine = StartCoroutine(StopElectricity());
-    //     }
-    // }
 }
