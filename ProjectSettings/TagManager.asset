@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
+  - ElectricitySourceFrom
+  - ElectricitySourceTo
+  - FallingObject
+  - LeftHandPokeInteractor
+  - RightHandPokeInteractor
+  - LeftHandIndexFingerTip
+  - RightHandIndexFingerTip
   layers:
   - Default
   - TransparentFX
