@@ -50,9 +50,9 @@ public class HapticController : MonoBehaviour
         return newMotorValues;
     }
 
-    public int RunMotors(MotorEvent bhapticsEvent, int motorStrength, int durationMillis)
+    public int RunMotors(MotorEvent bhapticsEvent, int motorStrength, int durationMs)
     {
-        return BhapticsLibrary.PlayMotors((int)bhapticsEvent.PositionType, MagnifyMotorStrengths(bhapticsEvent.MotorValues, motorStrength), durationMillis);
+        return BhapticsLibrary.PlayMotors((int)bhapticsEvent.PositionType, MagnifyMotorStrengths(bhapticsEvent.MotorValues, motorStrength), durationMs);
     }
 
     public bool StopByRequestId(int requestId)
