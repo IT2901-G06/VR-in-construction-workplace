@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BodyTriggerController : MonoBehaviour
+public class BodyPartTrigger : MonoBehaviour
 {
 
     [Tooltip("Select the position for the haptic feedback")]
@@ -42,9 +42,22 @@ public class BodyTriggerController : MonoBehaviour
 
         float newCenter = _initialCenterProportion * cameraCharController.height - _initialCameraYCenter + cameraCharController.skinWidth;
         GetComponent<BoxCollider>().center = new(_initialCenter.x, newCenter, _initialCenter.z);
-        
+
         Vector3 cameraPos = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
         transform.position = new(cameraPos.x, transform.position.y, cameraPos.z);
+    }
+
+    private MotorEvent TranslateTriggerPositionTypeToMotorEvent(TriggerPositionType position)
+    {
+        return position switch
+        {
+            TriggerPositionType.Front => BhapticsEventCollection.VestFront,
+            TriggerPositionType.Back => BhapticsEventCollection.VestBack,
+            TriggerPositionType.Left => BhapticsEventCollection.VestFarLeft,
+            TriggerPositionType.Right => BhapticsEventCollection.VestFarLeft,
+            TriggerPositionType.Head => BhapticsEventCollection.VestTop,
+            _ => BhapticsEventCollection.VestFront,
+        };
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,9 +65,11 @@ public class BodyTriggerController : MonoBehaviour
         if (other.CompareTag("FallingObject"))
         {
             HapticController hapticController = HapticController.Instance;
-            int motorStrength = Mathf.Clamp((int)(other.attachedRigidbody.linearVelocity.magnitude * 10), hapticController.GetMinimumMotorStrength(), 100);
-            hapticController.RunMotors(_position, motorStrength);
+            int motorStrength = Mathf.Clamp((int)(other.attachedRigidbody.linearVelocity.magnitude * 10), hapticController.GetMinMotorStrength(), hapticController.GetMaxMotorStrength());
+
+            MotorEvent motorEvent = TranslateTriggerPositionTypeToMotorEvent(_position);
+            hapticController.RunMotors(motorEvent, motorStrength, hapticController.GetSingleEventMotorRunTimeMs());
         }
     }
-
 }
+
