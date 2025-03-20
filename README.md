@@ -16,7 +16,7 @@ Make sure to import the following packages:
 ### 3. Fix Pink Prefabs caused by Missing Materials
 If you did not have the packages downloaded beforehand, prefabs will appear **pink** due to missing materials.
 
-For the **SimpliCity Construction Yard**, **Big Warehouse** and **VR Interaction Framework** packages:
+For the **SimpliCity Construction Yard**, **Big Warehouse**, and **VR Interaction Framework** packages:
 1. Navigate to the `Materials` folder
     - `Assets/SimpliCity_Construction_Yard/- Materials`    
 OR
