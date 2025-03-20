@@ -11,15 +11,18 @@ Make sure to import the following packages:
 - [Big Warehouse Pack](https://assetstore.unity.com/packages/3d/environments/industrial/big-warehouse-pack-96082)
 - [Terrain Sample Asset Pack](https://assetstore.unity.com/packages/3d/environments/landscapes/terrain-sample-asset-pack-145808)
 - [Obi Rope](https://assetstore.unity.com/packages/tools/physics/obi-rope-55579)
+- [VR Interaction Framework](https://assetstore.unity.com/packages/templates/systems/vr-interaction-framework-161066)
 
 ### 3. Fix Pink Prefabs caused by Missing Materials
-If you did not have the packages downloaded beforehand, all prefabs will appear **pink** due to missing materials.
+If you did not have the packages downloaded beforehand, prefabs will appear **pink** due to missing materials.
 
-For both **SimpliCity Construction Yard** and **Big Warehouse** packages:
+For the **SimpliCity Construction Yard**, **Big Warehouse** and **VR Interaction Framework** packages:
 1. Navigate to the `Materials` folder
     - `Assets/SimpliCity_Construction_Yard/- Materials`    
 OR
-    - `Assets/IGBlocks/IG_Warehouse/Models/Materials`
+    - `Assets/IGBlocks/IG_Warehouse/Models/Materials`   
+OR
+    - `Assets\BNG Framework\Materials`
 2. Select all materials
 3. Navigate to: **Edit → Rendering → Materials → Convert Selected Built-in Materials to URP**
     
