@@ -11,11 +11,18 @@ public class ButtonManager : MonoBehaviour
 
         if (hapticController != null)
         {
-            MotorEvent motorEvent = BhapticsEventCollection.GloveFingersLeft;
+            Debug.Log("Haptic Controller is not null");
 
             int motorStrength = 75;
+            int duration = hapticController.GetSingleEventMotorRunTimeMs();
 
-            hapticController.RunMotors(motorEvent, motorStrength, hapticController.GetSingleEventMotorRunTimeMs());
+            // Left glove
+            hapticController.RunMotors(BhapticsEventCollection.GloveFingersLeft, motorStrength, duration);
+            hapticController.RunMotors(BhapticsEventCollection.GlovePalmLeft, motorStrength, duration);
+
+            // Right glove
+            hapticController.RunMotors(BhapticsEventCollection.GloveFingersRight, motorStrength, duration);
+            hapticController.RunMotors(BhapticsEventCollection.GlovePalmRight, motorStrength, duration);
         }
         else
         {
@@ -31,11 +38,15 @@ public class ButtonManager : MonoBehaviour
 
         if (hapticController != null)
         {
-            MotorEvent motorEvent = BhapticsEventCollection.VestFront;
+            Debug.Log("Haptic Controller is not null");
 
             int motorStrength = 75;
+            int duration = hapticController.GetSingleEventMotorRunTimeMs();
 
-            hapticController.RunMotors(motorEvent, motorStrength, hapticController.GetSingleEventMotorRunTimeMs());
+            // Trigger both front and back simultaneously
+            hapticController.RunMotors(BhapticsEventCollection.VestFront, motorStrength, duration);
+            hapticController.RunMotors(BhapticsEventCollection.VestBack, motorStrength, duration);
+
         }
         else
         {
