@@ -17,6 +17,10 @@ public class ButtonManager : MonoBehaviour
 
             hapticController.RunMotors(motorEvent, motorStrength, hapticController.GetSingleEventMotorRunTimeMs());
         }
+        else
+        {
+            Debug.Log("Haptic Controller is null");
+        }
     }
 
     public void HandleSuitButtonPress()
@@ -32,6 +36,10 @@ public class ButtonManager : MonoBehaviour
             int motorStrength = 75;
 
             hapticController.RunMotors(motorEvent, motorStrength, hapticController.GetSingleEventMotorRunTimeMs());
+        }
+        else
+        {
+            Debug.Log("Haptic Controller is null");
         }
     }
 }
