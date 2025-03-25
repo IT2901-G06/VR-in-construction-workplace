@@ -4070,6 +4070,7 @@ Transform:
   m_PrefabInstance: {fileID: 506738569}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &530866577
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
