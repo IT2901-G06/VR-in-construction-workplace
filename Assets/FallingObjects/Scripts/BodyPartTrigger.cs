@@ -69,6 +69,11 @@ public class BodyPartTrigger : MonoBehaviour
 
             MotorEvent motorEvent = TranslateTriggerPositionTypeToMotorEvent(_position);
             hapticController.RunMotors(motorEvent, motorStrength, hapticController.GetSingleEventMotorRunTimeMs());
+            Debug.Log(_position + ": " + motorStrength);
+            if (motorStrength >= 50)
+            {
+                DeathManager.Instance.Kill();
+            }
         }
     }
 }
