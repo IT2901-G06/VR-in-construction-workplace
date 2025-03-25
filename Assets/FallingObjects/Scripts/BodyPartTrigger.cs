@@ -1,3 +1,4 @@
+using BNG;
 using UnityEngine;
 
 public class BodyPartTrigger : MonoBehaviour
@@ -6,6 +7,9 @@ public class BodyPartTrigger : MonoBehaviour
     [Tooltip("Select the position for the haptic feedback")]
     [SerializeField]
     private TriggerPositionType _position;
+
+    private static readonly float _percentOfPlayerHeightForBody = 0.6f;
+    private float _percentOfHeightToFill = _percentOfPlayerHeightForBody;
 
     public enum TriggerPositionType
     {
@@ -16,35 +20,37 @@ public class BodyPartTrigger : MonoBehaviour
         Head
     }
 
-    private float _initialHeightProportion;
-    private float _initialCameraYCenter;
-    private float _initialCenterProportion;
     private Vector3 _initialCenter;
+    private float _initialRigY;
+    private BNGPlayerController _cameraCharController;
+
+    void Awake()
+    {
+        if (_position == TriggerPositionType.Head)
+        {
+            _percentOfHeightToFill = 1 - _percentOfPlayerHeightForBody;
+        }
+    }
 
     void Start()
     {
         _initialCenter = GetComponent<BoxCollider>().center;
-        _initialHeightProportion = GetComponent<BoxCollider>().size.y / GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().height;
-        _initialCameraYCenter = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().center.y;
-        _initialCenterProportion = (_initialCameraYCenter + _initialCenter.y) / GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>().height;
+        _initialRigY = GameObject.FindGameObjectWithTag("Player").transform.parent.position.y / 2;
+        _cameraCharController = GameObject.FindGameObjectWithTag("Player").GetComponent<BNGPlayerController>();
     }
 
     void Update()
     {
-        Quaternion cameraRotation = GameObject.FindGameObjectWithTag("MainCamera").transform.rotation;
-        transform.rotation = new(0, cameraRotation.y, 0, cameraRotation.w);
-
-        CharacterController cameraCharController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
-
-        float newHeight = _initialHeightProportion * cameraCharController.height;
+        float newHeight = (_cameraCharController.ElevateCameraHeight + _initialRigY) * _percentOfHeightToFill;
         Vector3 currentSize = GetComponent<BoxCollider>().size;
         GetComponent<BoxCollider>().size = new(currentSize.x, newHeight, currentSize.z);
 
-        float newCenter = _initialCenterProportion * cameraCharController.height - _initialCameraYCenter + cameraCharController.skinWidth;
+        float newCenter = newHeight / 2 - _initialRigY;
+        if (_position == TriggerPositionType.Head)
+        {
+            newCenter += _percentOfPlayerHeightForBody * (_cameraCharController.ElevateCameraHeight + _initialRigY);
+        }
         GetComponent<BoxCollider>().center = new(_initialCenter.x, newCenter, _initialCenter.z);
-
-        Vector3 cameraPos = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
-        transform.position = new(cameraPos.x, transform.position.y, cameraPos.z);
     }
 
     private MotorEvent TranslateTriggerPositionTypeToMotorEvent(TriggerPositionType position)
