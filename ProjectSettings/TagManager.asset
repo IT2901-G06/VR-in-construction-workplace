@@ -12,6 +12,9 @@ TagManager:
   - RightHandPokeInteractor
   - LeftHandIndexFingerTip
   - RightHandIndexFingerTip
+  - RedContainer
+  - Crane
+  - CrateWithFallingObjects
   layers:
   - Default
   - TransparentFX
