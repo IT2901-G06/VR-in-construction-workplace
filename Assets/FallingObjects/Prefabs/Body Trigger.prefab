@@ -67,3 +67,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _position: 0
+  _percentOfPlayerHeight: 0.6

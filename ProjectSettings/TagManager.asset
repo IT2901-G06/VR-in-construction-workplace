@@ -8,46 +8,44 @@ TagManager:
   - ElectricitySourceFrom
   - ElectricitySourceTo
   - FallingObject
-  - LeftHandPokeInteractor
-  - RightHandPokeInteractor
-  - LeftHandIndexFingerTip
-  - RightHandIndexFingerTip
   - RedContainer
+  - LeftHandGrabber
+  - RightHandGrabber
   - Crane
   - CrateWithFallingObjects
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  -
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0
