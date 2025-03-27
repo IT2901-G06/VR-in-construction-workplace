@@ -23,6 +23,9 @@ public class LiftAnimationTrigger : MonoBehaviour
         //grabbable = gameObject.GetComponent<Grabbable>(); // Mulig man kan bruke denne for å sjekke om spaken er grepet av spilleren med "grabbable.BeingHeld", men usikker.
     }
 
+
+    // Foreløpig er det satt opp slik at spaken aktiverer animasjonene når spilleren går inn i triggeren.
+    // Vil endre denne til at man må gripe spaken for å aktivere animasjonene.
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == Player)
