@@ -11015,6 +11015,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 79687380231066536, guid: 3cc52f2262146b441b930ba12f12d791, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a06f85572b2546644a2c652e67f2ce3d, type: 3}
+    - target: {fileID: 1452326061831463356, guid: 3cc52f2262146b441b930ba12f12d791, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: ElectricityNightScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495324684758674481, guid: 3cc52f2262146b441b930ba12f12d791, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: FallingObjectsScenario
+      objectReference: {fileID: 0}
     - target: {fileID: 3337663187926131681, guid: 3cc52f2262146b441b930ba12f12d791, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.0840322
