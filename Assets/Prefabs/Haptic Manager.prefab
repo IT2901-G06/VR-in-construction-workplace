@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 49180823257310542}
   - component: {fileID: 4907945705439645683}
   m_Layer: 0
-  m_Name: HapticManager
+  m_Name: Haptic Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

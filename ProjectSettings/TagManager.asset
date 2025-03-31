@@ -8,10 +8,9 @@ TagManager:
   - ElectricitySourceFrom
   - ElectricitySourceTo
   - FallingObject
-  - LeftHandPokeInteractor
-  - RightHandPokeInteractor
-  - LeftHandIndexFingerTip
-  - RightHandIndexFingerTip
+  - RedContainer
+  - LeftHandGrabber
+  - RightHandGrabber
   layers:
   - Default
   - TransparentFX

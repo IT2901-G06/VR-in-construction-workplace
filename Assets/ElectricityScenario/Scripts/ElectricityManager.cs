@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BNG;
 using UnityEngine;
 
 public class ElectricityManager : MonoBehaviour
@@ -17,47 +18,42 @@ public class ElectricityManager : MonoBehaviour
     private readonly List<int> _bhapticsRequestIds = new();
     private Coroutine _stopElectricityCoroutine;
 
-    private Transform _leftHandCollidingChild;
-    private Transform _rightHandCollidingChild;
+    private Transform _leftHandGrabbed;
+    private Transform _rightHandGrabbed;
 
     private bool IsLeftHandSelected()
     {
-        return _leftHandCollidingChild != null;
+        return _leftHandGrabbed != null;
     }
     private bool IsRightHandSelected()
     {
-        return _rightHandCollidingChild != null;
+        return _rightHandGrabbed != null;
     }
     private bool HasGrabbedTwoOfSameDirection()
     {
-        return _leftHandCollidingChild != null && _leftHandCollidingChild.tag.Length > 0 && _leftHandCollidingChild.CompareTag(_rightHandCollidingChild.tag);
+        return _leftHandGrabbed != null && _leftHandGrabbed.tag.Length > 0 && _leftHandGrabbed.CompareTag(_rightHandGrabbed.tag);
     }
     private bool IsRightToLeft()
     {
-        return IsElectricityFromSource(_rightHandCollidingChild) && !IsElectricityFromSource(_leftHandCollidingChild);
+        return IsElectricityFromSource(_rightHandGrabbed) && !IsElectricityFromSource(_leftHandGrabbed);
     }
 
-    internal void OnTriggerEnterFromChild(Transform child, Collider collider)
+    internal void OnGrabFromChild(Transform child, Grabber grabber)
     {
-        // Find out which hand is poking
-        if (collider.CompareTag("LeftHandIndexFingerTip"))
+        if (grabber.CompareTag("LeftHandGrabber"))
         {
-            _leftHandCollidingChild = child;
-            Debug.Log("Left hand poking");
+            _leftHandGrabbed = child;
+            Debug.Log("Left hand grabbed");
         }
-        else if (collider.CompareTag("RightHandIndexFingerTip"))
+        else if (grabber.CompareTag("RightHandGrabber"))
         {
-            _rightHandCollidingChild = child;
-            Debug.Log("Right hand poking");
-        }
-        else
-        {
-            return;
+            _rightHandGrabbed = child;
+            Debug.Log("Right hand grabbed");
         }
 
         if (_electricityIsOn) return;
 
-        bool isLeftHand = collider.CompareTag("LeftHandIndexFingerTip");
+        bool isLeftHand = grabber.CompareTag("LeftHandGrabber");
 
         if (!requiresBothHands)
         {
@@ -72,22 +68,17 @@ public class ElectricityManager : MonoBehaviour
         }
     }
 
-    internal void OnTriggerExitFromChild(Transform _, Collider collider)
+    internal void OnReleaseFromChild(Transform leverReleased)
     {
-        // Find out which hand is poking
-        if (collider.CompareTag("LeftHandIndexFingerTip"))
+        if (_leftHandGrabbed == leverReleased)
         {
-            _leftHandCollidingChild = null;
-            Debug.Log("Left hand stopped poking");
+            _leftHandGrabbed = null;
+            Debug.Log("Left hand released");
         }
-        else if (collider.CompareTag("RightHandIndexFingerTip"))
+        else if (_rightHandGrabbed == leverReleased)
         {
-            _rightHandCollidingChild = null;
-            Debug.Log("Right hand stopped poking");
-        }
-        else
-        {
-            return;
+            _rightHandGrabbed = null;
+            Debug.Log("Right hand released");
         }
 
         if (_electricityIsOn)
