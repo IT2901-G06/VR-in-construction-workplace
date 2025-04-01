@@ -36,11 +36,10 @@ public class MotorStrengthManager : MonoBehaviour
     // Called by the slider's onSliderChange event
     public void UpdateMotorStrength(float sliderValue)
     {
-        // Convert slider value to integer (0-100)
-        motorStrength = Mathf.RoundToInt(sliderValue);
+        // Convert slider value to integer (0-55)
+        motorStrength = Mathf.RoundToInt(sliderValue * 0.55f);
 
-
-        Debug.Log($"Motor strength updated to: {motorStrength}");
+        Debug.Log($"Motor strength updated to: {sliderValue} (raw), {motorStrength} (scaled)");
 
         // Start or stop vibration based on slider value
         if (motorStrength > 0 && !isVibrating)
