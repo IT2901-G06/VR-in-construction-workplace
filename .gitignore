@@ -83,5 +83,6 @@ crashlytics-build.properties
 /Assets/GLTFUtility*/
 /Assets/stateSaver/
 
-/Assets/VR4VET/Components/NPC
+
+/Assets/VR4VET/Components/NPC/characterModels/
 
