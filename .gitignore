@@ -82,7 +82,6 @@ crashlytics-build.properties
 /Assets/BNG Framework/
 /Assets/GLTFUtility*/
 /Assets/stateSaver/
-/Assets/VR4VET/Components/360VideoPlayer
-/Assets/VR4VET/Components/multiplayer
+
 /Assets/VR4VET/Components/NPC
-/Assets/VR4VET/Components/PauseMenu
+
