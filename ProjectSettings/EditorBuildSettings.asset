@@ -5,9 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Template.unity
     guid: 55daccc09a3b69647bbab145b54a3ab3
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: c0379afb61bc3024b94fb84bb5f4816f
+  - enabled: 0
+    path: Assets/ElectricityScenario/Scenes/NightConstruction.unity
+    guid: 0b30a0ff5decb4ddc85cab8207b4a3f4
+  - enabled: 0
+    path: Assets/Scenes/Construction.unity
+    guid: a05c686326bd041fd944e624bc73d51c
+  - enabled: 1
+    path: Assets/FallingObjects/Scenes/FallingObjectsScenario.unity
+    guid: 8b59fd7ac188a4b00afeeba4b010cb99
+  - enabled: 1
+    path: Assets/ElectricityScenario/Scenes/ElectricityNightScene.unity
+    guid: b2b52808dd5234d37a26e8d2a74d7cce
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}

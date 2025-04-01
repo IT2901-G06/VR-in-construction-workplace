@@ -11,6 +11,9 @@ public class ProximitySpark : MonoBehaviour
     public float triggerDistance = 5f;
     public float countdownTime = 10f;
 
+    [HideInInspector]
+    public bool autoAssignLights = false;
+
     private bool countdownStarted = false;
     private bool triggered = false;
     private float timer = 0f;
@@ -49,7 +52,6 @@ public class ProximitySpark : MonoBehaviour
         }
         else if (countdownStarted)
         {
-            // Spilleren gikk vekk – nullstill nedtelling
             countdownStarted = false;
             timer = 0f;
         }
@@ -67,6 +69,6 @@ public class ProximitySpark : MonoBehaviour
             light.enabled = false;
         }
 
-        Debug.Log("Gnist!");
+        Debug.Log("⚡ Gnist-partikler spilt av og lys slått av!");
     }
 }
