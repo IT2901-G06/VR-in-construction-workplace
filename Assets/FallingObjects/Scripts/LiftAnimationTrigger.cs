@@ -2,20 +2,26 @@ using UnityEngine;
 
 public class LiftAnimationTrigger : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject crane;
 
-    private Animator craneAnimator;
-    private Animator crateWithFallingObjectsAnimator;
+    [SerializeField]
+    private GameObject crateWithFallingObjects;
 
     void Start()
     {
-        craneAnimator = GameObject.FindGameObjectWithTag("Crane").GetComponent<Animator>();
-        crateWithFallingObjectsAnimator = GameObject.FindGameObjectWithTag("CrateWithFallingObjects").GetComponent<Animator>();
     }
 
     public void StartAnimation()
     {
-        Debug.Log("Lift lever pulled");
-        craneAnimator.SetTrigger("PullLiftLeverCrane");
-        crateWithFallingObjectsAnimator.SetTrigger("PullLiftLeverBoxes");
+        Animator craneAnimator = crane.GetComponent<Animator>();
+        Animator crateWithFallingObjectsAnimator = crateWithFallingObjects.GetComponent<Animator>();
+
+        if (craneAnimator != null && crateWithFallingObjectsAnimator != null)
+        {
+            craneAnimator.SetTrigger("PullLiftLeverCrane");
+            crateWithFallingObjectsAnimator.SetTrigger("PullLiftLeverBoxes");
+            Debug.Log("Lift lever pulled");
+        }
     }
 }

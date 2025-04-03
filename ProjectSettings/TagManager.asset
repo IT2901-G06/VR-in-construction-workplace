@@ -11,8 +11,6 @@ TagManager:
   - RedContainer
   - LeftHandGrabber
   - RightHandGrabber
-  - Crane
-  - CrateWithFallingObjects
   layers:
   - Default
   - TransparentFX

@@ -2709,6 +2709,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a05452f09c720f4282f15e943a2841c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crane: {fileID: 1722143707}
+  crateWithFallingObjects: {fileID: 1092169779}
 --- !u!4 &334347532
 Transform:
   m_ObjectHideFlags: 0
@@ -4633,52 +4635,6 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!1 &669215131
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 669215133}
-  - component: {fileID: 669215132}
-  m_Layer: 0
-  m_Name: BurstCollisionWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &669215132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 669215131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSpans:
-    m_AlignBytes: 16
---- !u!4 &669215133
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 669215131}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &673971433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8057,7 +8013,7 @@ GameObject:
   - component: {fileID: 1092169780}
   m_Layer: 0
   m_Name: Crate
-  m_TagString: CrateWithFallingObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8257,6 +8213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a05452f09c720f4282f15e943a2841c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crane: {fileID: 0}
+  crateWithFallingObjects: {fileID: 0}
 --- !u!1001 &1118697831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12367,7 +12325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000012210597936, guid: 0da5ba4128d40da46b901faf2397741d, type: 3}
       propertyPath: m_TagString
-      value: Crane
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1000012210597936, guid: 0da5ba4128d40da46b901faf2397741d, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -15105,6 +15063,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000012872891332, guid: 209226fec07ec64479cb679ca33e0425, type: 3}
   m_PrefabInstance: {fileID: 1877962694}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1878005194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1878005196}
+  - component: {fileID: 1878005195}
+  m_Layer: 0
+  m_Name: BurstCollisionWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1878005195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878005194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpans:
+    m_AlignBytes: 16
+--- !u!4 &1878005196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878005194}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1893468587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16732,4 +16736,4 @@ SceneRoots:
   - {fileID: 75487776}
   - {fileID: 956235103}
   - {fileID: 2112866747}
-  - {fileID: 669215133}
+  - {fileID: 1878005196}
