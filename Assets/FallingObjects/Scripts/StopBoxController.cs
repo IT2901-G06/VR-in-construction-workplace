@@ -4,6 +4,7 @@ public class StopBoxController : MonoBehaviour
 {
     private bool _craneAtTop = false;
     private bool _badRopeGrabbed = false;
+    private bool _withinRange = false;
 
     public void RopeGrabbed(bool badRope)
     {
@@ -17,9 +18,14 @@ public class StopBoxController : MonoBehaviour
         _craneAtTop = craneAtTop;
     }
 
+    public void SetWithinRange(bool withinRange)
+    {
+        _withinRange = withinRange;
+    }
+
     public void LookedUp()
     {
-        Debug.Log("Looked up!");
-        if (_craneAtTop && _badRopeGrabbed) gameObject.SetActive(false);
+        Debug.Log("Looked up! | Crane at top: " + _craneAtTop + " | Bad rope grabbed: " + _badRopeGrabbed + " | Player within range: " + _withinRange);
+        if (_craneAtTop && _badRopeGrabbed && _withinRange) gameObject.SetActive(false);
     }
 }
