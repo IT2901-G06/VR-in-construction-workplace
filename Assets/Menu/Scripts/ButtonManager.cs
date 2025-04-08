@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
 {
-
     public void HandleGloveButtonPress()
     {
         Debug.Log("Glove Button Pressed");
@@ -40,7 +39,10 @@ public class ButtonManager : MonoBehaviour
         {
             Debug.Log("Haptic Controller is not null");
 
-            int motorStrength = 75;
+            int motorStrength = MotorStrengthManager.Instance != null ?
+                MotorStrengthManager.Instance.GetMotorStrength() : 75;
+            Debug.Log("Motor Strength: " + motorStrength);
+
             int duration = hapticController.GetSingleEventMotorRunTimeMs();
 
             // Trigger both front and back simultaneously
