@@ -1125,6 +1125,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 476566, guid: 281a92c301211ed469542110ade4df85, type: 3}
   m_PrefabInstance: {fileID: 150429594}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &150710516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 150710518}
+  - component: {fileID: 150710517}
+  m_Layer: 0
+  m_Name: BurstCollisionWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &150710517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150710516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpans:
+    m_AlignBytes: 16
+--- !u!4 &150710518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150710516}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &160403993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2800,6 +2846,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6654777086372118593, guid: ef4ac29d82abf9a4494e8363ee31716f, type: 3}
+      propertyPath: dynamicResolutionVersion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654777086372118593, guid: ef4ac29d82abf9a4494e8363ee31716f, type: 3}
+      propertyPath: quest2MaxDynamicResolutionScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654777086372118593, guid: ef4ac29d82abf9a4494e8363ee31716f, type: 3}
+      propertyPath: quest2MinDynamicResolutionScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654777086372118593, guid: ef4ac29d82abf9a4494e8363ee31716f, type: 3}
+      propertyPath: quest3MaxDynamicResolutionScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654777086372118593, guid: ef4ac29d82abf9a4494e8363ee31716f, type: 3}
+      propertyPath: quest3MinDynamicResolutionScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6654777086401330117, guid: ef4ac29d82abf9a4494e8363ee31716f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -2889,7 +2955,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6654777086365148303, guid: ef4ac29d82abf9a4494e8363ee31716f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1385097074}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6654777086365070767, guid: ef4ac29d82abf9a4494e8363ee31716f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1504389644}
+    - targetCorrespondingSourceObject: {fileID: 6654777086365070767, guid: ef4ac29d82abf9a4494e8363ee31716f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1504389649}
   m_SourcePrefab: {fileID: 100100000, guid: ef4ac29d82abf9a4494e8363ee31716f, type: 3}
 --- !u!4 &339455401 stripped
 Transform:
@@ -3876,7 +3948,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1832178728}
         m_TargetAssemblyTypeName: StopBoxController, Assembly-CSharp
-        m_MethodName: DisableStopBox
+        m_MethodName: RopeGrabbed
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11113,6 +11185,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000012872891332, guid: 209226fec07ec64479cb679ca33e0425, type: 3}
   m_PrefabInstance: {fileID: 1497494338}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1504389643 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6654777086365070767, guid: ef4ac29d82abf9a4494e8363ee31716f, type: 3}
+  m_PrefabInstance: {fileID: 339455400}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1504389644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504389643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1504389649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504389643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89769e0d56bb140fa84a1d855dbfcb24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stopBoxController: {fileID: 1832178728}
 --- !u!1 &1511883167
 GameObject:
   m_ObjectHideFlags: 0
@@ -12144,7 +12278,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1832178728}
         m_TargetAssemblyTypeName: StopBoxController, Assembly-CSharp
-        m_MethodName: DisableStopBox
+        m_MethodName: RopeGrabbed
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12416,6 +12550,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1000012210597936, guid: 0da5ba4128d40da46b901faf2397741d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1722143710}
+    - targetCorrespondingSourceObject: {fileID: 1000012210597936, guid: 0da5ba4128d40da46b901faf2397741d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1722143715}
     - targetCorrespondingSourceObject: {fileID: 1000014075806180, guid: 0da5ba4128d40da46b901faf2397741d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1722143709}
@@ -12530,6 +12667,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &1722143715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722143707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd3875491d544dbabb6e89a8244441f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stopBoxController: {fileID: 1832178728}
 --- !u!1001 &1727425290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15063,52 +15213,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000012872891332, guid: 209226fec07ec64479cb679ca33e0425, type: 3}
   m_PrefabInstance: {fileID: 1877962694}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1878005194
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1878005196}
-  - component: {fileID: 1878005195}
-  m_Layer: 0
-  m_Name: BurstCollisionWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1878005195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1878005194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSpans:
-    m_AlignBytes: 16
---- !u!4 &1878005196
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1878005194}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1893468587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16736,4 +16840,4 @@ SceneRoots:
   - {fileID: 75487776}
   - {fileID: 956235103}
   - {fileID: 2112866747}
-  - {fileID: 1878005196}
+  - {fileID: 150710518}
