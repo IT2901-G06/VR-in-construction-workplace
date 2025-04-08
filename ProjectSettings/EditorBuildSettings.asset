@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/FallingObjects/Scenes/FallingObjectsScenario.unity
     guid: 8b59fd7ac188a4b00afeeba4b010cb99
   - enabled: 1
-    path: Assets/ElectricityScenario/Scenes/ElectricityNightScene.unity
+    path: Assets/ElectricityScenario/Scenes/OLDElectricityNightScene.unity
     guid: b2b52808dd5234d37a26e8d2a74d7cce
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}

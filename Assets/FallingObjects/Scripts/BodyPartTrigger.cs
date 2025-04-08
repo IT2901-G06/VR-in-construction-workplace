@@ -35,8 +35,8 @@ public class BodyPartTrigger : MonoBehaviour
     void Start()
     {
         _initialCenter = GetComponent<BoxCollider>().center;
-        _initialRigY = GameObject.FindGameObjectWithTag("Player").transform.parent.position.y / 2;
-        _cameraCharController = GameObject.FindGameObjectWithTag("Player").GetComponent<BNGPlayerController>();
+        _initialRigY = GameObject.FindGameObjectWithTag("Player").transform.position.y / 2;
+        _cameraCharController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BNGPlayerController>();
     }
 
     void Update()
@@ -45,7 +45,7 @@ public class BodyPartTrigger : MonoBehaviour
         Vector3 currentSize = GetComponent<BoxCollider>().size;
         GetComponent<BoxCollider>().size = new(currentSize.x, newHeight, currentSize.z);
 
-        float newCenter = newHeight / 2 - _initialRigY;
+        float newCenter = newHeight / 2 - _initialRigY * 1.5f;
         if (_position == TriggerPositionType.Head)
         {
             newCenter += _percentOfPlayerHeightForBody * (_cameraCharController.ElevateCameraHeight + _initialRigY);
