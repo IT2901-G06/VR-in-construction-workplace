@@ -11,6 +11,11 @@ TagManager:
   - RedContainer
   - LeftHandGrabber
   - RightHandGrabber
+  - YrkesTitle
+  - Bullet
+  - Title
+  - OcupationName
+  - DangerZone
   layers:
   - Default
   - TransparentFX
