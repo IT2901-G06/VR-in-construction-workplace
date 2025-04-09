@@ -6,6 +6,8 @@ public class WaypointWalker : MonoBehaviour
 {
     private List<Vector3> Waypoints;
     public float Threshold = 0.5f;
+    public UnityEngine.Events.UnityEvent OnFinalDestinationReached;
+    
 
     private NavMeshAgent _agent;
     private Animator _animator;
@@ -13,6 +15,8 @@ public class WaypointWalker : MonoBehaviour
     private int _currentIndex = 0;
     private int _direction = 1;
     private bool _initialized = false;
+    private bool _shouldWalkWaypointsInCircle = true;
+    private bool _enabled = true;
 
 
     void Awake()
@@ -23,7 +27,7 @@ public class WaypointWalker : MonoBehaviour
 
     void Update()
     {
-        if (!_initialized || _agent == null || Waypoints == null || Waypoints.Count == 0) return;
+        if (!_initialized || _agent == null || Waypoints == null || Waypoints.Count == 0 || !_enabled) return;
 
         if (_animator != null)
         {
@@ -36,11 +40,24 @@ public class WaypointWalker : MonoBehaviour
 
             if (_currentIndex >= Waypoints.Count || _currentIndex < 0)
             {
-                _direction *= -1;
-                _currentIndex += _direction * 2;
+                if (_shouldWalkWaypointsInCircle)
+                {
+                    _direction *= -1;
+                    _currentIndex += _direction * 2;
+                }
+                else
+                {
+                    _enabled = false;
+                    OnFinalDestinationReached?.Invoke();
+                    _animator?.SetFloat(_velocityYHash, 0f);
+                }
             }
 
-            _agent.SetDestination(Waypoints[_currentIndex]);
+            if (_enabled)
+            {
+                _agent.SetDestination(Waypoints[_currentIndex]);
+            }
+
             AnimationConstraintsController visualFix = GetComponentInChildren<AnimationConstraintsController>();
             if (visualFix != null)
             {
@@ -52,6 +69,11 @@ public class WaypointWalker : MonoBehaviour
     public void SetWaypoints(List<Vector3> waypointPositions)
     {
         Waypoints = waypointPositions;
+    }
+
+    public void SetShouldWalkWaypointsInCircle(bool shouldWalkWaypointsInCircle)
+    {
+        _shouldWalkWaypointsInCircle = shouldWalkWaypointsInCircle;
     }
 
     public void UpdateAnimator(Animator animator)

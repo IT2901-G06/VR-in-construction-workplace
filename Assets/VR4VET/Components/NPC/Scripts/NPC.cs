@@ -12,6 +12,7 @@ public class NPC : ScriptableObject
     public Vector3 SpawnPosition;
     public Vector3 SpawnRotation;
     public bool ShouldFollow;
+    public bool ShouldRotateTowardsPlayerWhenStandingStill;
     public DialogueTree[] DialogueTreesSO;
     public TextAsset[] DialogueTreeJSON;
     public RuntimeAnimatorController runtimeAnimatorController;
@@ -21,5 +22,6 @@ public class NPC : ScriptableObject
     public float MinDistance;
     public bool ShouldWalkWaypoints;
     public Vector3[] Waypoints;
+    public bool ShouldWalkWaypointsInCircle = true;
 
 }

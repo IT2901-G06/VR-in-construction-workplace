@@ -125,7 +125,7 @@ public class AnimationConstraintsController : MonoBehaviour
                 Vector3 forward = transform.forward;
                 // Angle between player and NPC
                 float angle = Vector3.Angle(forward, playerDirection);
-                if (angle <= 90f)
+                if (angle > 90f)
                 {
                     // Enable the multi-aim constraint when character is talking and player not behind NPC
                     // Add up to different thresholds for spine and head so spine moves less than head

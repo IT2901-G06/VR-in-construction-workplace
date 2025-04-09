@@ -27,13 +27,13 @@ public class NPCSpawner : MonoBehaviour
         // change the apperance, animation avatar and voice from the deafult one, to a specific one
         SetAppearanceAnimationAndVoice(newNPC, npcSO.CharacterModel, npcSO.CharacterAvatar, npcSO.runtimeAnimatorController, npcSO.VoicePresetId);
         // Should the NPC follow after the player or not? (from the start)
-        SetFollowingBehavior(newNPC, npcSO.ShouldFollow);
+        SetFollowingBehavior(newNPC, npcSO.ShouldFollow, npcSO.ShouldRotateTowardsPlayerWhenStandingStill);
         // Update the name of the NPC
         SetName(newNPC, npcSO.NameOfNPC);
         // set talking topics aka. dialogueTrees
         SetConversation(newNPC, npcSO.DialogueTreesSO, npcSO.DialogueTreeJSON);
 
-        SetWaypointWalkingBehavior(newNPC, npcSO.ShouldWalkWaypoints, npcSO.Waypoints);
+        SetWaypointWalkingBehavior(newNPC, npcSO.ShouldWalkWaypoints, npcSO.Waypoints, npcSO.ShouldWalkWaypointsInCircle);
         spawnedNpc = newNPC;
         // return the NPC
         return newNPC;
@@ -88,12 +88,13 @@ public class NPCSpawner : MonoBehaviour
         }
     }
 
-    public void SetFollowingBehavior(GameObject npc, bool shouldFollow)
+    public void SetFollowingBehavior(GameObject npc, bool shouldFollow, bool shouldRotateTowardsPlayerWhenStandingStill)
     {
         FollowThePlayerController followThePlayerController = npc.GetComponent<FollowThePlayerController>();
         if (followThePlayerController != null)
         {
             followThePlayerController.ShouldFollow = shouldFollow;
+            followThePlayerController.ShouldRotateTowardsPlayerWhenStandingStill = shouldRotateTowardsPlayerWhenStandingStill;
         }
         else
         {
@@ -140,11 +141,12 @@ public class NPCSpawner : MonoBehaviour
         }
     }
 
-    public void SetWaypointWalkingBehavior(GameObject npc, bool shouldWalk, Vector3[] waypointPositions)
+    public void SetWaypointWalkingBehavior(GameObject npc, bool shouldWalk, Vector3[] waypointPositions, bool shouldWalkWaypointsInCircle)
     {
         if (shouldWalk && waypointPositions != null && waypointPositions.Length > 0)
         {
-            var walker = npc.AddComponent<WaypointWalker>();
+            WaypointWalker walker = npc.GetComponentInChildren<WaypointWalker>();
+            walker.SetShouldWalkWaypointsInCircle(shouldWalkWaypointsInCircle);
             walker.SetWaypoints(new List<Vector3>(waypointPositions));
             var setCharacterModel = npc.GetComponent<SetCharacterModel>();
             var animator = setCharacterModel?.GetAnimator();
