@@ -11,14 +11,16 @@ public class BoxStackingController : MonoBehaviour
     private int _amtBoxesToStack = 4;
 
     [Header("Necessary Game Objects")]
-    [SerializeField]
-    private ObiSolver _ropeObiSolver;
 
     [SerializeField]
     private GameObject _snapZones;
 
     [SerializeField]
     private GameObject _pallet;
+
+    [SerializeField]
+    private SnapZone _ropeSnapZone;
+
 
     [Header("Debugging")]
     [Tooltip("How many boxes have been successfully stacked (Only for debugging purposes.)")]
@@ -56,11 +58,6 @@ public class BoxStackingController : MonoBehaviour
         if (_stackedBoxes.Count == _amtBoxesToStack)
         {
             Debug.Log("Enough boxes stacked!");
-            if (_ropeObiSolver == null)
-            {
-                Debug.LogWarning("Box Stacking Controller must have an assigned Rope Obi Solver to properly function.");
-                return;
-            }
             if (_snapZones == null)
             {
                 Debug.LogWarning("Box Stacking Controller must have an assigned Snap Zones GameObject to properly function.");
@@ -71,21 +68,17 @@ public class BoxStackingController : MonoBehaviour
                 Debug.LogWarning("Box Stacking Controller must have an assigned Pallet GameObject to properly function.");
                 return;
             }
-
-            foreach (GameObject stackedBox in _stackedBoxes)
+            if (_ropeSnapZone == null)
             {
-                stackedBox.tag = "FallingObject";
-                stackedBox.layer = 0;
-                stackedBox.GetComponent<GrabbableRingHelper>().enabled = false;
-                stackedBox.GetComponent<Grabbable>().enabled = false;
-
+                Debug.LogWarning("Box Stacking Controller must have an assigned Rope Snap Zone GameObject to properly function.");
+                return;
             }
 
             StartCoroutine(WaitAndReleaseSnapZones());
 
             IEnumerator WaitAndReleaseSnapZones()
             {
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.1f);
 
                 foreach (Transform child in _snapZones.transform)
                 {
@@ -95,9 +88,17 @@ public class BoxStackingController : MonoBehaviour
                         snapZone.ReleaseAll();
                     }
                 }
+
+                foreach (GameObject stackedBox in _stackedBoxes)
+                {
+                    stackedBox.TryGetComponent(out Grabbable grabbable);
+                    grabbable.enabled = false;
+                    stackedBox.tag = "FallingObject";
+                    stackedBox.layer = 0;
+                }
             }
 
-            _ropeObiSolver.gameObject.SetActive(true);
+            _ropeSnapZone.gameObject.SetActive(true);
         }
     }
 }
