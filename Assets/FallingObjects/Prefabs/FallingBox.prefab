@@ -194,7 +194,7 @@ Transform:
   m_GameObject: {fileID: 5673394727812939115}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0.25, z: -0.25}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -212,11 +212,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab52d2f563d6a2547a95671c153ebbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handPoseType: 1
+  handPoseType: 4
   SelectedHandPose: {fileID: 0}
   HandPose: 0
-  LeftHandIsValid: 1
-  RightHandIsValid: 1
+  LeftHandIsValid: 0
+  RightHandIsValid: 0
   HandPosition: {fileID: 0}
   MaxDegreeDifferenceAllowed: 180
   IndexBlendMin: 0
@@ -263,6 +263,62 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5804045717933596036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab52d2f563d6a2547a95671c153ebbb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handPoseType: 1
+  SelectedHandPose: {fileID: 0}
+  HandPose: 0
+  LeftHandIsValid: 1
+  RightHandIsValid: 1
+  HandPosition: {fileID: 0}
+  MaxDegreeDifferenceAllowed: 180
+  IndexBlendMin: 0
+  IndexBlendMax: 0
+  ThumbBlendMin: 0
+  ThumbBlendMax: 0
+  ShowAngleGizmo: 1
+--- !u!1 &7577018443703860993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7780100519922586097}
+  - component: {fileID: 6987409555116068305}
+  m_Layer: 0
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7780100519922586097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7577018443703860993}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25, y: 0.25, z: -0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7492791322611316742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6987409555116068305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7577018443703860993}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab52d2f563d6a2547a95671c153ebbb3, type: 3}
@@ -461,6 +517,10 @@ PrefabInstance:
       value: FallingBox
       objectReference: {fileID: 0}
     - target: {fileID: 192878, guid: ac1e57da7eccaa44a8c5b369ce7a5043, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 192878, guid: ac1e57da7eccaa44a8c5b369ce7a5043, type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
@@ -470,7 +530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 492900, guid: ac1e57da7eccaa44a8c5b369ce7a5043, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 492900, guid: ac1e57da7eccaa44a8c5b369ce7a5043, type: 3}
       propertyPath: m_LocalPosition.y
@@ -478,7 +538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 492900, guid: ac1e57da7eccaa44a8c5b369ce7a5043, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 492900, guid: ac1e57da7eccaa44a8c5b369ce7a5043, type: 3}
       propertyPath: m_LocalRotation.w
@@ -515,6 +575,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 492900, guid: ac1e57da7eccaa44a8c5b369ce7a5043, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7780100519922586097}
     - targetCorrespondingSourceObject: {fileID: 492900, guid: ac1e57da7eccaa44a8c5b369ce7a5043, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4058783157250488126}
@@ -681,7 +744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RingOnValidPickup: 1
   RingOnValidRemotePickup: 1
-  RingHelperScale: 0.5
+  RingHelperScale: 1
 --- !u!114 &7534436981806788348
 MonoBehaviour:
   m_ObjectHideFlags: 0

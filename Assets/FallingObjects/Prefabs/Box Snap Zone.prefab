@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 1652932065171397479}
   - component: {fileID: 6114612104493406249}
   - component: {fileID: 7989408201346860341}
+  - component: {fileID: 1660446891186444477}
   m_Layer: 2
   m_Name: Box Snap Zone
   m_TagString: Untagged
@@ -232,9 +233,9 @@ MonoBehaviour:
   OnSnapEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BoxStackingController, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1660446891186444477}
+        m_TargetAssemblyTypeName: BoxSnapZoneScript, Assembly-CSharp
+        m_MethodName: AddBox
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -337,3 +338,15 @@ MonoBehaviour:
   UseCustomInspector: 1
   lastFlickTime: 0
   FlickForce: 1
+--- !u!114 &1660446891186444477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8415424332475163831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1aae12c71d4e44eeb17585fd9009b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

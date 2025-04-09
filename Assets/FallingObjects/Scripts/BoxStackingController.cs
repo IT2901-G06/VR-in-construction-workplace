@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using BNG;
 using Obi;
 using UnityEngine;
@@ -23,19 +24,36 @@ public class BoxStackingController : MonoBehaviour
     [Tooltip("How many boxes have been successfully stacked (Only for debugging purposes.)")]
     public int AmtStackedBoxes = 0;
 
-    private int _stackedBoxes = 0;
+    private List<GameObject> _stackedBoxes;
+
+
+    public static BoxStackingController Instance;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     void Start()
     {
         AmtStackedBoxes = 0;
+        _stackedBoxes = new List<GameObject>();
     }
 
-    public void IncrementStackedBoxes()
+    public void IncrementStackedBoxes(Grabbable newStackedBox)
     {
-        _stackedBoxes++;
-        AmtStackedBoxes = _stackedBoxes;
+        _stackedBoxes.Add(newStackedBox.gameObject);
+        AmtStackedBoxes = _stackedBoxes.Count;
         Debug.Log("Amt stacked boxes is now: " + _stackedBoxes);
-        if (_stackedBoxes == _amtBoxesToStack)
+        if (_stackedBoxes.Count == _amtBoxesToStack)
         {
             Debug.Log("Enough boxes stacked!");
             if (_ropeObiSolver == null)
@@ -54,7 +72,14 @@ public class BoxStackingController : MonoBehaviour
                 return;
             }
 
-            _pallet.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            foreach (GameObject stackedBox in _stackedBoxes)
+            {
+                stackedBox.tag = "FallingObject";
+                stackedBox.layer = 0;
+                stackedBox.GetComponent<GrabbableRingHelper>().enabled = false;
+                stackedBox.GetComponent<Grabbable>().enabled = false;
+
+            }
 
             StartCoroutine(WaitAndReleaseSnapZones());
 
