@@ -55,6 +55,12 @@ public class ConversationController : MonoBehaviour
     {
         return _dialogueBoxController.GetActivatedCount();
     }
+
+    public DialogueTree GetActiveDialogueTree()
+    {
+        return _dialogueTree;
+    }
+
     /// <summary>
     /// Start the dialogue when the Player is close enough
     /// </summary>

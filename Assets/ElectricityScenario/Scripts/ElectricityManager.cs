@@ -4,14 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using BNG;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ElectricityManager : MonoBehaviour
 {
+    [Header("Electricity Settings")]
     [SerializeField] private bool requiresBothHands = true;
     [SerializeField] private float secondsBetweenElectricitySteps = 0.1f;
     [Range(1, 100)]
     [SerializeField]
     private int motorStrength = 100;
+
+    [Header("Events")]
+    [SerializeField] private UnityEvent onElectricityStarting;
+    [SerializeField] private UnityEvent onElectricityStarted;
+    [SerializeField] private UnityEvent onElectricityStopping;
+    [SerializeField] private UnityEvent onElectricityStopped;
 
     private bool _electricityIsOn = false;
 
@@ -92,11 +100,19 @@ public class ElectricityManager : MonoBehaviour
         return source.CompareTag("ElectricitySourceFrom");
     }
 
+    private IEnumerator KillAfterDelay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        DeathManager.Instance.Kill();
+        Debug.Log("Player killed after delay");
+    }
+
     private IEnumerator StartElectricitySequence(bool reverse = false)
     {
         HapticController hapticController = HapticController.Instance;
 
         Debug.Log("Electricity starting!");
+        onElectricityStarting?.Invoke();
         _electricityIsOn = true;
 
         MotorEvent[] events = reverse ? ElectricityEventSequence.EventSteps.Reverse().ToArray() : ElectricityEventSequence.EventSteps;
@@ -113,6 +129,9 @@ public class ElectricityManager : MonoBehaviour
         }
 
         Debug.Log("Electricity on!");
+        onElectricityStarted?.Invoke();
+
+        StartCoroutine(KillAfterDelay(0.5f));
     }
 
     private IEnumerator StopElectricitySequence()
@@ -120,6 +139,7 @@ public class ElectricityManager : MonoBehaviour
         HapticController hapticController = HapticController.Instance;
 
         Debug.Log("Electricity off is starting!");
+        onElectricityStopping?.Invoke();
 
         var copiedRequestIds = new int[_bhapticsRequestIds.Count];
         _bhapticsRequestIds.CopyTo(copiedRequestIds);
@@ -134,5 +154,6 @@ public class ElectricityManager : MonoBehaviour
         _electricityIsOn = false;
         _stopElectricityCoroutine = null;
         Debug.Log("Electricity is off!");
+        onElectricityStopped?.Invoke();
     }
 }

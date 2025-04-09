@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08df34276ae9b5f4fbdd63d5671e73fe, type: 3}
-  m_Name: BobtheBuilder
+  m_Name: BobTheCoworker
   m_EditorClassIdentifier: 
-  NameOfNPC: Bob the Builder
+  NameOfNPC: Bob the Coworker
   NpcPrefab: {fileID: 142329030213301039, guid: ff4da975a925d9447a923de91bf35e65, type: 3}
   CharacterModel: {fileID: 919132149155446097, guid: 8e28746bec22d7747b484758390ef5e5, type: 3}
   CharacterAvatar: {fileID: 9000000, guid: 8e28746bec22d7747b484758390ef5e5, type: 3}
@@ -20,11 +20,15 @@ MonoBehaviour:
   SpawnPosition: {x: -16, y: 0, z: 5.5}
   SpawnRotation: {x: 0, y: 0, z: 0}
   ShouldFollow: 1
+  ShouldRotateTowardsPlayerWhenStandingStill: 1
   DialogueTreesSO:
-  - {fileID: 11400000, guid: 307543b39e53adb4aa8c2e598b75a41b, type: 2}
+  - {fileID: 11400000, guid: d0710d03888d54f48a27df2fa1db3647, type: 2}
+  - {fileID: 11400000, guid: 4f328089d0f7241c98bcc22444f0e1b0, type: 2}
+  - {fileID: 11400000, guid: b8027398a4eb44c8daf5fcd66f8b9dfe, type: 2}
   DialogueTreeJSON: []
   runtimeAnimatorController: {fileID: 9100000, guid: acb4b9981fa45ce46adb4867634b31ab, type: 2}
   SpatialBlend: 0
   MinDistance: 1
   ShouldWalkWaypoints: 0
   Waypoints: []
+  ShouldWalkWaypointsInCircle: 1
