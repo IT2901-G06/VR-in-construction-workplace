@@ -24,7 +24,8 @@ public class BobTheCoworker : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (_player == null) {
+        if (_player == null)
+        {
             Debug.LogError("Player not found");
         }
 
@@ -34,7 +35,6 @@ public class BobTheCoworker : MonoBehaviour
             Debug.Log("Cant find spawner");
         }
 
-        DialogueBoxController.OnDialogueEnded += OnDialogueEnded;
         DialogueBoxController.OnSpeakEnded += OnSpeakEnded;
 
         _npcInstances = _npcSpawner._npcInstances;
@@ -78,7 +78,10 @@ public class BobTheCoworker : MonoBehaviour
         Debug.Log("Performing Bob The Coworker stage 2");
 
         _conversationController.NextDialogueTree();
-        _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, "BobTheCoworkerStage2");
+
+        DialogueTree activeDialogueTree = _conversationController.GetActiveDialogueTree();
+        _dialogueBoxController.StartDialogue(activeDialogueTree, 0, "BobTheCoworkerStage2");
+        _conversationController.AddOldDialogueTree(activeDialogueTree);
     }
 
     private void OnSpeakEnded(string name)
@@ -98,11 +101,11 @@ public class BobTheCoworker : MonoBehaviour
             waypoints[0] = position;
 
             _npcSpawner.SetWaypointWalkingBehavior(_npc, true, waypoints, false);
-            _waypointWalker.OnFinalDestinationReached.AddListener(OnFinalDestinationReachedBobTheCoworker);
+            _waypointWalker.OnFinalDestinationReached.AddListener(OnFinalDestinationReached);
         }
     }
 
-    private void OnFinalDestinationReachedBobTheCoworker()
+    private void OnFinalDestinationReached()
     {
         _hasReachedElectricityBox = true;
         TryRunStage3();
@@ -139,10 +142,5 @@ public class BobTheCoworker : MonoBehaviour
         _hasPlayedStage3 = true;
         _conversationController.NextDialogueTree();
         _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, "BobTheCoworkerStage3");
-    }
-
-    private void OnDialogueEnded(string name)
-    {
-        Debug.Log("Dialogue ended: " + name);
     }
 }

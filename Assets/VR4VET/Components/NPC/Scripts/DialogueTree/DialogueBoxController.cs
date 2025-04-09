@@ -288,7 +288,7 @@ public class DialogueBoxController : MonoBehaviour
         _animator.SetBool(_isTalkingHash, false);
         dialogueIsActive = false;
         ResetBox();
-        if (dialogueTreeRestart.speakButtonOnExit || hideSpeakButton)
+        if (dialogueTreeRestart.speakButtonOnExit && !hideSpeakButton)
         {
             // Only start speak canvas if option is not turned off
             StartSpeakCanvas(dialogueTreeRestart);
