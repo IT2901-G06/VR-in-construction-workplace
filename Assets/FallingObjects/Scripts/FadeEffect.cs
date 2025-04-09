@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FadeEffect : MonoBehaviour
 {
+    public static FadeEffect Instance;
+
+    [Header("Events")]
+    public UnityEvent OnFadeStart;
+    public UnityEvent OnFadeComplete;
+
     private Material _material;
     private TextMeshProUGUI _text;
 
     private bool _isFadingOut = false;
 
-    public static FadeEffect Instance;
+
 
     void Awake()
     {
@@ -50,6 +57,8 @@ public class FadeEffect : MonoBehaviour
 
     private IEnumerator PlayEffect(bool fadeOut, float fadeDelay)
     {
+        OnFadeStart?.Invoke();
+
         float startAlpha = _material.GetFloat("_Alpha");
         float endAlpha = fadeOut ? 1.0f : 0.0f;
         float remainingTime = fadeDelay * Mathf.Abs(endAlpha - startAlpha);
@@ -83,5 +92,6 @@ public class FadeEffect : MonoBehaviour
         var color = text.color;
         text.color = new Color(color.r, color.g, color.b, endAlpha);
 
+        OnFadeComplete?.Invoke();
     }
 }

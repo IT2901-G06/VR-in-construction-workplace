@@ -1,6 +1,7 @@
 using System.Collections;
 using Meta.WitAi.TTS.Utilities;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DeathManager : MonoBehaviour
 {
@@ -13,9 +14,17 @@ public class DeathManager : MonoBehaviour
     [SerializeField]
     private GameObject _player;
 
+    [Header("Events")]
+
+    public UnityEvent OnDeath;
+    public UnityEvent OnDeathComplete;
+    public UnityEvent OnRevive;
+
     private TTSSpeaker _ttsSpeaker;
 
     private bool _isDead = false;
+    private bool _hasFinishedSpeak = false;
+    private bool _isFading = false;
 
     public static DeathManager Instance;
 
@@ -68,21 +77,45 @@ public class DeathManager : MonoBehaviour
         }
     }
 
+    private void OnFadeComplete()
+    {
+        _isFading = false;
+        if (_isDead)
+        {
+            TryFireDeathComplete();
+        }
+    }
+
+    private void TryFireDeathComplete()
+    {
+        Debug.Log("Death complete check");
+        if (!_isFading && _hasFinishedSpeak)
+        {
+            Debug.Log("Death complete");
+            OnDeathComplete?.Invoke();
+        }
+    }
+
     public void Kill()
     {
         if (_isDead || FadeEffect.Instance == null) return;
 
+        _hasFinishedSpeak = false;
+        _isFading = true;
         _isDead = true;
         FadeEffect.Instance.Fade(_isDead, _fadeDelay, _deathMessage);
+        FadeEffect.Instance.OnFadeComplete.AddListener(OnFadeComplete);
 
         if (_ttsSpeaker != null)
         {
-            StartCoroutine(WaitAndSpeakTTS(_deathMessage, _fadeDelay / 2));
+            StartCoroutine(WaitAndSpeakTTS(_deathMessage, _fadeDelay / 3));
         }
         else
         {
             Debug.LogError("TTSSpeaker not found");
         }
+
+        OnDeath?.Invoke();
     }
 
     private IEnumerator WaitAndSpeakTTS(string message, float delaySeconds)
@@ -96,13 +129,33 @@ public class DeathManager : MonoBehaviour
         {
             Debug.LogError("TTSSpeaker not found");
         }
+
+        // Avoid race condition
+        yield return new WaitForSeconds(1f);
+
+        // Wait for the TTS speaker to finish speaking
+        while (_ttsSpeaker.IsSpeaking)
+        {
+            yield return null;
+        }
+
+        _hasFinishedSpeak = true;
+
+        if (_isDead)
+        {
+            TryFireDeathComplete();
+        }
     }
 
     public void Revive()
     {
         if (!_isDead || FadeEffect.Instance == null) return;
 
+        _hasFinishedSpeak = false;
+        _isFading = true;
         _isDead = false;
         FadeEffect.Instance.Fade(_isDead, _fadeDelay);
+
+        OnRevive?.Invoke();
     }
 }
