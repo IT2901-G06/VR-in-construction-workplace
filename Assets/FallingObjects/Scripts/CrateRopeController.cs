@@ -2,7 +2,7 @@ using BNG;
 using Obi;
 using UnityEngine;
 
-public class RopeSnapZoneScript : MonoBehaviour
+public class CrateRopeController : MonoBehaviour
 {
 
     [Header("Settings")]
@@ -12,6 +12,9 @@ public class RopeSnapZoneScript : MonoBehaviour
 
     [Header("Necessary Game Objects")]
     [SerializeField]
+    private SnapZone _ropeSnapZone;
+
+    [SerializeField]
     private ObiSolver _ropeObiSolver;
 
     [SerializeField]
@@ -20,35 +23,52 @@ public class RopeSnapZoneScript : MonoBehaviour
     [SerializeField]
     private StopBoxController _stopBoxController;
 
+    [SerializeField]
+    private BoxCollider _ropeAttachmentPlane;
+
     public void AttachedRope()
     {
-        GameObject attachedRopeGameObject = GetComponent<SnapZone>().HeldItem.gameObject;
+        GameObject attachedRopeGameObject = _ropeSnapZone.HeldItem.gameObject;
 
         // Hide ring helper for snap zone
-        transform.GetChild(0).gameObject.SetActive(false);
+        _ropeSnapZone.transform.GetChild(0).gameObject.SetActive(false);
 
 
+        if (_ropeSnapZone == null)
+        {
+            Debug.LogWarning("Crate Rope Manager must have an assigned Rope Snap Zone to properly function.");
+            return;
+        }
         if (_stopBoxController == null)
         {
-            Debug.LogWarning("Rope Snap Zone Script must have an assigned Stop Box Controller to properly function.");
+            Debug.LogWarning("Crate Rope Manager must have an assigned Stop Box Controller to properly function.");
             return;
         }
         if (_ropeObiSolver == null)
         {
-            Debug.LogWarning("Rope Snap Zone Script must have an assigned Rope Obi Solver GameObject to properly function.");
+            Debug.LogWarning("Crate Rope Manager must have an assigned Rope Obi Solver GameObject to properly function.");
             return;
         }
         if (_craneRopeObiSolver == null)
         {
-            Debug.LogWarning("Rope Snap Zone Script must have an assigned Crane Rope Obi Solver GameObject to properly function.");
+            Debug.LogWarning("Crate Rope Manager must have an assigned Crane Rope Obi Solver GameObject to properly function.");
+            return;
+        }
+        if (_ropeAttachmentPlane == null)
+        {
+            Debug.LogWarning("Box Stacking Controller must have an assigned Rope Attachment Plane GameObject to properly function.");
             return;
         }
 
         // Hide rope moved over to snap zone
         attachedRopeGameObject.SetActive(false);
+        attachedRopeGameObject.transform.GetChild(0).GetComponent<ObiParticleAttachment>().enabled = false;
         _stopBoxController.SetRopeAttached(attachedRopeGameObject.name.Contains("Bad"));
 
-        // Enable rope around crates, and thicken if Good rope selected.
+        // Enable plane for rope around crates to attach itself to
+        _ropeAttachmentPlane.gameObject.SetActive(true);
+
+        // Enable rope around crates, and thicken if Good rope selected
         _ropeObiSolver.gameObject.SetActive(true);
         _craneRopeObiSolver.gameObject.SetActive(true);
         if (attachedRopeGameObject.name.Contains("Good"))
