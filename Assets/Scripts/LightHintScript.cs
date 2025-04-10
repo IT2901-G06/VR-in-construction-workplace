@@ -1,11 +1,20 @@
 using BNG;
 using UnityEngine;
 
-public class HighlightHingeScript : GrabbableEvents
+[RequireComponent(typeof(Grabbable))]
+[RequireComponent(typeof(Outline))]
+public class LightHintScript : GrabbableEvents
 {
 
     public bool HighlightOnGrabbable = true;
     public bool HighlightOnRemoteGrabbable = true;
+
+    private Outline _outline;
+
+    void Start()
+    {
+        _outline = GetComponent<Outline>();
+    }
 
     // Item has been grabbed by a Grabber
     public override void OnGrab(Grabber grabber)
@@ -49,11 +58,13 @@ public class HighlightHingeScript : GrabbableEvents
     {
         // Enable your highlight here
         Debug.Log("Highlighting item");
-        Light light = GetComponent<Light>();
+        _outline.enabled = true;
     }
 
     public void UnhighlightItem()
     {
         // Disable your highlight here
+        Debug.Log("Stop highlighting item");
+        _outline.enabled = false;
     }
 }
