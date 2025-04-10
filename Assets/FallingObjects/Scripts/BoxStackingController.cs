@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BNG;
+using Obi;
 using UnityEngine;
 
 public class BoxStackingController : MonoBehaviour
@@ -12,13 +13,13 @@ public class BoxStackingController : MonoBehaviour
     [Header("Necessary Game Objects")]
 
     [SerializeField]
-    private GameObject _snapZones;
-
-    [SerializeField]
     private GameObject _pallet;
 
     [SerializeField]
     private SnapZone _ropeSnapZone;
+
+    [SerializeField]
+    private ObiSolver _tableRopesObiSolver;
 
 
     [Header("Debugging")]
@@ -32,14 +33,8 @@ public class BoxStackingController : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
+        if (Instance == null) Instance = this;
+        else Destroy(this);
     }
 
     void Start()
@@ -53,50 +48,36 @@ public class BoxStackingController : MonoBehaviour
         _stackedBoxes.Add(newStackedBox.gameObject);
         AmtStackedBoxes = _stackedBoxes.Count;
         Debug.Log("Amt stacked boxes is now: " + _stackedBoxes.Count);
-        if (_stackedBoxes.Count == _amtBoxesToStack)
+
+        if (_stackedBoxes.Count != _amtBoxesToStack) return;
+
+
+        Debug.Log("Enough boxes stacked!");
+        if (_pallet == null)
         {
-            Debug.Log("Enough boxes stacked!");
-            if (_snapZones == null)
-            {
-                Debug.LogWarning("Box Stacking Controller must have an assigned Snap Zones GameObject to properly function.");
-                return;
-            }
-            if (_pallet == null)
-            {
-                Debug.LogWarning("Box Stacking Controller must have an assigned Pallet GameObject to properly function.");
-                return;
-            }
-            if (_ropeSnapZone == null)
-            {
-                Debug.LogWarning("Box Stacking Controller must have an assigned Rope Snap Zone GameObject to properly function.");
-                return;
-            }
-
-            StartCoroutine(WaitAndReleaseSnapZones());
-
-            IEnumerator WaitAndReleaseSnapZones()
-            {
-                yield return new WaitForSeconds(0.1f);
-
-                foreach (Transform child in _snapZones.transform)
-                {
-                    child.TryGetComponent(out SnapZone snapZone);
-                    if (snapZone != null)
-                    {
-                        snapZone.ReleaseAll();
-                    }
-                }
-
-                foreach (GameObject stackedBox in _stackedBoxes)
-                {
-                    stackedBox.TryGetComponent(out Grabbable grabbable);
-                    grabbable.enabled = false;
-                    stackedBox.tag = "FallingObject";
-                    stackedBox.layer = 0;
-                }
-            }
-
-            _ropeSnapZone.gameObject.SetActive(true);
+            Debug.LogWarning("Box Stacking Controller must have an assigned Pallet GameObject to properly function.");
+            return;
         }
+        if (_ropeSnapZone == null)
+        {
+            Debug.LogWarning("Box Stacking Controller must have an assigned Rope Snap Zone GameObject to properly function.");
+            return;
+        }
+        if (_tableRopesObiSolver == null)
+        {
+            Debug.LogWarning("Box Stacking Controller must have an assigned Table Ropes Obi Solver GameObject to properly function.");
+            return;
+        }
+
+        // Allow for grabbing of ropes
+        foreach (Transform child in _tableRopesObiSolver.gameObject.transform)
+        {
+            if (child.TryGetComponent(out Grabbable grabbable)) grabbable.enabled = true;
+        }
+
+        CrateRopeController.Instance.SetStackedBoxes(_stackedBoxes);
+
+        // Allow for placing rope on pallet
+        _ropeSnapZone.gameObject.SetActive(true);
     }
 }

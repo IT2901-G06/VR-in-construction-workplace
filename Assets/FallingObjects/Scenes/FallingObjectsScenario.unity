@@ -3195,6 +3195,52 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 65, y: 20, z: 0.2}
   m_Center: {x: -5.6, y: -13, z: -7}
+--- !u!1 &414971039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 414971041}
+  - component: {fileID: 414971040}
+  m_Layer: 0
+  m_Name: BurstCollisionWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &414971040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414971039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpans:
+    m_AlignBytes: 16
+--- !u!4 &414971041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414971039}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &418450687 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7492791322611316742, guid: bab7dca22309953498d934b88d17fb32, type: 3}
@@ -3967,7 +4013,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539595723}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cdea428d48e2bb488d33d5f75c39bb9, type: 3}
   m_Name: 
@@ -4838,7 +4884,7 @@ GameObject:
   - component: {fileID: 686994092}
   - component: {fileID: 686994091}
   m_Layer: 0
-  m_Name: Obi Solver
+  m_Name: Table Ropes Obi Solver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8213,6 +8259,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2112866747}
     m_Modifications:
+    - target: {fileID: 3633990089531104098, guid: 2c8749612dd1d9542aecb3bbb4aa6470, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3633990089531104101, guid: 2c8749612dd1d9542aecb3bbb4aa6470, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -9116,52 +9166,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 20, z: -61.1}
   m_Center: {x: -37.6, y: -13, z: 23}
---- !u!1 &1229991216
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1229991218}
-  - component: {fileID: 1229991217}
-  m_Layer: 0
-  m_Name: BurstCollisionWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1229991217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1229991216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSpans:
-    m_AlignBytes: 16
---- !u!4 &1229991218
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1229991216}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1229992865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9416,6 +9420,17 @@ MonoBehaviour:
   RingOnValidPickup: 1
   RingOnValidRemotePickup: 1
   RingHelperScale: 0.2
+--- !u!114 &1259248060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3633990089531104098, guid: 2c8749612dd1d9542aecb3bbb4aa6470, type: 3}
+  m_PrefabInstance: {fileID: 1099472592}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259248044}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cdea428d48e2bb488d33d5f75c39bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1270539666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12208,7 +12223,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716102704}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cdea428d48e2bb488d33d5f75c39bb9, type: 3}
   m_Name: 
@@ -16998,6 +17013,10 @@ PrefabInstance:
       propertyPath: _ropeSnapZone
       value: 
       objectReference: {fileID: 1652932064883265637}
+    - target: {fileID: 428870035799414560, guid: db039f4c5e15e40eca3efc54f7442852, type: 3}
+      propertyPath: _tableRopesObiSolver
+      value: 
+      objectReference: {fileID: 686994091}
     - target: {fileID: 1870421335384765862, guid: db039f4c5e15e40eca3efc54f7442852, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.07
@@ -17199,6 +17218,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7483704082165872469, guid: 217b78d5040874b8d9be8ee4a72f3110, type: 3}
+      propertyPath: _hinge
+      value: 
+      objectReference: {fileID: 1259248060}
+    - target: {fileID: 7483704082165872469, guid: 217b78d5040874b8d9be8ee4a72f3110, type: 3}
+      propertyPath: _snapZones
+      value: 
+      objectReference: {fileID: 2051944290}
+    - target: {fileID: 7483704082165872469, guid: 217b78d5040874b8d9be8ee4a72f3110, type: 3}
+      propertyPath: _boxSnapZones
+      value: 
+      objectReference: {fileID: 2051944290}
     - target: {fileID: 7483704082165872469, guid: 217b78d5040874b8d9be8ee4a72f3110, type: 3}
       propertyPath: _ropeSnapZone
       value: 
@@ -17521,4 +17552,4 @@ SceneRoots:
   - {fileID: 956235103}
   - {fileID: 2112866747}
   - {fileID: 1951458708}
-  - {fileID: 1229991218}
+  - {fileID: 414971041}
