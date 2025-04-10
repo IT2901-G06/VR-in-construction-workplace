@@ -16,7 +16,7 @@ public class LiftAnimationTrigger : MonoBehaviour
         Animator craneAnimator = _crane.GetComponent<Animator>();
         Animator crateWithFallingObjectsAnimator = _crateWithFallingObjects.GetComponent<Animator>();
 
-        if (craneAnimator != null && crateWithFallingObjectsAnimator != null && _stopBoxController.GetRopeGrabbed() != "")
+        if (craneAnimator != null && crateWithFallingObjectsAnimator != null && _stopBoxController.GetRopeAttached() != "")
         {
             craneAnimator.SetTrigger("PullLiftLeverCrane");
             crateWithFallingObjectsAnimator.SetTrigger("PullLiftLeverBoxes");

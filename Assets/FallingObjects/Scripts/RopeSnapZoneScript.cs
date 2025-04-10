@@ -46,7 +46,7 @@ public class RopeSnapZoneScript : MonoBehaviour
 
         // Hide rope moved over to snap zone
         attachedRopeGameObject.SetActive(false);
-        _stopBoxController.SetRopeGrabbed(attachedRopeGameObject.name.Contains("Bad"));
+        _stopBoxController.SetRopeAttached(attachedRopeGameObject.name.Contains("Bad"));
 
         // Enable rope around crates, and thicken if Good rope selected.
         _ropeObiSolver.gameObject.SetActive(true);
