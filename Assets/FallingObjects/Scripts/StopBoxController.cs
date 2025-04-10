@@ -3,13 +3,18 @@ using UnityEngine;
 public class StopBoxController : MonoBehaviour
 {
     private bool _craneAtTop = false;
-    private bool _badRopeGrabbed = false;
+    private string _ropeGrabbed = "";
     private bool _withinRange = false;
 
-    public void RopeGrabbed(bool badRope)
+    public void SetRopeGrabbed(bool badRope)
     {
-        Debug.Log((badRope ? "Bad" : "Good") + " rope grabbed!");
-        _badRopeGrabbed = badRope;
+        _ropeGrabbed = badRope ? "Bad" : "Good";
+        Debug.Log(_ropeGrabbed + " rope grabbed!");
+    }
+
+    public string GetRopeGrabbed()
+    {
+        return _ropeGrabbed;
     }
 
     public void SetCraneAtTop(bool craneAtTop)
@@ -25,7 +30,9 @@ public class StopBoxController : MonoBehaviour
 
     public void LookedUp()
     {
-        Debug.Log("Looked up! | Crane at top: " + _craneAtTop + " | Bad rope grabbed: " + _badRopeGrabbed + " | Player within range: " + _withinRange);
-        if (_craneAtTop && _badRopeGrabbed && _withinRange) gameObject.SetActive(false);
+        Debug.Log("Looked up! | Crane at top: " + _craneAtTop + " | Bad rope grabbed: " + (_ropeGrabbed == "Bad") + " | Player within range: " + _withinRange);
+
+        // Release crates if all conditions met
+        if (_craneAtTop && _ropeGrabbed == "Bad" && _withinRange) gameObject.SetActive(false);
     }
 }

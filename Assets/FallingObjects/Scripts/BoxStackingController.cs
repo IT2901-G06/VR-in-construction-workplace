@@ -36,7 +36,6 @@ public class BoxStackingController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
         else
         {
@@ -54,7 +53,7 @@ public class BoxStackingController : MonoBehaviour
     {
         _stackedBoxes.Add(newStackedBox.gameObject);
         AmtStackedBoxes = _stackedBoxes.Count;
-        Debug.Log("Amt stacked boxes is now: " + _stackedBoxes);
+        Debug.Log("Amt stacked boxes is now: " + _stackedBoxes.Count);
         if (_stackedBoxes.Count == _amtBoxesToStack)
         {
             Debug.Log("Enough boxes stacked!");
