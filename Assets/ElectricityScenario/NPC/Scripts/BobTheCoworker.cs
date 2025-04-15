@@ -37,36 +37,28 @@ public class BobTheCoworker : MonoBehaviour
 
         DialogueBoxController.OnSpeakEnded += OnSpeakEnded;
 
-        ActiveNPCInstances = _npcSpawner.ActiveNPCInstances;
-
-        ActiveNPCInstances.ForEach(npc =>
-        {
-            if (npc.name == "Bob the Coworker")
-            {
-                _npc = npc;
-                _followThePlayerController = _npc.GetComponent<FollowThePlayerController>();
-                _dialogueBoxController = _npc.GetComponentInChildren<DialogueBoxController>();
-                _conversationController = _npc.GetComponentInChildren<ConversationController>();
-                _waypointWalker = _npc.GetComponentInChildren<WaypointWalker>();
-
-                if (_followThePlayerController != null)
-                {
-                    _followThePlayerController.PersonalSpaceFactor = 2;
-                    _followThePlayerController.StartFollowingRadius = 2;
-                }
-            }
-        });
+        GameObject _npc = ActiveNPCInstances.Find(npc => npc.name == "Bob the Coworker");
 
         if (_npc == null)
         {
             Debug.Log("BobTheCoworker NPC not found");
+            return;
         }
+
+        _followThePlayerController = _npc.GetComponent<FollowThePlayerController>();
+        _dialogueBoxController = _npc.GetComponentInChildren<DialogueBoxController>();
+        _conversationController = _npc.GetComponentInChildren<ConversationController>();
+        _waypointWalker = _npc.GetComponentInChildren<WaypointWalker>();
+        if (_followThePlayerController != null)
+        {
+            _followThePlayerController.PersonalSpaceFactor = 2;
+            _followThePlayerController.StartFollowingRadius = 2;
+        }        
     }
 
     public void OnElectricitySparkTrigger()
     {
         Debug.Log("Electricity spark triggered");
-        Debug.Log("BobTheCoworker: " + _npc);
 
         // Perform Bob The Coworker stage 2
         PerformBobTheCoworkerStage2();
