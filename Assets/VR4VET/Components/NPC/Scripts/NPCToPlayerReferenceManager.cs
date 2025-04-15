@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPCToPlayerReferenceManager : MonoBehaviour
 {
     public GameObject PlayerTarget; // something that moves with the player and often represents the players position (e.g. CameraRig)
+    public GameObject CenterEyeAnchor;
     public Collider PlayerCollider; // Something actives TriggerOnEnter and other collison stuff (e.g. HolseterRight)
     #region Singleton
 

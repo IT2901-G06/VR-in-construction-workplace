@@ -8,17 +8,17 @@ using UnityEngine.Events;
 public class ElectricityManager : MonoBehaviour
 {
     [Header("Electricity Settings")]
-    [SerializeField] private bool requiresBothHands = true;
-    [SerializeField] private float secondsBetweenElectricitySteps = 0.1f;
+    [SerializeField] private bool _requiresBothHands = true;
+    [SerializeField] private float _secondsBetweenElectricitySteps = 0.1f;
     [Range(1, 100)]
     [SerializeField]
-    private int motorStrength = 100;
+    private int _motorStrength = 100;
 
     [Header("Events")]
-    [SerializeField] private UnityEvent onElectricityStarting;
-    [SerializeField] private UnityEvent onElectricityStarted;
-    [SerializeField] private UnityEvent onElectricityStopping;
-    [SerializeField] private UnityEvent onElectricityStopped;
+    [SerializeField] private UnityEvent _onElectricityStarting;
+    [SerializeField] private UnityEvent _onElectricityStarted;
+    [SerializeField] private UnityEvent _onElectricityStopping;
+    [SerializeField] private UnityEvent _onElectricityStopped;
 
     private bool _electricityIsOn = false;
 
@@ -60,7 +60,7 @@ public class ElectricityManager : MonoBehaviour
 
         if (_electricityIsOn) return;
 
-        if (!requiresBothHands)
+        if (!_requiresBothHands)
         {
             StartCoroutine(StartElectricitySequence(isLeftHand));
         }
@@ -109,7 +109,7 @@ public class ElectricityManager : MonoBehaviour
         HapticController hapticController = HapticController.Instance;
 
         Debug.Log("Electricity starting!");
-        onElectricityStarting?.Invoke();
+        _onElectricityStarting?.Invoke();
         _electricityIsOn = true;
 
         MotorEvent[] events = reverse ? ElectricityEventSequence.EventSteps.Reverse().ToArray() : ElectricityEventSequence.EventSteps;
@@ -120,13 +120,13 @@ public class ElectricityManager : MonoBehaviour
             // not be able to stop requests that hasn't already started.
             if (_stopElectricityCoroutine != null) break;
 
-            int requestId = hapticController.RunMotors(motorEvent, motorStrength, 99999999);
+            int requestId = hapticController.RunMotors(motorEvent, _motorStrength, 99999999);
             _bhapticsRequestIds.Add(requestId);
-            yield return new WaitForSeconds(secondsBetweenElectricitySteps);
+            yield return new WaitForSeconds(_secondsBetweenElectricitySteps);
         }
 
         Debug.Log("Electricity on!");
-        onElectricityStarted?.Invoke();
+        _onElectricityStarted?.Invoke();
 
         StartCoroutine(KillAfterDelay(0.5f));
     }
@@ -136,7 +136,7 @@ public class ElectricityManager : MonoBehaviour
         HapticController hapticController = HapticController.Instance;
 
         Debug.Log("Electricity off is starting!");
-        onElectricityStopping?.Invoke();
+        _onElectricityStopping?.Invoke();
 
         var copiedRequestIds = new int[_bhapticsRequestIds.Count];
         _bhapticsRequestIds.CopyTo(copiedRequestIds);
@@ -145,12 +145,12 @@ public class ElectricityManager : MonoBehaviour
         foreach (int requestId in copiedRequestIds)
         {
             hapticController.StopByRequestId(requestId);
-            yield return new WaitForSeconds(secondsBetweenElectricitySteps);
+            yield return new WaitForSeconds(_secondsBetweenElectricitySteps);
         }
 
         _electricityIsOn = false;
         _stopElectricityCoroutine = null;
         Debug.Log("Electricity is off!");
-        onElectricityStopped?.Invoke();
+        _onElectricityStopped?.Invoke();
     }
 }

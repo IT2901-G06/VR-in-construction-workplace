@@ -7,7 +7,6 @@ public class BobTheCoworker : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
     [HideInInspector] private NPCSpawner _npcSpawner;
-    private List<GameObject> ActiveNPCInstances;
 
     private GameObject _npc;
     private FollowThePlayerController _followThePlayerController;
@@ -37,7 +36,7 @@ public class BobTheCoworker : MonoBehaviour
 
         DialogueBoxController.OnSpeakEnded += OnSpeakEnded;
 
-        GameObject _npc = ActiveNPCInstances.Find(npc => npc.name == "Bob the Coworker");
+        _npc = _npcSpawner.ActiveNPCInstances.Find(npc => npc.name == "Bob the Coworker");
 
         if (_npc == null)
         {

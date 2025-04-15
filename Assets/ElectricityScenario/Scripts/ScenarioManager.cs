@@ -7,8 +7,8 @@ public class ScenarioManager : MonoBehaviour
     private NPCSpawner _npcSpawner;
 
     [Header("Events")]
-    public UnityEvent onScenarioStart;
-    public UnityEvent onScenarioEnd;
+    public UnityEvent OnScenarioStart;
+    public UnityEvent OnScenarioEnd;
 
     public void StartPartTwo()
     {

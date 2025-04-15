@@ -4,8 +4,8 @@ using UnityEngine;
 public class ProximitySpark : MonoBehaviour
 {
     [Header("References")]
-    public ParticleSystem[] sparkParticles;
-    public Light[] lightsToTurnOff;
+    public ParticleSystem[] SparkParticles;
+    public Light[] LightsToTurnOff;
 
     public void TriggerEffects(int runAfterSeconds)
     {
@@ -16,12 +16,12 @@ public class ProximitySpark : MonoBehaviour
     {
         yield return new WaitForSeconds(runAfterSeconds);
 
-        foreach (var ps in sparkParticles)
+        foreach (var ps in SparkParticles)
         {
             ps.Play();
         }
 
-        foreach (var light in lightsToTurnOff)
+        foreach (var light in LightsToTurnOff)
         {
             light.enabled = false;
         }

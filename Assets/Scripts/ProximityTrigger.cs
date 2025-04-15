@@ -4,11 +4,11 @@ using UnityEngine.Events;
 public class ProximityTrigger : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;
+    [SerializeField] private Transform _player;
 
     [Header("Values")]
-    public float triggerRadius = 5f;
-    public bool canTriggerOnlyOnce = true;
+    [SerializeField] private float _triggerRadius = 5f;
+    [SerializeField] private bool _canTriggerOnlyOnce = true;
 
     [Header("Events")]
     public UnityEvent OnEnter;
@@ -19,28 +19,28 @@ public class ProximityTrigger : MonoBehaviour
 
     void Start()
     {
-        if (player == null)
-            player = GameObject.FindWithTag("Player")?.transform;
+        if (_player == null)
+            _player = GameObject.FindWithTag("Player")?.transform;
     }
 
     void Update()
     {
-        if (canTriggerOnlyOnce && _hasTriggered && _hasExited)
+        if (_canTriggerOnlyOnce && _hasTriggered && _hasExited)
         {
             return;
         }
 
-        float distance = Vector3.Distance(player.position, transform.position);
-        if (distance <= triggerRadius && !_hasTriggered)
+        float distance = Vector3.Distance(_player.position, transform.position);
+        if (distance <= _triggerRadius && !_hasTriggered)
         {
             _hasTriggered = true;
             OnEnter?.Invoke();
             return;
         }
 
-        if (distance > triggerRadius && _hasTriggered && !_hasExited)
+        if (distance > _triggerRadius && _hasTriggered && !_hasExited)
         {
-            if (!canTriggerOnlyOnce)
+            if (!_canTriggerOnlyOnce)
             {
                 _hasTriggered = false;
             }
@@ -54,6 +54,6 @@ public class ProximityTrigger : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, triggerRadius);
+        Gizmos.DrawWireSphere(transform.position, _triggerRadius);
     }
 }

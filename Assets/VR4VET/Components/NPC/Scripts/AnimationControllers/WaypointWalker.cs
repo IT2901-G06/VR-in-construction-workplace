@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class WaypointWalker : MonoBehaviour
 {
     private List<Vector3> Waypoints;
     public float Threshold = 0.5f;
-    public UnityEngine.Events.UnityEvent OnFinalDestinationReached;
+    public UnityEvent OnFinalDestinationReached;
     
 
     private NavMeshAgent _agent;

@@ -41,8 +41,7 @@ public class AnimationConstraintsController : MonoBehaviour
 
                 if (rig != null)
                 {
-                    GameObject playerRef = NPCToPlayerReferenceManager.Instance.PlayerTarget;
-                    targetRef = playerRef.transform.Find("TrackingSpace").transform.Find("CenterEyeAnchor").gameObject;
+                    targetRef = NPCToPlayerReferenceManager.Instance.CenterEyeAnchor;
                     if (targetRef != null)
                     {
                         // Adds contraints at runtime

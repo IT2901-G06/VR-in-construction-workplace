@@ -1773,9 +1773,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19080ab56b82e45da87693ca1a40cf92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 827632445874447150}
-  triggerRadius: 5
-  canTriggerOnlyOnce: 0
+  _player: {fileID: 827632445874447150}
+  _triggerRadius: 5
+  _canTriggerOnlyOnce: 1
   OnEnter:
     m_PersistentCalls:
       m_Calls:
@@ -2783,19 +2783,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e797b3dc1754d57b93fb4415a3c95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiresBothHands: 1
-  secondsBetweenElectricitySteps: 0.1
-  motorStrength: 100
-  onElectricityStarting:
+  _requiresBothHands: 1
+  _secondsBetweenElectricitySteps: 0.1
+  _motorStrength: 100
+  _onElectricityStarting:
     m_PersistentCalls:
       m_Calls: []
-  onElectricityStarted:
+  _onElectricityStarted:
     m_PersistentCalls:
       m_Calls: []
-  onElectricityStopping:
+  _onElectricityStopping:
     m_PersistentCalls:
       m_Calls: []
-  onElectricityStopped:
+  _onElectricityStopped:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &338592013
@@ -4321,6 +4321,10 @@ PrefabInstance:
       propertyPath: PlayerCollider
       value: 
       objectReference: {fileID: 827632445874447144}
+    - target: {fileID: 4330640650074883634, guid: 5d9cb0bf37420f547a3d16e4ec82094a, type: 3}
+      propertyPath: CenterEyeAnchor
+      value: 
+      objectReference: {fileID: 647476813}
     - target: {fileID: 4330640650074883635, guid: 5d9cb0bf37420f547a3d16e4ec82094a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.9536457
@@ -5200,6 +5204,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 209226fec07ec64479cb679ca33e0425, type: 3}
+--- !u!1 &647476813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3271598659965722035, guid: a11e85b0f7c0d4e409539ba1e795bac0, type: 3}
+  m_PrefabInstance: {fileID: 7731876257769047672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &661778260 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012872891332, guid: 209226fec07ec64479cb679ca33e0425, type: 3}
@@ -6187,31 +6196,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd3510c4d03a5184ba90de51ae4c55f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sparkParticles:
-  - {fileID: 2097786860}
-  - {fileID: 1914047872}
-  - {fileID: 1784268423}
-  - {fileID: 1217718352}
+  SparkParticles:
   - {fileID: 1132446163}
+  - {fileID: 1217718352}
   - {fileID: 1827358586}
   - {fileID: 1862454136}
-  lightsToTurnOff:
+  - {fileID: 1914047872}
+  - {fileID: 2097786860}
+  - {fileID: 1784268423}
+  LightsToTurnOff:
   - {fileID: 1797935176}
+  - {fileID: 1120816037}
   - {fileID: 92038408}
   - {fileID: 1490776736}
   - {fileID: 1484350871}
+  - {fileID: 475119482}
   - {fileID: 1533580883}
   - {fileID: 458452523}
   - {fileID: 956767153}
   - {fileID: 1922960085}
+  - {fileID: 1573401809}
   - {fileID: 450298933}
   - {fileID: 28925285}
   - {fileID: 559544928}
   - {fileID: 109053258}
-  - {fileID: 1120816037}
-  - {fileID: 475119482}
   - {fileID: 296454157}
-  - {fileID: 1573401809}
 --- !u!114 &806554050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6224,9 +6233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19080ab56b82e45da87693ca1a40cf92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 827632445874447150}
-  triggerRadius: 10
-  canTriggerOnlyOnce: 1
+  _player: {fileID: 827632445874447150}
+  _triggerRadius: 9
+  _canTriggerOnlyOnce: 1
   OnEnter:
     m_PersistentCalls:
       m_Calls:
@@ -19112,10 +19121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _npcSpawner: {fileID: 1550291692}
-  onScenarioStart:
+  OnScenarioStart:
     m_PersistentCalls:
       m_Calls: []
-  onScenarioEnd:
+  OnScenarioEnd:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1434870263
