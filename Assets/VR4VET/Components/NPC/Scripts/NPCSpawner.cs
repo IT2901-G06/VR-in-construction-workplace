@@ -4,15 +4,43 @@ using System;
 using System.Collections.Generic;
 public class NPCSpawner : MonoBehaviour
 {
-    [SerializeField] private NPC[] _nPCs;
-    [HideInInspector] public List<GameObject> _npcInstances;
+    [SerializeField] private NPC[] _activeNPCs;
+    [SerializeField] private NPC[] _inactiveNPCs;
+    [HideInInspector] public List<GameObject> ActiveNPCInstances;
+    [HideInInspector] public List<NPC> InactiveNPCInstances;
     private GameObject spawnedNpc;
 
     private void Awake()
     {
-        foreach (var npcSO in _nPCs)
+        foreach (var npcSO in _activeNPCs)
         {
-            _npcInstances.Add(SpawnNPC(npcSO));
+            ActiveNPCInstances.Add(SpawnNPC(npcSO));
+        }
+
+        InactiveNPCInstances = new List<NPC>(_inactiveNPCs);
+    }
+
+    public void DestroyAndRemoveAllNPCs()
+    {
+        foreach (var npc in ActiveNPCInstances)
+        {
+            Destroy(npc);
+        }
+        ActiveNPCInstances.Clear();
+    }
+
+    public void DestroyAndRemoveNPC(GameObject npc)
+    {
+        if (npc != null)
+        {
+            // Remove the NPC from the active list
+            ActiveNPCInstances.Remove(npc);
+            // Destroy the NPC GameObject
+            Destroy(npc);
+        }
+        else
+        {
+            Debug.LogError("Attempted to destroy a null NPC GameObject.");
         }
     }
 

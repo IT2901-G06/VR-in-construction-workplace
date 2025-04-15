@@ -20,11 +20,14 @@ MonoBehaviour:
   SpawnPosition: {x: -16, y: 0, z: 5.5}
   SpawnRotation: {x: 0, y: 0, z: 0}
   ShouldFollow: 1
+  ShouldRotateTowardsPlayerWhenStandingStill: 0
   DialogueTreesSO:
   - {fileID: 11400000, guid: 307543b39e53adb4aa8c2e598b75a41b, type: 2}
-  DialogueTreeJSON: []
+  DialogueTreeJSON:
+  - {fileID: 0}
   runtimeAnimatorController: {fileID: 9100000, guid: acb4b9981fa45ce46adb4867634b31ab, type: 2}
   SpatialBlend: 0
   MinDistance: 1
   ShouldWalkWaypoints: 0
   Waypoints: []
+  ShouldWalkWaypointsInCircle: 1

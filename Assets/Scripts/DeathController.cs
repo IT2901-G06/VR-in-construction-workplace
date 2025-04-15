@@ -10,6 +10,8 @@ public class DeathManager : MonoBehaviour
 
     [SerializeField]
     private float _fadeDelay = 3;
+    [SerializeField]
+    private bool _respawnPlayerAtInitialPosition = true;
 
     [SerializeField]
     private GameObject _player;
@@ -25,6 +27,7 @@ public class DeathManager : MonoBehaviour
     private bool _isDead = false;
     private bool _hasFinishedSpeak = false;
     private bool _isFading = false;
+    private Vector3 _initialPlayerPosition;
 
     public static DeathManager Instance;
 
@@ -56,6 +59,8 @@ public class DeathManager : MonoBehaviour
         {
             AttachTTSSpeaker();
         }
+
+        _initialPlayerPosition = _player.transform.position;
     }
 
     private void AttachTTSSpeaker()
@@ -154,6 +159,14 @@ public class DeathManager : MonoBehaviour
         _hasFinishedSpeak = false;
         _isFading = true;
         _isDead = false;
+
+        if (_respawnPlayerAtInitialPosition)
+        {
+            // Debug with player position
+            Debug.Log("Respawning player at initial position: " + _initialPlayerPosition);
+            TeleportHelper.Instance.Teleport(_initialPlayerPosition);
+        }
+
         FadeEffect.Instance.Fade(_isDead, _fadeDelay);
 
         OnRevive?.Invoke();

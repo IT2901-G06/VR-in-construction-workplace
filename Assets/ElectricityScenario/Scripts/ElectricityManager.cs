@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using BNG;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -46,22 +45,20 @@ public class ElectricityManager : MonoBehaviour
         return IsElectricityFromSource(_rightHandGrabbed) && !IsElectricityFromSource(_leftHandGrabbed);
     }
 
-    internal void OnGrabFromChild(Transform child, Grabber grabber)
+    public void OnGrabFromChild(Transform leverGrabbed, bool isLeftHand)
     {
-        if (grabber.CompareTag("LeftHandGrabber"))
+        if (isLeftHand)
         {
-            _leftHandGrabbed = child;
+            _leftHandGrabbed = leverGrabbed;
             Debug.Log("Left hand grabbed");
         }
-        else if (grabber.CompareTag("RightHandGrabber"))
+        else
         {
-            _rightHandGrabbed = child;
+            _rightHandGrabbed = leverGrabbed;
             Debug.Log("Right hand grabbed");
         }
 
         if (_electricityIsOn) return;
-
-        bool isLeftHand = grabber.CompareTag("LeftHandGrabber");
 
         if (!requiresBothHands)
         {
@@ -76,7 +73,7 @@ public class ElectricityManager : MonoBehaviour
         }
     }
 
-    internal void OnReleaseFromChild(Transform leverReleased)
+    public void OnReleaseFromChild(Transform leverReleased)
     {
         if (_leftHandGrabbed == leverReleased)
         {
