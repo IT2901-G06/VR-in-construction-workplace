@@ -52,14 +52,11 @@ public class DeathManager : MonoBehaviour
             if (_player == null)
             {
                 Debug.LogError("Player not found");
+                return;
             }
         }
-
-        if (_player != null)
-        {
-            AttachTTSSpeaker();
-        }
-
+        
+        AttachTTSSpeaker();
         _initialPlayerPosition = _player.transform.position;
     }
 
