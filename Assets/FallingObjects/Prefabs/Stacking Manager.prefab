@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1870421335384765862}
   - component: {fileID: 428870035799414560}
   m_Layer: 0
-  m_Name: Box Stacking Manager
+  m_Name: Stacking Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

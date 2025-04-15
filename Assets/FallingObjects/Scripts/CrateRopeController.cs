@@ -27,7 +27,10 @@ public class CrateRopeController : MonoBehaviour
     private SnapZone _ropeSnapZone;
 
     [SerializeField]
-    private GameObject _boxSnapZones;
+    private GameObject _initialSnapZones;
+
+    [SerializeField]
+    private GameObject _secondarySnapZones;
 
 
     [Header("Game Objects")]
@@ -36,13 +39,22 @@ public class CrateRopeController : MonoBehaviour
     private StopBoxController _stopBoxController;
 
     [SerializeField]
-    private BoxCollider _ropeAttachmentPlane;
+    private BoxCollider _pipesAttachmentPlane;
+
+    [SerializeField]
+    private BoxCollider _spoolsAttachmentPlane;
+
+    [SerializeField]
+    private BoxCollider _spoolsFloor;
 
     [SerializeField]
     private Grabbable _hinge;
 
+    [SerializeField]
+    private GameObject _crateBoundaries;
 
-    private List<GameObject> _stackedBoxes;
+
+    private List<GameObject> _stackedItems;
 
     public static CrateRopeController Instance;
 
@@ -52,9 +64,10 @@ public class CrateRopeController : MonoBehaviour
         else Destroy(this);
     }
 
-    public void SetStackedBoxes(List<GameObject> stackedBoxes)
+    public void SetStackedItems(List<GameObject> initialStackedItems, List<GameObject> secondaryStackedItems)
     {
-        _stackedBoxes = stackedBoxes;
+        _stackedItems = new List<GameObject>(initialStackedItems);
+        _stackedItems.AddRange(secondaryStackedItems);
     }
 
     public void AttachedRope()
@@ -85,9 +98,14 @@ public class CrateRopeController : MonoBehaviour
             Debug.LogWarning("Crate Rope Manager must have an assigned Crane Rope Obi Solver GameObject to properly function.");
             return;
         }
-        if (_ropeAttachmentPlane == null)
+        if (_pipesAttachmentPlane == null)
         {
-            Debug.LogWarning("Crate Rope Manager must have an assigned Rope Attachment Plane GameObject to properly function.");
+            Debug.LogWarning("Crate Rope Manager must have an assigned Pipes Attachment Plane GameObject to properly function.");
+            return;
+        }
+        if (_spoolsAttachmentPlane == null)
+        {
+            Debug.LogWarning("Crate Rope Manager must have an assigned Spools Attachment Plane GameObject to properly function.");
             return;
         }
         if (_hinge == null)
@@ -95,9 +113,14 @@ public class CrateRopeController : MonoBehaviour
             Debug.LogWarning("Crate Rope Manager must have an assigned Hinge GameObject to properly function.");
             return;
         }
-        if (_boxSnapZones == null)
+        if (_initialSnapZones == null)
         {
-            Debug.LogWarning("Box Stacking Controller must have an assigned Snap Zones GameObject to properly function.");
+            Debug.LogWarning("Crate Rope Manager must have an assigned Initial Snap Zones GameObject to properly function.");
+            return;
+        }
+        if (_secondarySnapZones == null)
+        {
+            Debug.LogWarning("Crate Rope Manager must have an assigned Secondary Snap Zones GameObject to properly function.");
             return;
         }
 
@@ -110,15 +133,26 @@ public class CrateRopeController : MonoBehaviour
         _hinge.enabled = true;
 
         // Enable plane for rope around crates to attach itself to
-        _ropeAttachmentPlane.gameObject.SetActive(true);
+        _pipesAttachmentPlane.gameObject.SetActive(true);
+        _spoolsAttachmentPlane.gameObject.SetActive(true);
+        _spoolsFloor.gameObject.SetActive(true);
+
+        // Activate boundaries around crate
+        _crateBoundaries.SetActive(true);
 
         // Release boxes from crate
-        foreach (Transform child in _boxSnapZones.transform)
+        foreach (Transform child in _initialSnapZones.transform)
         {
             if (child.TryGetComponent(out SnapZone snapZone)) snapZone.ReleaseAll();
         }
 
-        foreach (GameObject stackedBox in _stackedBoxes)
+        foreach (Transform child in _secondarySnapZones.transform)
+        {
+            if (child.TryGetComponent(out SnapZone snapZone)) snapZone.ReleaseAll();
+        }
+
+
+        foreach (GameObject stackedBox in _stackedItems)
         {
             if (stackedBox.TryGetComponent(out Grabbable grabbable)) grabbable.enabled = false;
             stackedBox.tag = "FallingObject";

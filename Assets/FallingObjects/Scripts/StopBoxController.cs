@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class StopBoxController : MonoBehaviour
 {
+
+    [SerializeField]
+    private BoxCollider _spoolsFloor;
+
     private bool _craneAtTop = false;
     private string _ropeAttached = "";
     private bool _withinRange = false;
@@ -33,6 +37,10 @@ public class StopBoxController : MonoBehaviour
         Debug.Log("Looked up! | Crane at top: " + _craneAtTop + " | Bad rope attached: " + (_ropeAttached == "Bad") + " | Player within range: " + _withinRange);
 
         // Release crates if all conditions met
-        if (_craneAtTop && _ropeAttached == "Bad" && _withinRange) gameObject.SetActive(false);
+        if (_craneAtTop && _ropeAttached == "Bad" && _withinRange)
+        {
+            _spoolsFloor.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
     }
 }
