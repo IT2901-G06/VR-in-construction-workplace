@@ -24,15 +24,7 @@ Make sure to import the following packages:
 - [Obi Rope](https://assetstore.unity.com/packages/tools/physics/obi-rope-55579)
 - [VR Interaction Framework](https://assetstore.unity.com/packages/templates/systems/vr-interaction-framework-161066)
 
-### 4. Install Oculus integration
-
-1. In the Unity editor, open the folder "Assets\BNG Framework\Integrations\Oculus Integration"
-2. Double click the module in that folder which is called "OculusIntegration.unitypackage".
-3. Select everything and install.
-4. In the top window bar, click "VRIF" -> "VRIF Integrations"
-5. Check the "Oculus Integration" option.
-
-### 5. Fix Pink Prefabs caused by Missing Materials
+### 4. Fix Pink Prefabs caused by Missing Materials
 If you did not have the packages downloaded beforehand, prefabs will appear **pink** due to missing materials.
 
 For the **SimpliCity Construction Yard**, **Big Warehouse**, and **VR Interaction Framework** packages:
@@ -50,7 +42,7 @@ OR
 
 > The prefabs should now display correctly in the scenes!! 🤯
 
-### 6. Generate Lightmap UVs for SimpliCity Package
+### 5. Generate Lightmap UVs for SimpliCity Package
 To correctly generate shadows for the **SimpliCity Construction Yard** package:
 1. Navigate to the `Meshes` folder: 
     - `Assets/SimpliCity_Construction_Yard/- Meshes`
