@@ -18,6 +18,7 @@ public class FollowThePlayerController : MonoBehaviour
     [SerializeField] public float StartFollowingRadius = 8f;
     [SerializeField] public float PersonalSpaceFactor = 4f;
     [SerializeField] public bool ShouldFollow = false;
+    [SerializeField] public bool ShouldRotateTowardsPlayerWhenStandingStill = true;
 
     [HideInInspector] private Transform _target;
     [HideInInspector] private NavMeshAgent _agent;
@@ -68,7 +69,21 @@ public class FollowThePlayerController : MonoBehaviour
                     _animator.SetFloat(_velocityYHash, _agent.velocity.magnitude);
                 }
             }
-        } else {
+
+            if (ShouldRotateTowardsPlayerWhenStandingStill && _animator.GetFloat(_velocityYHash) < 0.1f)
+            {
+                Vector3 direction = _target.transform.position - transform.position;
+                direction.y = 0f; // Keep rotation on the Y-axis only (no looking up/down)
+
+                if (direction.sqrMagnitude > 0.01f)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(direction);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
+                }
+            }
+        }
+        else
+        {
             _animator = GetComponentInChildren<Animator>();
         }
     }
