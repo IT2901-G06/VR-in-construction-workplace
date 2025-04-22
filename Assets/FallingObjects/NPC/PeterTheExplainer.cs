@@ -1,16 +1,19 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PeterTheExplainer : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
     [HideInInspector] private NPCSpawner _npcSpawner;
+    [SerializeField] private Transform _finalZone;
 
     private GameObject _npc;
     private FollowThePlayerController _followThePlayerController;
     private ConversationController _conversationController;
     private DialogueBoxController _dialogueBoxController;
     private bool _isPartTwo;
+    private bool _npcHasReachedSafeZone;
+    private bool _playerHasReachedSafeZone;
     private string _partSuffix;
     private readonly string _peterPrefix = "PeterTheExplainerStage";
 
@@ -68,6 +71,13 @@ public class PeterTheExplainer : MonoBehaviour
     {
         Debug.Log("Speak ended: " + name);
 
+        if (name == _peterPrefix + "5PartTwo")
+        {
+            _npcSpawner.SetWaypointWalkingBehavior(_npc, true, new[] { _finalZone.position }, false);
+            WaypointWalker waypointWalker = _npc.GetComponent<WaypointWalker>();
+            waypointWalker.OnFinalDestinationReached.AddListener(OnFinalDestinationReached);
+        }
+
         if (_isPartTwo) return;
 
         if (name == "NPC")
@@ -80,5 +90,28 @@ public class PeterTheExplainer : MonoBehaviour
             _conversationController.NextDialogueTree();
             _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, _peterPrefix + "1_3PartOne" + _partSuffix);
         }
+    }
+
+    public void OnFinalDestinationReached()
+    {
+        _npcHasReachedSafeZone = true;
+        Debug.Log("NPC IS HERE");
+        TryStartFinalStage();
+    }
+
+    public void SetPlayerReachedSafeZone(bool hasReachedSafeZone)
+    {
+        _playerHasReachedSafeZone = hasReachedSafeZone;
+        Debug.Log("PLAYER IS " + (hasReachedSafeZone ? "" : "NOT ") + "HERE");
+        TryStartFinalStage();
+    }
+
+    private void TryStartFinalStage()
+    {
+        if (!_npcHasReachedSafeZone || !_playerHasReachedSafeZone) return;
+
+        Debug.Log("yap alert");
+        _conversationController.NextDialogueTree();
+        _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, _peterPrefix + "6PartTwo");
     }
 }

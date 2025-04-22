@@ -10,16 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e00f7924afa24219a5197b2a8fa8d48, type: 3}
-  m_Name: PeterTheExplainerStage4PartTwo
+  m_Name: PeterTheExplainerStage6PartTwo
   m_EditorClassIdentifier: 
   shouldTriggerOnProximity: 1
   speakButtonOnExit: 1
   sections:
   - dialogue:
-    - 'Perfect! This rope is strong, and the pallet is properly secured. Now pull
-      the lever to lift the pallet!
-
-'
+    - Great job, you pass the Falling Objects test!
     endAfterDialogue: 1
     branchPoint:
       question: 

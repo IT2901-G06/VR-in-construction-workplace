@@ -16,7 +16,8 @@ MonoBehaviour:
   speakButtonOnExit: 1
   sections:
   - dialogue:
-    - NOW RUN!!!!! GET OUT OF HERE!!! YOU'LL NEVER MAKE IT OUT ALIVE
+    - Finally, we need to make sure we move out of the way. It is dangerous to stand
+      under lifted objects. Follow me!
     endAfterDialogue: 1
     branchPoint:
       question: 

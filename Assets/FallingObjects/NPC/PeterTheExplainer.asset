@@ -34,5 +34,6 @@ MonoBehaviour:
   SpatialBlend: 0
   MinDistance: 1
   ShouldWalkWaypoints: 0
-  Waypoints: []
-  ShouldWalkWaypointsInCircle: 1
+  Waypoints:
+  - {x: -20, y: 0, z: -10}
+  ShouldWalkWaypointsInCircle: 0
