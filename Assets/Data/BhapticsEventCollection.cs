@@ -104,4 +104,12 @@ public class BhapticsEventCollection
     public static MotorEvent GlovePalmRight = new(PositionType.GloveR, new int[] {
         0, 0, 0, 0, 0, 1,
     });
+
+    public static MotorEvent IndexFingerLeft = new(PositionType.GloveL, new int[] {
+        0, 1, 0, 0, 0, 0,
+    });
+
+    public static MotorEvent IndexFingerRight = new(PositionType.GloveR, new int[] {
+        0, 1, 0, 0, 0, 0,
+    });
 }
