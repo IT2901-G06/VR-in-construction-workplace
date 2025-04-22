@@ -174,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8415424332475163831, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_Name
-      value: Cement Snap Zone
+      value: Pipes Snap Zone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7575,6 +7575,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 615873684}
     m_Modifications:
+    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: 'OnlyAllowNames.Array.data[0]'
+      value: Wire
+      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.6
@@ -12461,6 +12465,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2051944291}
     m_Modifications:
+    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: 'OnlyAllowNames.Array.data[0]'
+      value: Box
+      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.7
@@ -12518,6 +12526,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2051944291}
     m_Modifications:
+    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: 'OnlyAllowNames.Array.data[0]'
+      value: Box
+      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.7
@@ -12575,6 +12587,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 615873684}
     m_Modifications:
+    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: 'OnlyAllowNames.Array.data[0]'
+      value: Wire
+      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.6
@@ -18559,6 +18575,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2051944291}
     m_Modifications:
+    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: 'OnlyAllowNames.Array.data[0]'
+      value: Cement
+      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.6
