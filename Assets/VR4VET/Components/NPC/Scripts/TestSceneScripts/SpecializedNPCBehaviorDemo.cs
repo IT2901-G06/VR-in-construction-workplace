@@ -19,9 +19,9 @@ public class SpecializedNPCBehaviorDemo : MonoBehaviour
             return;
         }
 
-        _npcSpawner._npcInstances[1].gameObject.SetActive(false);
+        _npcSpawner.ActiveNPCInstances[1].gameObject.SetActive(false);
 
-        _npc = _npcSpawner._npcInstances[2];
+        _npc = _npcSpawner.ActiveNPCInstances[2];
         HandleProximityNPC();
     }
 
@@ -33,9 +33,11 @@ public class SpecializedNPCBehaviorDemo : MonoBehaviour
 
     private void HandleProximityNPC()
     {
-        if (_npc != null) { 
-            _followThePlayerController = _npc.GetComponent<FollowThePlayerController>(); 
-        if (_followThePlayerController != null) {
+        if (_npc != null)
+        {
+            _followThePlayerController = _npc.GetComponent<FollowThePlayerController>();
+            if (_followThePlayerController != null)
+            {
                 _followThePlayerController.PersonalSpaceFactor = 2;
                 _followThePlayerController.StartFollowingRadius = 3;
             }
@@ -44,9 +46,10 @@ public class SpecializedNPCBehaviorDemo : MonoBehaviour
 
     private void UpdateProximityNPC()
     {
-        if (_followThePlayerController == null) {
+        if (_followThePlayerController == null)
+        {
             return;
-        } 
+        }
         // Get the player's position and the NPC spawn position
         Vector3 playerPosition = NPCToPlayerReferenceManager.Instance.PlayerTarget.transform.position;
         Vector3 npcPosition = _npc.transform.position;

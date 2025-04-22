@@ -2,16 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using BNG;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ElectricityManager : MonoBehaviour
 {
-    [SerializeField] private bool requiresBothHands = true;
-    [SerializeField] private float secondsBetweenElectricitySteps = 0.1f;
+    [Header("Electricity Settings")]
+    [SerializeField] private bool _requiresBothHands = true;
+    [SerializeField] private float _secondsBetweenElectricitySteps = 0.1f;
     [Range(1, 100)]
     [SerializeField]
-    private int motorStrength = 100;
+    private int _motorStrength = 100;
+
+    [Header("Events")]
+    [SerializeField] private UnityEvent _onElectricityStarting;
+    [SerializeField] private UnityEvent _onElectricityStarted;
+    [SerializeField] private UnityEvent _onElectricityStopping;
+    [SerializeField] private UnityEvent _onElectricityStopped;
 
     private bool _electricityIsOn = false;
 
@@ -38,24 +45,22 @@ public class ElectricityManager : MonoBehaviour
         return IsElectricityFromSource(_rightHandGrabbed) && !IsElectricityFromSource(_leftHandGrabbed);
     }
 
-    internal void OnGrabFromChild(Transform child, Grabber grabber)
+    public void OnGrabFromChild(Transform leverGrabbed, bool isLeftHand)
     {
-        if (grabber.CompareTag("LeftHandGrabber"))
+        if (isLeftHand)
         {
-            _leftHandGrabbed = child;
+            _leftHandGrabbed = leverGrabbed;
             Debug.Log("Left hand grabbed");
         }
-        else if (grabber.CompareTag("RightHandGrabber"))
+        else
         {
-            _rightHandGrabbed = child;
+            _rightHandGrabbed = leverGrabbed;
             Debug.Log("Right hand grabbed");
         }
 
         if (_electricityIsOn) return;
 
-        bool isLeftHand = grabber.CompareTag("LeftHandGrabber");
-
-        if (!requiresBothHands)
+        if (!_requiresBothHands)
         {
             StartCoroutine(StartElectricitySequence(isLeftHand));
         }
@@ -68,7 +73,7 @@ public class ElectricityManager : MonoBehaviour
         }
     }
 
-    internal void OnReleaseFromChild(Transform leverReleased)
+    public void OnReleaseFromChild(Transform leverReleased)
     {
         if (_leftHandGrabbed == leverReleased)
         {
@@ -92,11 +97,19 @@ public class ElectricityManager : MonoBehaviour
         return source.CompareTag("ElectricitySourceFrom");
     }
 
+    private IEnumerator KillAfterDelay(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        DeathManager.Instance.Kill();
+        Debug.Log("Player killed after delay");
+    }
+
     private IEnumerator StartElectricitySequence(bool reverse = false)
     {
         HapticController hapticController = HapticController.Instance;
 
         Debug.Log("Electricity starting!");
+        _onElectricityStarting?.Invoke();
         _electricityIsOn = true;
 
         MotorEvent[] events = reverse ? ElectricityEventSequence.EventSteps.Reverse().ToArray() : ElectricityEventSequence.EventSteps;
@@ -107,12 +120,15 @@ public class ElectricityManager : MonoBehaviour
             // not be able to stop requests that hasn't already started.
             if (_stopElectricityCoroutine != null) break;
 
-            int requestId = hapticController.RunMotors(motorEvent, motorStrength, 99999999);
+            int requestId = hapticController.RunMotors(motorEvent, _motorStrength, 99999999);
             _bhapticsRequestIds.Add(requestId);
-            yield return new WaitForSeconds(secondsBetweenElectricitySteps);
+            yield return new WaitForSeconds(_secondsBetweenElectricitySteps);
         }
 
         Debug.Log("Electricity on!");
+        _onElectricityStarted?.Invoke();
+
+        StartCoroutine(KillAfterDelay(0.5f));
     }
 
     private IEnumerator StopElectricitySequence()
@@ -120,6 +136,7 @@ public class ElectricityManager : MonoBehaviour
         HapticController hapticController = HapticController.Instance;
 
         Debug.Log("Electricity off is starting!");
+        _onElectricityStopping?.Invoke();
 
         var copiedRequestIds = new int[_bhapticsRequestIds.Count];
         _bhapticsRequestIds.CopyTo(copiedRequestIds);
@@ -128,11 +145,12 @@ public class ElectricityManager : MonoBehaviour
         foreach (int requestId in copiedRequestIds)
         {
             hapticController.StopByRequestId(requestId);
-            yield return new WaitForSeconds(secondsBetweenElectricitySteps);
+            yield return new WaitForSeconds(_secondsBetweenElectricitySteps);
         }
 
         _electricityIsOn = false;
         _stopElectricityCoroutine = null;
         Debug.Log("Electricity is off!");
+        _onElectricityStopped?.Invoke();
     }
 }

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: VoiceSDK
   m_EditorClassIdentifier: 
   _clientAccessToken: 2TLPDHKLQKS2ANVRHGSKTLCNS2NJ3UE3
+  editorVersionTag: 
+  buildVersionTag: 
   _appInfo:
     name: voice_sdk
     id: 779010703981616
@@ -24,29 +26,91 @@ MonoBehaviour:
     lastTrainedAt: 1969-12-31T16:00:00-0800
     nextTrainAt: 1969-12-31T16:00:00-0800
     intents: []
-    entities: []
+    entities:
+    - name: ChessBoardLetter
+      id: 704547405179100
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: ChessBoardLetter
+        id: 2069451773420019
+      keywords:
+      - keyword: A
+        synonyms: []
+      - keyword: B
+        synonyms: []
+      - keyword: C
+        synonyms: []
+      - keyword: D
+        synonyms: []
+      - keyword: E
+        synonyms: []
+      - keyword: F
+        synonyms: []
+      - keyword: G
+        synonyms: []
+      - keyword: H
+        synonyms: []
+    - name: ColorName
+      id: 1169090897618806
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: ColorName
+        id: 720557926877664
+      keywords:
+      - keyword: black
+        synonyms: []
+      - keyword: blue
+        synonyms: []
+      - keyword: brown
+        synonyms: []
+      - keyword: gold
+        synonyms: []
+      - keyword: green
+        synonyms: []
+      - keyword: magenta
+        synonyms: []
+      - keyword: maroon
+        synonyms: []
+      - keyword: orange
+        synonyms: []
+      - keyword: pink
+        synonyms: []
+      - keyword: purple
+        synonyms: []
+      - keyword: red
+        synonyms: []
+      - keyword: violet
+        synonyms: []
+      - keyword: white
+        synonyms: []
+      - keyword: yellow
+        synonyms: []
+    - name: ShapeName
+      id: 3722693951335991
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: ShapeName
+        id: 721492916809142
+      keywords:
+      - keyword: capsule
+        synonyms: []
+      - keyword: cube
+        synonyms: []
+      - keyword: cylinder
+        synonyms: []
+      - keyword: sphere
+        synonyms: []
     traits: []
     versionTags: []
     voices:
-    - name: wit/Rebecca
-      locale: en_US
-      gender: female
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
-    - name: wit/Charlie
-      locale: en_US
-      gender: male
-      styles:
-      - default
-      - soft
-      - fast
-      - projected
-    - name: wit/Cooper
-      locale: en_US
+    - name: wit$British Butler
+      locale: en_GB
       gender: male
       styles:
       - default
@@ -54,7 +118,15 @@ MonoBehaviour:
       - formal
       - fast
       - projected
-    - name: wit/Vampire
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cael
       locale: en_US
       gender: male
       styles:
@@ -63,30 +135,15 @@ MonoBehaviour:
       - formal
       - fast
       - projected
-    - name: wit/Prospector
-      locale: en_US
-      gender: male
-      styles:
-      - default
-    - name: wit/Cody
-      locale: en_US
-      gender: male
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
-    - name: wit/Remi
-      locale: en_US
-      gender: female
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
-    - name: wit/Cam
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cam
       locale: en_US
       gender: male
       styles:
@@ -95,7 +152,15 @@ MonoBehaviour:
       - formal
       - fast
       - projected
-    - name: wit/Connor
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Carl
       locale: en_US
       gender: male
       styles:
@@ -104,79 +169,15 @@ MonoBehaviour:
       - formal
       - fast
       - projected
-    - name: wit/Railey
-      locale: en_US
-      gender: female
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
-    - name: wit/Cael
-      locale: en_US
-      gender: male
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
-    - name: wit/Carl
-      locale: en_US
-      gender: male
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
-    - name: wit/Rubie
-      locale: en_US
-      gender: female
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
-    - name: wit/Overconfident
-      locale: en_US
-      gender: male
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
-    - name: wit/Disaffected
-      locale: en_US
-      gender: female
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
-    - name: wit/Hollywood
-      locale: en_US
-      gender: female
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
-    - name: wit/Trendy
-      locale: en_US
-      gender: female
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
-    - name: wit/Cartoon Baby
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cartoon Baby
       locale: en_US
       gender: nonbinary
       styles:
@@ -185,7 +186,299 @@ MonoBehaviour:
       - formal
       - fast
       - projected
-    - name: wit/Rosie
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cartoon Kid
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cartoon Villain
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Charlie
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cockney Accent
+      locale: en_GB
+      gender: nonbinary
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cody
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Colin
+      locale: en_CA
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Connor
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Cooper
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Disaffected
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Hollywood
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Kenyan Accent
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Overconfident
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Pirate
+      locale: en_GB
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Prospector
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Railey
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Rebecca
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Remi
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Rosie
       locale: en_CA
       gender: female
       styles:
@@ -194,8 +487,33 @@ MonoBehaviour:
       - formal
       - fast
       - projected
-    - name: wit/Colin
-      locale: en_CA
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Rubie
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Southern Accent
+      locale: en_US
       gender: male
       styles:
       - default
@@ -203,7 +521,83 @@ MonoBehaviour:
       - formal
       - fast
       - projected
-    - name: wit/Pirate
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Surfer
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Trendy
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Vampire
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Whimsical
+      locale: en_GB
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
+    - name: wit$Wizard
       locale: en_GB
       gender: male
       styles:
@@ -212,18 +606,18 @@ MonoBehaviour:
       - formal
       - fast
       - projected
-    - name: wit/British Butler
-      locale: en_GB
-      gender: male
-      styles:
-      - default
-      - soft
-      - formal
-      - fast
-      - projected
+      supported_features:
+      - style
+      - pitch
+      - speed
+      - sfx
+      - viseme_events
+      - phoneme_events
+      - word_events
   _configData: []
   _configurationId: 266baa08-7370-40aa-b9c2-8657d109a609
-  timeoutMS: 10000
+  _requestType: 0
+  _requestTimeoutMs: 10000
   endpointConfiguration:
     _uriScheme: 
     _authority: 
@@ -236,6 +630,7 @@ MonoBehaviour:
     _event: 
     _converse: 
   isDemoOnly: 0
+  useIntentAttributes: 1
   useConduit: 1
   _manifestLocalPath: ConduitManifest-38a3f850-7eea-4d3c-8f75-6561823d6898.json
   excludedAssemblies:

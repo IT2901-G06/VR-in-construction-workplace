@@ -14,17 +14,20 @@ public class FredrikSpecializedScript : MonoBehaviour
     void Start()
     {
         _npcSpawner = GameObject.Find("NPCSpawner").GetComponent<NPCSpawner>();
-        if (_npcSpawner == null) {
+        if (_npcSpawner == null)
+        {
             Debug.Log("Cant find spawner");
         }
-        _npc = _npcSpawner._npcInstances[0];
+        _npc = _npcSpawner.ActiveNPCInstances[0];
         platform = GameObject.Find("CommentPlatform");
         _conversationController = _npc.GetComponentInChildren<ConversationController>();
     }
 
-    void OnTriggerEnter() {
+    void OnTriggerEnter()
+    {
         Debug.Log("Entered platform trigger");
-        if (i == 0) {
+        if (i == 0)
+        {
             i++;
             _conversationController.NextDialogueTree();
         }
@@ -34,6 +37,6 @@ public class FredrikSpecializedScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
