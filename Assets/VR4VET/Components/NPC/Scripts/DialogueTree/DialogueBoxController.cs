@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using TMPro;
-using UnityEngine;
 // Import of the TTS namespace
 using Meta.WitAi.TTS.Utilities;
+using TMPro;
+using UnityEngine;
 
 public class DialogueBoxController : MonoBehaviour
 {
@@ -288,7 +288,7 @@ public class DialogueBoxController : MonoBehaviour
         _animator.SetBool(_isTalkingHash, false);
         dialogueIsActive = false;
         ResetBox();
-        if (dialogueTreeRestart.speakButtonOnExit && !hideSpeakButton)
+        if (dialogueTreeRestart != null && dialogueTreeRestart.speakButtonOnExit && !hideSpeakButton)
         {
             // Only start speak canvas if option is not turned off
             StartSpeakCanvas(dialogueTreeRestart);

@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e00f7924afa24219a5197b2a8fa8d48, type: 3}
-  m_Name: PeterTheExplainerStage4
+  m_Name: PeterTheExplainerStage3PartOne
   m_EditorClassIdentifier: 
   shouldTriggerOnProximity: 1
   speakButtonOnExit: 1
   sections:
   - dialogue:
-    - Great! Now you can pull the lever to lift the pallet.
+    - Now, pick up the rope that seems the least sturdy and attach it to the finished
+      pallet.
     endAfterDialogue: 1
     branchPoint:
       question: 

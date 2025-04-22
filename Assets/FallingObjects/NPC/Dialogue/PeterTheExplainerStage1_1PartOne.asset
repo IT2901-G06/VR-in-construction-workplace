@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e00f7924afa24219a5197b2a8fa8d48, type: 3}
-  m_Name: PeterTheExplainerStage1_2
+  m_Name: PeterTheExplainerStage1_1PartOne
   m_EditorClassIdentifier: 
   shouldTriggerOnProximity: 1
   speakButtonOnExit: 1
   sections:
   - dialogue:
-    - "First, we\u2019ll deliberately do things wrong."
+    - "Hello! Today, we\u2019re going to see what can happen if you don\u2019t properly
+      secure a load before lifting it."
     endAfterDialogue: 1
     branchPoint:
       question: 

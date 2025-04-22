@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e00f7924afa24219a5197b2a8fa8d48, type: 3}
-  m_Name: PeterTheExplainerStage1_3
+  m_Name: PeterTheExplainerStage4PartTwo
   m_EditorClassIdentifier: 
   shouldTriggerOnProximity: 1
   speakButtonOnExit: 1
   sections:
   - dialogue:
-    - Start by stacking the cement and the cardboard boxes on the pallet.
+    - Perfect! This rope is strong, and the pallet is properly secured. Great job!
     endAfterDialogue: 1
     branchPoint:
       question: 

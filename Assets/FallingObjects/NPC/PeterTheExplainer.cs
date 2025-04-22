@@ -10,6 +10,9 @@ public class PeterTheExplainer : MonoBehaviour
     private FollowThePlayerController _followThePlayerController;
     private ConversationController _conversationController;
     private DialogueBoxController _dialogueBoxController;
+    private bool _isPartTwo;
+    private string _partSuffix;
+    private readonly string _peterPrefix = "PeterTheExplainerStage";
 
     // Individual NPCs
 
@@ -33,7 +36,7 @@ public class PeterTheExplainer : MonoBehaviour
 
         if (_npc == null)
         {
-            Debug.Log("BobTheCoworker NPC not found");
+            Debug.Log("Peter The Explainer NPC not found");
             return;
         }
 
@@ -45,28 +48,37 @@ public class PeterTheExplainer : MonoBehaviour
             _followThePlayerController.PersonalSpaceFactor = 3;
             _followThePlayerController.StartFollowingRadius = 2;
         }
+
+        _isPartTwo = FallingObjectsScenarioController.Instance.GetPartTwo();
+        _partSuffix = "Part" + (!_isPartTwo ? "One" : "Two");
+        if (_isPartTwo)
+        {
+            _conversationController.SetDialogueTreeList(FallingObjectsScenarioController.Instance.GetDialogueTrees());
+        }
     }
 
     public void ExecuteDialogueStage(int number)
     {
-        Debug.Log("Performing Peter The Explainer stage " + number);
+        Debug.Log("Performing " + _peterPrefix + number + _partSuffix);
         _conversationController.NextDialogueTree();
-        _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, "PeterTheExplainerStage" + number);
+        _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, _peterPrefix + number + _partSuffix);
     }
 
     private void OnSpeakEnded(string name)
     {
         Debug.Log("Speak ended: " + name);
 
+        if (_isPartTwo) return;
+
         if (name == "NPC")
         {
             _conversationController.NextDialogueTree();
-            _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, "PeterTheExplainerStage1_2");
+            _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, _peterPrefix + "1_2PartOne");
         }
-        else if (name == "PeterTheExplainerStage1_2")
+        else if (name == _peterPrefix + "1_2" + _partSuffix)
         {
             _conversationController.NextDialogueTree();
-            _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, "PeterTheExplainerStage1_3");
+            _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, _peterPrefix + "1_3PartOne" + _partSuffix);
         }
     }
 }

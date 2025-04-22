@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,9 @@ public class FallingObjectsScenarioController : MonoBehaviour
 {
     [SerializeField]
     private bool _partTwo;
+
+    [SerializeField]
+    private List<DialogueTree> _dialogueTrees;
 
     public static FallingObjectsScenarioController Instance;
     void Awake()
@@ -18,7 +22,6 @@ public class FallingObjectsScenarioController : MonoBehaviour
         {
             Destroy(this);
         }
-        _partTwo = false;
     }
 
     public void GoToPartTwo()
@@ -30,5 +33,10 @@ public class FallingObjectsScenarioController : MonoBehaviour
     public bool GetPartTwo()
     {
         return _partTwo;
+    }
+
+    public List<DialogueTree> GetDialogueTrees()
+    {
+        return _dialogueTrees;
     }
 }
