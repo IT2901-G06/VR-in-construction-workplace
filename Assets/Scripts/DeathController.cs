@@ -33,15 +33,8 @@ public class DeathManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(this);
-        }
+        if (Instance == null) Instance = this;
+        else Destroy(this);
     }
 
     void Start()
@@ -55,7 +48,7 @@ public class DeathManager : MonoBehaviour
                 return;
             }
         }
-        
+
         AttachTTSSpeaker();
         _initialPlayerPosition = _player.transform.position;
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1393121789410636736}
   - component: {fileID: 6821957109848154327}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Front Grab Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2378664642857321176}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: 1.75, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7275266311589332431}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6821957109848154327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,11 +66,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000010704601538, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
       propertyPath: m_Name
-      value: Falling Pipes Variant
+      value: Falling Pipes
       objectReference: {fileID: 0}
     - target: {fileID: 1000010704601538, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000012328279092, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
       propertyPath: m_LocalScale.x
@@ -146,6 +146,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1000010704601538, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6571786833014168820}
+    - targetCorrespondingSourceObject: {fileID: 1000010704601538, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8458897652687243579}
   m_SourcePrefab: {fileID: 100100000, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
 --- !u!4 &7275266311589332431 stripped
 Transform:
@@ -305,3 +308,93 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalPositionOffset: {x: 0, y: -0.5, z: 0}
   LocalRotationOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &8458897652687243579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7276489158352918585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad179a9e83dba5142adaaf7737678e8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onGrab:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4521383531558727901}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_isTrigger
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  onRelease:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4521383531558727901}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_isTrigger
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onBecomesClosestGrabbable:
+    m_PersistentCalls:
+      m_Calls: []
+  onNoLongerClosestGrabbable:
+    m_PersistentCalls:
+      m_Calls: []
+  onBecomesClosestRemoteGrabbable:
+    m_PersistentCalls:
+      m_Calls: []
+  onNoLongerClosestRemoteGrabbable:
+    m_PersistentCalls:
+      m_Calls: []
+  onGrip:
+    m_PersistentCalls:
+      m_Calls: []
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton1:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton1Down:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton1Up:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton2:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton2Down:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton2Up:
+    m_PersistentCalls:
+      m_Calls: []
+  onSnapZoneEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onSnapZoneExit:
+    m_PersistentCalls:
+      m_Calls: []

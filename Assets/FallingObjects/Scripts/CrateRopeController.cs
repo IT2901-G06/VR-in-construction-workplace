@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BNG;
 using Obi;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CrateRopeController : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class CrateRopeController : MonoBehaviour
 
     [SerializeField]
     private ObiSolver _craneRopeObiSolver;
+
+    [Header("Events")]
+    [SerializeField]
+    private UnityEvent _stage4Event;
 
 
     [Header("Snap Zones")]
@@ -139,6 +144,9 @@ public class CrateRopeController : MonoBehaviour
 
         // Activate boundaries around crate
         _crateBoundaries.SetActive(true);
+
+        // Start dialogue
+        _stage4Event?.Invoke();
 
         // Release boxes from crate
         foreach (Transform child in _initialSnapZones.transform)
