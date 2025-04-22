@@ -172,6 +172,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7989408201346860341, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: RemoteGrabDistance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8415424332475163831, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_Name
       value: Pipes Snap Zone
@@ -7619,6 +7623,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7989408201346860341, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: RemoteGrabDistance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8415424332475163831, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_Name
       value: Wire Snap Zone 1
@@ -12509,6 +12517,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7989408201346860341, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: RemoteGrabDistance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8415424332475163831, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_Name
       value: Box Snap Zone (2)
@@ -12570,6 +12582,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7989408201346860341, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: RemoteGrabDistance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8415424332475163831, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_Name
       value: Box Snap Zone (1)
@@ -12630,6 +12646,10 @@ PrefabInstance:
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7989408201346860341, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: RemoteGrabDistance
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8415424332475163831, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_Name
@@ -18619,6 +18639,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7989408201346860341, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: RemoteGrabDistance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8415424332475163831, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_Name
       value: Cement Snap Zone
@@ -19400,7 +19424,7 @@ MonoBehaviour:
   GrabSpeed: 7.5
   RemoteGrabbable: 1
   RemoteGrabMechanic: 0
-  RemoteGrabDistance: 5
+  RemoteGrabDistance: 30
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
