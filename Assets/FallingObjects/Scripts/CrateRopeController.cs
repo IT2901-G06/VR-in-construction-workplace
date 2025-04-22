@@ -58,9 +58,6 @@ public class CrateRopeController : MonoBehaviour
     [SerializeField]
     private GameObject _crateBoundaries;
 
-    [SerializeField]
-    private GameObject _roof;
-
 
     private List<GameObject> _stackedItems;
 
@@ -145,9 +142,8 @@ public class CrateRopeController : MonoBehaviour
         _spoolsAttachmentPlane.gameObject.SetActive(true);
         _spoolsFloor.gameObject.SetActive(true);
 
-        // Activate boundaries around crate and deactivate roof boundary
+        // Activate boundaries around crate
         _crateBoundaries.SetActive(true);
-        _roof.SetActive(false);
 
         // Start dialogue
         _stage4Event?.Invoke();
