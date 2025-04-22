@@ -5,7 +5,6 @@ public class PeterTheExplainer : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
     [HideInInspector] private NPCSpawner _npcSpawner;
-    [SerializeField] private Transform _finalZone;
 
     private GameObject _npc;
     private FollowThePlayerController _followThePlayerController;
@@ -73,7 +72,9 @@ public class PeterTheExplainer : MonoBehaviour
 
         if (name == _peterPrefix + "5PartTwo")
         {
-            _npcSpawner.SetWaypointWalkingBehavior(_npc, true, new[] { _finalZone.position }, false);
+            _npcSpawner = GameObject.Find("NPCSpawner").GetComponent<NPCSpawner>();
+            _npc = _npcSpawner.ActiveNPCInstances.Find(npc => npc.name == "Peter");
+            _npcSpawner.SetWaypointWalkingBehavior(_npc, true, new[] { GameObject.Find("Final Zone Trigger").transform.position }, false);
             WaypointWalker waypointWalker = _npc.GetComponent<WaypointWalker>();
             waypointWalker.OnFinalDestinationReached.AddListener(OnFinalDestinationReached);
         }

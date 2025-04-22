@@ -16,8 +16,8 @@ MonoBehaviour:
   speakButtonOnExit: 1
   sections:
   - dialogue:
-    - Now, try stacking the pallet again, choose the rope that looks the sturdiest,
-      and lift the pallet using the lever.
+    - Now, try stacking the pallet again, and secure the load with the rope that
+      looks the sturdiest.
     endAfterDialogue: 1
     branchPoint:
       question: 

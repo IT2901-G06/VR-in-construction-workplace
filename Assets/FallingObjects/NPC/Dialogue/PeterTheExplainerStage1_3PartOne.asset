@@ -16,7 +16,7 @@ MonoBehaviour:
   speakButtonOnExit: 1
   sections:
   - dialogue:
-    - Start by stacking the cement and the cardboard boxes on the pallet.
+    - Start by stacking the cement bags and the cardboard boxes on the pallet.
     endAfterDialogue: 1
     branchPoint:
       question: 
