@@ -122,7 +122,7 @@ public class DialogueBoxController : MonoBehaviour
         // stop I-have-something-to-tell-you-animation and start talking
         _animator.SetBool(_hasNewDialogueOptionsHash, false);
         //_animator.SetBool(_isTalkingHash, true);
-        // Dialogue 
+        // Dialogue
         ResetBox();
         _dialogueBox.SetActive(true);
         OnDialogueStarted?.Invoke(name);
@@ -143,7 +143,7 @@ public class DialogueBoxController : MonoBehaviour
     IEnumerator WaitForSpeakToEnd(string name)
     {
         // Avoid race condition
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         // Wait for the TTS speaker to finish speaking
         while (TTSSpeaker.GetComponent<TTSSpeaker>().IsSpeaking)

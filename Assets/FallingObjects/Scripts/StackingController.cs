@@ -4,6 +4,7 @@ using BNG;
 using Obi;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StackingController : MonoBehaviour
 {
@@ -27,6 +28,13 @@ public class StackingController : MonoBehaviour
 
     [SerializeField]
     private GameObject _secondarySnapZones;
+
+    [Header("Events")]
+    [SerializeField]
+    private UnityEvent _stage2Event;
+
+    [SerializeField]
+    private UnityEvent _stage3Event;
 
 
     [Header("Debugging")]
@@ -71,6 +79,7 @@ public class StackingController : MonoBehaviour
         {
             _stage++;
             _secondarySnapZones.SetActive(true);
+            _stage2Event?.Invoke();
             return;
         }
 
@@ -109,5 +118,6 @@ public class StackingController : MonoBehaviour
 
         // Allow for placing rope on pallet
         _ropeSnapZone.gameObject.SetActive(true);
+        _stage3Event?.Invoke();
     }
 }

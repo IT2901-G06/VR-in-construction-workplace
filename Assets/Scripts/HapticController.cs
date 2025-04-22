@@ -14,15 +14,8 @@ public class HapticController : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
-        }
-        else
-        {
-            Destroy(this);
-        }
+        if (Instance == null) Instance = this;
+        else Destroy(this);
     }
 
     public int GetSingleEventMotorRunTimeMs()

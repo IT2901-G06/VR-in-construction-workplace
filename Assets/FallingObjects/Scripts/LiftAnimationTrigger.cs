@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LiftAnimationTrigger : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class LiftAnimationTrigger : MonoBehaviour
     [SerializeField]
     private StopBoxController _stopBoxController;
 
+    [SerializeField]
+    private UnityEvent _stage5Event;
+
     public void StartAnimation()
     {
         Animator craneAnimator = _crane.GetComponent<Animator>();
@@ -20,6 +24,7 @@ public class LiftAnimationTrigger : MonoBehaviour
         {
             craneAnimator.SetTrigger("PullLiftLeverCrane");
             crateWithFallingObjectsAnimator.SetTrigger("PullLiftLeverBoxes");
+            _stage5Event?.Invoke();
             Debug.Log("Lift lever pulled");
         }
     }
