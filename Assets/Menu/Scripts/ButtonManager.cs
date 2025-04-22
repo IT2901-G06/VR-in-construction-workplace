@@ -55,4 +55,19 @@ public class ButtonManager : MonoBehaviour
             Debug.Log("Haptic Controller is null");
         }
     }
+
+    public void TriggerIndexFingerHaptic()
+    {
+        Debug.Log("Index Finger Haptic Triggered");
+
+        HapticController hapticController = HapticController.Instance;
+
+        if (hapticController != null)
+        {
+            int motorStrength = 6;
+            int duration = 10;
+
+            hapticController.RunMotors(BhapticsEventCollection.IndexFingerLeft, motorStrength, duration);
+        }
+    }
 }
