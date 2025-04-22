@@ -8,7 +8,7 @@ public class WaypointWalker : MonoBehaviour
     private List<Vector3> Waypoints;
     public float Threshold = 0.5f;
     public UnityEvent OnFinalDestinationReached;
-    
+
 
     private NavMeshAgent _agent;
     private Animator _animator;

@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using BNG;
 using Obi;
-using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StackingController : MonoBehaviour
 {
@@ -23,10 +22,20 @@ public class StackingController : MonoBehaviour
     private SnapZone _ropeSnapZone;
 
     [SerializeField]
-    private ObiSolver _tableRopesObiSolver;
+    private Grabbable _badRope;
+
+    [SerializeField]
+    private Grabbable _goodRope;
 
     [SerializeField]
     private GameObject _secondarySnapZones;
+
+    [Header("Events")]
+    [SerializeField]
+    private UnityEvent _stage2Event;
+
+    [SerializeField]
+    private UnityEvent _stage3Event;
 
 
     [Header("Debugging")]
@@ -71,6 +80,7 @@ public class StackingController : MonoBehaviour
         {
             _stage++;
             _secondarySnapZones.SetActive(true);
+            if (!FallingObjectsScenarioController.Instance.GetPartTwo()) _stage2Event?.Invoke();
             return;
         }
 
@@ -88,26 +98,24 @@ public class StackingController : MonoBehaviour
             Debug.LogWarning("Stacking Controller must have an assigned Rope Snap Zone GameObject to properly function.");
             return;
         }
-        if (_tableRopesObiSolver == null)
-        {
-            Debug.LogWarning("Stacking Controller must have an assigned Table Ropes Obi Solver GameObject to properly function.");
-            return;
-        }
         if (_secondarySnapZones == null)
         {
             Debug.LogWarning("Stacking Controller must have an assigned Secondary Snap Zones GameObject to properly function.");
             return;
         }
 
-        // Allow for grabbing of ropes
-        foreach (Transform child in _tableRopesObiSolver.gameObject.transform)
+        if (!FallingObjectsScenarioController.Instance.GetPartTwo()) {
+            _badRope.enabled = true;
+        }
+        else
         {
-            if (child.TryGetComponent(out Grabbable grabbable)) grabbable.enabled = true;
+            _goodRope.enabled = true;
         }
 
         CrateRopeController.Instance.SetStackedItems(_initialStackedItems, _secondaryStackedItems);
 
         // Allow for placing rope on pallet
         _ropeSnapZone.gameObject.SetActive(true);
+        if (!FallingObjectsScenarioController.Instance.GetPartTwo()) _stage3Event?.Invoke();
     }
 }
