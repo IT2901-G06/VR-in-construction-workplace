@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public class Sound_Trigger : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Rigidbody))]
+public class SoundTrigger : MonoBehaviour
 {
     private AudioSource audioSource;
     private Rigidbody rb;
@@ -13,11 +15,10 @@ public class Sound_Trigger : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         // Store the absolute vertical speed from the last physics frame
         previousVerticalSpeed = Mathf.Abs(rb.linearVelocity.y);
-        Debug.Log(previousVerticalSpeed);
     }
 
     void OnCollisionEnter(Collision collision)
