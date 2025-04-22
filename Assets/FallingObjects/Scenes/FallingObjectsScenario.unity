@@ -132,22 +132,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 615873684}
     m_Modifications:
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: OnlyAllowNames.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: 'OnlyAllowNames.Array.data[0]'
-      value: Pipes
-      objectReference: {fileID: 0}
-    - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.7
@@ -7583,14 +7567,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 615873684}
     m_Modifications:
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: OnlyAllowNames.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: 'OnlyAllowNames.Array.data[0]'
-      value: Wire
-      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.6
@@ -12461,14 +12437,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2051944291}
     m_Modifications:
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: OnlyAllowNames.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: 'OnlyAllowNames.Array.data[0]'
-      value: Box
-      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.7
@@ -12526,14 +12494,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2051944291}
     m_Modifications:
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: OnlyAllowNames.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: 'OnlyAllowNames.Array.data[0]'
-      value: Box
-      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.7
@@ -12591,14 +12551,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 615873684}
     m_Modifications:
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: OnlyAllowNames.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: 'OnlyAllowNames.Array.data[0]'
-      value: Wire
-      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.6
@@ -18575,22 +18527,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2051944291}
     m_Modifications:
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: OnlyAllowNames.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652932065171397479, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: 'OnlyAllowNames.Array.data[0]'
-      value: Falling Cement
-      objectReference: {fileID: 0}
-    - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.6
@@ -19410,7 +19346,7 @@ MonoBehaviour:
   GrabPhysics: 2
   GrabMechanic: 1
   GrabSpeed: 7.5
-  RemoteGrabbable: 0
+  RemoteGrabbable: 1
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 5
   ThrowForceMultiplier: 2
