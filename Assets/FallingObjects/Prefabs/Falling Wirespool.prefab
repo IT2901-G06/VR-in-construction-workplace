@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7726616113365588865}
   - component: {fileID: 6902134419777624365}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Front Grab Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,11 +66,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000012951238326, guid: 51c7dde72e568214892fdde1f4e46b83, type: 3}
       propertyPath: m_Name
-      value: Falling Wirespool Variant
+      value: Falling Wirespool
       objectReference: {fileID: 0}
     - target: {fileID: 1000012951238326, guid: 51c7dde72e568214892fdde1f4e46b83, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000011373863796, guid: 51c7dde72e568214892fdde1f4e46b83, type: 3}
       propertyPath: m_LocalScale.x
@@ -146,6 +146,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1000012951238326, guid: 51c7dde72e568214892fdde1f4e46b83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 442318163229008936}
+    - targetCorrespondingSourceObject: {fileID: 1000012951238326, guid: 51c7dde72e568214892fdde1f4e46b83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3073836061866366456}
   m_SourcePrefab: {fileID: 100100000, guid: 51c7dde72e568214892fdde1f4e46b83, type: 3}
 --- !u!1 &3636015375972281683 stripped
 GameObject:
@@ -300,6 +303,96 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocalPositionOffset: {x: 0, y: -0.3, z: 0}
   LocalRotationOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &3073836061866366456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3636015375972281683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad179a9e83dba5142adaaf7737678e8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onGrab:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 589324153206483725}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_isTrigger
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  onRelease:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 589324153206483725}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_isTrigger
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onBecomesClosestGrabbable:
+    m_PersistentCalls:
+      m_Calls: []
+  onNoLongerClosestGrabbable:
+    m_PersistentCalls:
+      m_Calls: []
+  onBecomesClosestRemoteGrabbable:
+    m_PersistentCalls:
+      m_Calls: []
+  onNoLongerClosestRemoteGrabbable:
+    m_PersistentCalls:
+      m_Calls: []
+  onGrip:
+    m_PersistentCalls:
+      m_Calls: []
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton1:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton1Down:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton1Up:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton2:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton2Down:
+    m_PersistentCalls:
+      m_Calls: []
+  onButton2Up:
+    m_PersistentCalls:
+      m_Calls: []
+  onSnapZoneEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onSnapZoneExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &3636657544188688529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011373863796, guid: 51c7dde72e568214892fdde1f4e46b83, type: 3}

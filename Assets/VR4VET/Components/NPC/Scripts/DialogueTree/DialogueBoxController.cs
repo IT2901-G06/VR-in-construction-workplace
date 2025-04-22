@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using TMPro;
-using UnityEngine;
 // Import of the TTS namespace
 using Meta.WitAi.TTS.Utilities;
+using TMPro;
+using UnityEngine;
 
 public class DialogueBoxController : MonoBehaviour
 {
@@ -122,7 +122,7 @@ public class DialogueBoxController : MonoBehaviour
         // stop I-have-something-to-tell-you-animation and start talking
         _animator.SetBool(_hasNewDialogueOptionsHash, false);
         //_animator.SetBool(_isTalkingHash, true);
-        // Dialogue 
+        // Dialogue
         ResetBox();
         _dialogueBox.SetActive(true);
         OnDialogueStarted?.Invoke(name);
@@ -143,7 +143,7 @@ public class DialogueBoxController : MonoBehaviour
     IEnumerator WaitForSpeakToEnd(string name)
     {
         // Avoid race condition
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         // Wait for the TTS speaker to finish speaking
         while (TTSSpeaker.GetComponent<TTSSpeaker>().IsSpeaking)
@@ -288,7 +288,7 @@ public class DialogueBoxController : MonoBehaviour
         _animator.SetBool(_isTalkingHash, false);
         dialogueIsActive = false;
         ResetBox();
-        if (dialogueTreeRestart.speakButtonOnExit && !hideSpeakButton)
+        if (dialogueTreeRestart != null && dialogueTreeRestart.speakButtonOnExit && !hideSpeakButton)
         {
             // Only start speak canvas if option is not turned off
             StartSpeakCanvas(dialogueTreeRestart);
