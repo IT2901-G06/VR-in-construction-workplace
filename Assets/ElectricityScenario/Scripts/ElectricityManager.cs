@@ -9,7 +9,7 @@ public class ElectricityManager : MonoBehaviour
 {
     [Header("Electricity Settings")]
     [SerializeField] private bool _requiresBothHands = true;
-    [SerializeField] private float _secondsBetweenElectricitySteps = 0.5f;
+    [SerializeField] private float _secondsBetweenElectricitySteps = 0.2f;
     [Range(1, 100)]
     [SerializeField]
     private int _motorStrength = 100;
