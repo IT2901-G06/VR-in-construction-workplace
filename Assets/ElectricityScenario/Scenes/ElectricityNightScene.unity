@@ -2783,7 +2783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e797b3dc1754d57b93fb4415a3c95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _requiresBothHands: 1
+  _requiresBothHands: 0
   _secondsBetweenElectricitySteps: 0.1
   _motorStrength: 100
   _onElectricityStarting:
