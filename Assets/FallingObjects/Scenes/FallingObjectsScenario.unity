@@ -178,15 +178,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_Text
-      value: Pipes
+      value: O
       objectReference: {fileID: 0}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
-      objectReference: {fileID: 12800000, guid: 4345225956e176043b2f73b9ee1b0f2b, type: 3}
+      objectReference: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_LineSpacing
@@ -195,6 +195,14 @@ PrefabInstance:
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_HorizontalOverflow
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2220,52 +2228,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000012872891332, guid: 209226fec07ec64479cb679ca33e0425, type: 3}
   m_PrefabInstance: {fileID: 268814948}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &271804725
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 271804727}
-  - component: {fileID: 271804726}
-  m_Layer: 0
-  m_Name: BurstCollisionWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &271804726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 271804725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSpans:
-    m_AlignBytes: 16
---- !u!4 &271804727
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 271804725}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &274574883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2292,7 +2254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3636657544188688529, guid: 263ecd49964f94ca8b519bba1c960fd7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3636657544188688529, guid: 263ecd49964f94ca8b519bba1c960fd7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7817,15 +7779,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_Text
-      value: Wire
+      value: O
       objectReference: {fileID: 0}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
-      objectReference: {fileID: 12800000, guid: 4345225956e176043b2f73b9ee1b0f2b, type: 3}
+      objectReference: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 10
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12758,9 +12728,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 4345225956e176043b2f73b9ee1b0f2b, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.5
@@ -12845,10 +12823,18 @@ PrefabInstance:
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
-      objectReference: {fileID: 12800000, guid: 4345225956e176043b2f73b9ee1b0f2b, type: 3}
+      objectReference: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 10
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12933,15 +12919,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_Text
-      value: Wire
+      value: O
       objectReference: {fileID: 0}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
-      objectReference: {fileID: 12800000, guid: 4345225956e176043b2f73b9ee1b0f2b, type: 3}
+      objectReference: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 10
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18368,6 +18362,52 @@ Transform:
   - {fileID: 1756031493}
   m_Father: {fileID: 956235103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2073320867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2073320869}
+  - component: {fileID: 2073320868}
+  m_Layer: 0
+  m_Name: BurstCollisionWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2073320868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073320867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpans:
+    m_AlignBytes: 16
+--- !u!4 &2073320869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073320867}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2078446666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18945,19 +18985,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_Text
-      value: Cement
+      value: O
       objectReference: {fileID: 0}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
-      objectReference: {fileID: 12800000, guid: 4345225956e176043b2f73b9ee1b0f2b, type: 3}
+      objectReference: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6097824680720090490, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_FontData.m_HorizontalOverflow
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459706755886400334, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19843,7 +19895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3636657544188688529, guid: 263ecd49964f94ca8b519bba1c960fd7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3636657544188688529, guid: 263ecd49964f94ca8b519bba1c960fd7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19896,7 +19948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7275266311589332431, guid: 89ee79d1d0b214cfaa5025ae848bc0a1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7275266311589332431, guid: 89ee79d1d0b214cfaa5025ae848bc0a1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20083,4 +20135,4 @@ SceneRoots:
   - {fileID: 956235103}
   - {fileID: 1842927403}
   - {fileID: 1457424572}
-  - {fileID: 271804727}
+  - {fileID: 2073320869}

@@ -48,8 +48,8 @@ public class PeterTheExplainer : MonoBehaviour
         _conversationController = _npc.GetComponentInChildren<ConversationController>();
         if (_followThePlayerController != null)
         {
-            _followThePlayerController.PersonalSpaceFactor = 3;
-            _followThePlayerController.StartFollowingRadius = 2;
+            _followThePlayerController.PersonalSpaceFactor = 4;
+            _followThePlayerController.StartFollowingRadius = 4;
         }
 
         _isPartTwo = FallingObjectsScenarioController.Instance.GetPartTwo();
