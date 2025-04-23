@@ -84,8 +84,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Snap: {fileID: 1652932065171397479}
-  RestingColor: {r: 0.1745283, g: 0.5084977, b: 1, a: 0.16862746}
-  ValidSnapColor: {r: 0, g: 0.18643188, b: 1, a: 1}
+  RestingColor: {r: 0.1462264, g: 0.491084, b: 1, a: 1}
+  ValidSnapColor: {r: 0, g: 0.18403953, b: 0.9622642, a: 1}
   RestingScale: 800
   ValidSnapScale: 600
   ScaleSpeed: 50
@@ -133,8 +133,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 495c9e2a934bcc640a8d7427b13cb680, type: 3}
-    m_FontSize: 22
+    m_Font: {fileID: 12800000, guid: aace1d6711bf8104d87562bd81d1819d, type: 3}
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
