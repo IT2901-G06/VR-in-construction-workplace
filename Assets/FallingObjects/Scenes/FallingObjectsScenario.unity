@@ -12717,10 +12717,6 @@ PrefabInstance:
       propertyPath: 'OnlyAllowNames.Array.data[0]'
       value: Box
       objectReference: {fileID: 0}
-    - target: {fileID: 2252561867022143432, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3642758846397168084, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.7
