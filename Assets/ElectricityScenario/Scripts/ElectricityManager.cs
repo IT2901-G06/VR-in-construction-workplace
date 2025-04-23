@@ -9,7 +9,7 @@ public class ElectricityManager : MonoBehaviour
 {
     [Header("Electricity Settings")]
     [SerializeField] private bool _requiresBothHands = true;
-    [SerializeField] private float _secondsBetweenElectricitySteps = 0.1f;
+    [SerializeField] private float _secondsBetweenElectricitySteps = 0.5f;
     [Range(1, 100)]
     [SerializeField]
     private int _motorStrength = 100;
@@ -134,6 +134,8 @@ public class ElectricityManager : MonoBehaviour
 
     private IEnumerator StopElectricitySequence()
     {
+        yield return new WaitForSeconds(4f);
+
         HapticController hapticController = HapticController.Instance;
 
         Debug.Log("Electricity off is starting!");
