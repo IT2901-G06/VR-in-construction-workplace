@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PeterTheExplainer : MonoBehaviour
 {
@@ -77,6 +78,10 @@ public class PeterTheExplainer : MonoBehaviour
             _npcSpawner.SetWaypointWalkingBehavior(_npc, true, new[] { GameObject.Find("Final Zone Trigger").transform.position }, false);
             WaypointWalker waypointWalker = _npc.GetComponent<WaypointWalker>();
             waypointWalker.OnFinalDestinationReached.AddListener(OnFinalDestinationReached);
+        }
+        else if (name == _peterPrefix + "6PartTwo")
+        {
+            SceneManager.LoadScene("MainMenu");
         }
 
         if (_isPartTwo) return;
