@@ -1784,7 +1784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4747da60837c44f9ba4b4a86879bcc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  material: {fileID: 2100000, guid: 629cf2a97ac4f42eca27baefddea14f7, type: 2}
   renderParameters:
     layer: 6
     lightProbeUsage: 1
@@ -1794,7 +1794,7 @@ MonoBehaviour:
     motionVectors: 0
     renderingLayerMask: 4294967295
   uvAnchor: 0
-  uvScale: {x: 1, y: 1}
+  uvScale: {x: 1, y: 5}
   normalizeV: 1
   section: {fileID: 11400000, guid: a0bc36a59515f413e90e10895929c938, type: 2}
   thicknessScale: 0.2
@@ -12793,6 +12793,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_FontSize
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 6459706755886400334, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7247461371312742653, guid: 4ec882baeeb764a5380ca02bccf5c7c0, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -15109,7 +15113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4747da60837c44f9ba4b4a86879bcc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  material: {fileID: 2100000, guid: 629cf2a97ac4f42eca27baefddea14f7, type: 2}
   renderParameters:
     layer: 6
     lightProbeUsage: 1
@@ -15119,7 +15123,7 @@ MonoBehaviour:
     motionVectors: 0
     renderingLayerMask: 4294967295
   uvAnchor: 0
-  uvScale: {x: 1, y: 1}
+  uvScale: {x: 1, y: 3}
   normalizeV: 1
   section: {fileID: 11400000, guid: a0bc36a59515f413e90e10895929c938, type: 2}
   thicknessScale: 0.6
