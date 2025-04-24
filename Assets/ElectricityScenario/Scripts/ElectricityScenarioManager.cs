@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
-public class ScenarioManager : MonoBehaviour
+public class ElectricityScenarioManager : MonoBehaviour
 {
     [SerializeField]
     private NPCSpawner _npcSpawner;
@@ -13,10 +12,6 @@ public class ScenarioManager : MonoBehaviour
 
     public void StartPartTwo()
     {
-        // temporary while user testing
-        ReturnToMainMenu();
-        return;
-
         if (_npcSpawner == null)
         {
             Debug.LogError("NPCSpawner not found");
@@ -33,10 +28,5 @@ public class ScenarioManager : MonoBehaviour
         _npcSpawner.SpawnNPC(constructionManager);
 
         DeathManager.Instance.Revive();
-    }
-
-    public void ReturnToMainMenu()
-    {         
-        SceneManager.LoadScene("MainMenu");
     }
 }

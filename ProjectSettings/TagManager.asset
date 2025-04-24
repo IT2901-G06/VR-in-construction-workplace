@@ -9,8 +9,6 @@ TagManager:
   - ElectricitySourceTo
   - FallingObject
   - RedContainer
-  - LeftHandGrabber
-  - RightHandGrabber
   - YrkesTitle
   - Bullet
   - Title
@@ -41,6 +39,8 @@ TagManager:
   - SamplesInfoPanel
   - QDSUIToggleCheckboxRadio
   - 'Ground '
+  - RightHandPokeInteractor
+  - LeftHandPokeInteractor
   layers:
   - Default
   - TransparentFX
