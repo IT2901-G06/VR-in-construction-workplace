@@ -23,7 +23,8 @@ MonoBehaviour:
   ShouldRotateTowardsPlayerWhenStandingStill: 0
   DialogueTreesSO:
   - {fileID: 11400000, guid: 8f1da25136450438494b6309a0bb8ce3, type: 2}
-  DialogueTreeJSON: []
+  DialogueTreeJSON:
+  - {fileID: 0}
   runtimeAnimatorController: {fileID: 9100000, guid: acb4b9981fa45ce46adb4867634b31ab, type: 2}
   SpatialBlend: 0
   MinDistance: 1
