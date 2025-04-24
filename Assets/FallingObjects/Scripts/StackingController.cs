@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using BNG;
-using Obi;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -29,6 +28,9 @@ public class StackingController : MonoBehaviour
 
     [SerializeField]
     private GameObject _secondarySnapZones;
+
+    [SerializeField]
+    private GameObject _itemsToStack;
 
     [Header("Events")]
     [SerializeField]
@@ -80,6 +82,10 @@ public class StackingController : MonoBehaviour
         {
             _stage++;
             _secondarySnapZones.SetActive(true);
+            foreach (Transform child in _itemsToStack.transform)
+            {
+                if (child.TryGetComponent(out Grabbable grabbable)) grabbable.enabled = true;
+            }
             if (!FallingObjectsScenarioController.Instance.GetPartTwo()) _stage2Event?.Invoke();
             return;
         }
@@ -104,7 +110,8 @@ public class StackingController : MonoBehaviour
             return;
         }
 
-        if (!FallingObjectsScenarioController.Instance.GetPartTwo()) {
+        if (!FallingObjectsScenarioController.Instance.GetPartTwo())
+        {
             _badRope.enabled = true;
         }
         else

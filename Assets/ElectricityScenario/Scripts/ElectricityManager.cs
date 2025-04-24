@@ -9,7 +9,7 @@ public class ElectricityManager : MonoBehaviour
 {
     [Header("Electricity Settings")]
     [SerializeField] private bool _requiresBothHands = true;
-    [SerializeField] private float _secondsBetweenElectricitySteps = 0.1f;
+    [SerializeField] private float _secondsBetweenElectricitySteps = 0.2f;
     [Range(1, 100)]
     [SerializeField]
     private int _motorStrength = 100;
@@ -113,6 +113,7 @@ public class ElectricityManager : MonoBehaviour
         _electricityIsOn = true;
 
         MotorEvent[] events = reverse ? ElectricityEventSequence.EventSteps.Reverse().ToArray() : ElectricityEventSequence.EventSteps;
+        Debug.Log("walla " + events.Count() + "");
 
         foreach (MotorEvent motorEvent in events)
         {
@@ -133,6 +134,8 @@ public class ElectricityManager : MonoBehaviour
 
     private IEnumerator StopElectricitySequence()
     {
+        yield return new WaitForSeconds(4f);
+
         HapticController hapticController = HapticController.Instance;
 
         Debug.Log("Electricity off is starting!");
@@ -141,6 +144,8 @@ public class ElectricityManager : MonoBehaviour
         var copiedRequestIds = new int[_bhapticsRequestIds.Count];
         _bhapticsRequestIds.CopyTo(copiedRequestIds);
         _bhapticsRequestIds.Clear();
+        Debug.Log("wallah " + copiedRequestIds.Count() + "");
+        _electricityIsOn = false;
 
         foreach (int requestId in copiedRequestIds)
         {

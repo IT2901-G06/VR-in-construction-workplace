@@ -24,7 +24,7 @@ public class SoundTrigger : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // Only play sound if the vertical speed before impact was high enough
-        if (previousVerticalSpeed > 3f)
+        if (previousVerticalSpeed > 5f)
         {
             // Prevent overlapping sounds
             if (!audioSource.isPlaying)

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1393121789410636736}
   - component: {fileID: 6821957109848154327}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Front Grab Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010704601538, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4000012328279092, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
       propertyPath: m_LocalScale.x
@@ -149,6 +149,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1000010704601538, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8458897652687243579}
+    - targetCorrespondingSourceObject: {fileID: 1000010704601538, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3544389385151780848}
+    - targetCorrespondingSourceObject: {fileID: 1000010704601538, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8576324414456776627}
   m_SourcePrefab: {fileID: 100100000, guid: 1d341dd6f54c45d408a2804644e434bc, type: 3}
 --- !u!4 &7275266311589332431 stripped
 Transform:
@@ -398,3 +404,112 @@ MonoBehaviour:
   onSnapZoneExit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!82 &3544389385151780848
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7276489158352918585}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2df25ca792e08a646936bb7cf1c8d2e3, type: 3}
+  m_Resource: {fileID: 8300000, guid: 2df25ca792e08a646936bb7cf1c8d2e3, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &8576324414456776627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7276489158352918585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47cc155be6a4cd34aa592e5c6fcc8318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

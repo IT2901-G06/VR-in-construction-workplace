@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PeterTheExplainer : MonoBehaviour
 {
@@ -47,8 +48,8 @@ public class PeterTheExplainer : MonoBehaviour
         _conversationController = _npc.GetComponentInChildren<ConversationController>();
         if (_followThePlayerController != null)
         {
-            _followThePlayerController.PersonalSpaceFactor = 3;
-            _followThePlayerController.StartFollowingRadius = 2;
+            _followThePlayerController.PersonalSpaceFactor = 4;
+            _followThePlayerController.StartFollowingRadius = 4;
         }
 
         _isPartTwo = FallingObjectsScenarioController.Instance.GetPartTwo();
@@ -77,6 +78,10 @@ public class PeterTheExplainer : MonoBehaviour
             _npcSpawner.SetWaypointWalkingBehavior(_npc, true, new[] { GameObject.Find("Final Zone Trigger").transform.position }, false);
             WaypointWalker waypointWalker = _npc.GetComponent<WaypointWalker>();
             waypointWalker.OnFinalDestinationReached.AddListener(OnFinalDestinationReached);
+        }
+        else if (name == _peterPrefix + "6PartTwo")
+        {
+            SceneManager.LoadScene("MainMenu");
         }
 
         if (_isPartTwo) return;
