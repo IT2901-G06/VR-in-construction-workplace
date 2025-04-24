@@ -1,4 +1,3 @@
-using BNG;
 using UnityEngine;
 
 public class BodyPartTrigger : MonoBehaviour
@@ -22,7 +21,7 @@ public class BodyPartTrigger : MonoBehaviour
 
     private Vector3 _initialCenter;
     private float _initialRigY;
-    private BNGPlayerController _cameraCharController;
+    private Oculus.Interaction.Locomotion.CharacterController _cameraCharController;
 
     void Awake()
     {
@@ -36,19 +35,19 @@ public class BodyPartTrigger : MonoBehaviour
     {
         _initialCenter = GetComponent<BoxCollider>().center;
         _initialRigY = GameObject.FindGameObjectWithTag("Player").transform.position.y / 2;
-        _cameraCharController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BNGPlayerController>();
+        _cameraCharController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Oculus.Interaction.Locomotion.CharacterController>();
     }
 
     void Update()
     {
-        float newHeight = (_cameraCharController.ElevateCameraHeight + _initialRigY) * _percentOfHeightToFill;
+        float newHeight = (_cameraCharController.transform.position.y + _initialRigY) * _percentOfHeightToFill;
         Vector3 currentSize = GetComponent<BoxCollider>().size;
         GetComponent<BoxCollider>().size = new(currentSize.x, newHeight, currentSize.z);
 
-        float newCenter = newHeight / 2 - _initialRigY * 1.5f;
+        float newCenter = newHeight / 2 - _initialRigY;
         if (_position == TriggerPositionType.Head)
         {
-            newCenter += _percentOfPlayerHeightForBody * (_cameraCharController.ElevateCameraHeight + _initialRigY);
+            newCenter += _percentOfPlayerHeightForBody * (_cameraCharController.transform.position.y + _initialRigY);
         }
         GetComponent<BoxCollider>().center = new(_initialCenter.x, newCenter, _initialCenter.z);
     }
