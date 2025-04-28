@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8487485016624642684}
   - component: {fileID: 6353843467905493301}
   - component: {fileID: 8598742704460010786}
-  - component: {fileID: 2731987064527112789}
   m_Layer: 4
   m_Name: SnapInteractor
   m_TagString: Untagged
@@ -87,21 +86,33 @@ MonoBehaviour:
   _whenSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2731987064527112789}
-        m_TargetAssemblyTypeName: StackableItemSnapScript, Assembly-CSharp
-        m_MethodName: AddItem
-        m_Mode: 1
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: StackingController, Assembly-CSharp
+        m_MethodName: IncrementStackedBoxes
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 3636015375972281683}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: select
+          m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: StackingController, Assembly-CSharp
+        m_MethodName: DecrementStackedBoxes
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 3636015375972281683}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenPreprocessed:
     m_PersistentCalls:
       m_Calls: []
@@ -129,18 +140,6 @@ MonoBehaviour:
   _hoverColor: {r: 0, g: 0, b: 1, a: 0.19607843}
   _selectColor: {r: 0, g: 1, b: 0, a: 0.19607843}
   _disabledColor: {r: 0, g: 0, b: 0, a: 1}
---- !u!114 &2731987064527112789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1131351459114168912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1aae12c71d4e44eeb17585fd9009b00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5610221461981029117
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +165,7 @@ Transform:
   m_GameObject: {fileID: 5610221461981029117}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -341,7 +340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011373863796, guid: 51c7dde72e568214892fdde1f4e46b83, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.25
+      value: -2.245
       objectReference: {fileID: 0}
     - target: {fileID: 4000011373863796, guid: 51c7dde72e568214892fdde1f4e46b83, type: 3}
       propertyPath: m_LocalPosition.y
@@ -349,7 +348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011373863796, guid: 51c7dde72e568214892fdde1f4e46b83, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 4000011373863796, guid: 51c7dde72e568214892fdde1f4e46b83, type: 3}
       propertyPath: m_LocalRotation.w

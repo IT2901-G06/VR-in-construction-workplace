@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Obi;
-using Oculus.Interaction;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -140,22 +139,10 @@ public class CrateRopeController : MonoBehaviour
         // Start dialogue
         _stage4Event?.Invoke();
 
-        // Release boxes from crate
-        foreach (Transform child in _initialSnapZones.transform)
+        if (!FallingObjectsScenarioController.Instance.IsPartTwo())
         {
-            // if (child.TryGetComponent(out SnapZone snapZone)) snapZone.ReleaseAll();
-        }
-
-        foreach (Transform child in _secondarySnapZones.transform)
-        {
-            // if (child.TryGetComponent(out SnapZone snapZone)) snapZone.ReleaseAll();
-        }
-
-
-        foreach (GameObject stackedBox in _stackedItems)
-        {
-            stackedBox.tag = "FallingObject";
-            stackedBox.layer = 0;
+            _initialSnapZones.SetActive(false);
+            _secondarySnapZones.SetActive(false);
         }
 
         // Enable rope around crates, and thicken if Good rope selected

@@ -1,15 +1,24 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using Oculus.Interaction;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class StackingController : MonoBehaviour
 {
     [Header("Settings")]
+
     [SerializeField]
     private int _amtInitialStackableItems = 3;
+
     [SerializeField]
     private int _amtSecondaryStackableItems = 2;
+
+    [SerializeField]
+    [Range(0, 1)]
+    private float _raceConditionWaitTime = 0.1f;
 
 
     [Header("Necessary Game Objects")]
@@ -88,14 +97,6 @@ public class StackingController : MonoBehaviour
         {
             _stage++;
             _secondarySnapZones.SetActive(true);
-            // foreach (Transform child in _stage1ItemsToStack.transform)
-            // {
-            //     foreach (Transform grandChild in child)
-            //     {
-            //         if (grandChild.TryGetComponent(out Grabbable _)) grandChild.gameObject.SetActive(false);
-            //     }
-            // }
-
             foreach (Transform child in _stage2ItemsToStack.transform)
             {
                 foreach (Transform grandChild in child)
@@ -103,7 +104,8 @@ public class StackingController : MonoBehaviour
                     if (grandChild.TryGetComponent(out Grabbable _)) grandChild.gameObject.SetActive(true);
                 }
             }
-            if (!FallingObjectsScenarioController.Instance.GetPartTwo()) _stage2Event?.Invoke();
+            if (!FallingObjectsScenarioController.Instance.IsPartTwo()) _stage2Event?.Invoke();
+            StartCoroutine(DisableInitialGrabbables());
             return;
         }
 
@@ -127,7 +129,7 @@ public class StackingController : MonoBehaviour
             return;
         }
 
-        if (!FallingObjectsScenarioController.Instance.GetPartTwo())
+        if (!FallingObjectsScenarioController.Instance.IsPartTwo())
         {
             _badRope.SetActive(true);
         }
@@ -137,16 +139,68 @@ public class StackingController : MonoBehaviour
         }
 
         CrateRopeController.Instance.SetStackedItems(_initialStackedItems, _secondaryStackedItems);
-        // foreach (Transform child in _stage2ItemsToStack.transform)
-        //     {
-        //         foreach (Transform grandChild in child)
-        //         {
-        //             if (grandChild.TryGetComponent(out Grabbable _)) grandChild.gameObject.SetActive(false);
-        //         }
-        //     }
+        StartCoroutine(DisableSecondaryGrabbables());
 
         // Allow for placing rope on pallet
         _ropeSnapZone.SetActive(true);
-        if (!FallingObjectsScenarioController.Instance.GetPartTwo()) _stage3Event?.Invoke();
+        if (!FallingObjectsScenarioController.Instance.IsPartTwo()) _stage3Event?.Invoke();
+    }
+
+    private IEnumerator DisableInitialGrabbables()
+    {
+        yield return new WaitForSeconds(_raceConditionWaitTime);
+        foreach (Transform child in _stage1ItemsToStack.transform)
+        {
+            child.gameObject.tag = "FallingObject";
+            child.gameObject.layer = 0;
+            foreach (Transform grandChild in child)
+            {
+                if (grandChild.TryGetComponent(out DistanceGrabInteractable distanceGrabInteractable))
+                {
+                    distanceGrabInteractable.enabled = false;
+                }
+                if (grandChild.TryGetComponent(out DistanceHandGrabInteractable distanceHandGrabInteractable))
+                {
+                    distanceHandGrabInteractable.enabled = false;
+                }
+            }
+        }
+        yield break;
+    }
+
+    private IEnumerator DisableSecondaryGrabbables()
+    {
+        yield return new WaitForSeconds(_raceConditionWaitTime);
+        foreach (Transform child in _stage2ItemsToStack.transform)
+        {
+            child.gameObject.tag = "FallingObject";
+            child.gameObject.layer = 0;
+            foreach (Transform grandChild in child)
+            {
+                if (grandChild.TryGetComponent(out DistanceGrabInteractable distanceGrabInteractable))
+                {
+                    distanceGrabInteractable.enabled = false;
+                }
+                if (grandChild.TryGetComponent(out DistanceHandGrabInteractable distanceHandGrabInteractable))
+                {
+                    distanceHandGrabInteractable.enabled = false;
+                }
+            }
+        }
+        yield break;
+    }
+
+    public void DecrementStackedBoxes(GameObject oldStackedItem)
+    {
+        if (_stage == 0)
+        {
+            _initialStackedItems.Remove(oldStackedItem);
+        }
+        else if (_stage == 1)
+        {
+            _secondaryStackedItems.Remove(oldStackedItem);
+        }
+        AmtStackedItems = _initialStackedItems.Count + _secondaryStackedItems.Count;
+        Debug.Log("Amt stacked items is now: " + AmtStackedItems);
     }
 }
