@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldTriggerOnProximity: 1
   speakButtonOnExit: 1
+  hasExitButton: 0
+  hasNextButton: 0
   sections:
   - dialogue:
     - "Hello! Today, we\u2019re going to see what can happen if you don\u2019t properly
