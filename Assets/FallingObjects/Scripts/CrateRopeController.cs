@@ -139,6 +139,12 @@ public class CrateRopeController : MonoBehaviour
         // Start dialogue
         _stage4Event?.Invoke();
 
+        foreach (GameObject gameObject in _stackedItems)
+        {
+            gameObject.tag = "FallingObject";
+            gameObject.layer = 0;
+        }
+
         // Enable rope around crates, and thicken if Good rope selected
         _ropeObiSolver.gameObject.SetActive(true);
         _craneRopeObiSolver.gameObject.SetActive(true);

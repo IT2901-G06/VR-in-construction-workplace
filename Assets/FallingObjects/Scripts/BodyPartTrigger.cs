@@ -70,15 +70,11 @@ public class BodyPartTrigger : MonoBehaviour
         if (other.CompareTag("FallingObject"))
         {
             HapticController hapticController = HapticController.Instance;
-            int motorStrength = Mathf.Clamp((int)(other.attachedRigidbody.linearVelocity.magnitude * 10), hapticController.GetMinMotorStrength(), hapticController.GetMaxMotorStrength());
 
             MotorEvent motorEvent = TranslateTriggerPositionTypeToMotorEvent(_position);
-            hapticController.RunMotors(motorEvent, motorStrength, hapticController.GetSingleEventMotorRunTimeMs());
-            Debug.Log(_position + ": " + motorStrength);
-            if (motorStrength >= 25)
-            {
-                DeathManager.Instance.Kill();
-            }
+            hapticController.RunMotors(motorEvent, hapticController.GetFallingObjectsMotorStrength(), hapticController.GetSingleEventMotorRunTimeMs());
+            Debug.Log(_position + ": " + hapticController.GetFallingObjectsMotorStrength());
+            DeathManager.Instance.Kill();
         }
     }
 }

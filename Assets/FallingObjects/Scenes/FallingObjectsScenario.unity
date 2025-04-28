@@ -1074,52 +1074,6 @@ Transform:
   - {fileID: 84769559}
   m_Father: {fileID: 1658125949}
   m_LocalEulerAnglesHint: {x: 0, y: -71.613, z: 0}
---- !u!1 &142924966
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 142924968}
-  - component: {fileID: 142924967}
-  m_Layer: 0
-  m_Name: BurstCollisionWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &142924967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142924966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSpans:
-    m_AlignBytes: 16
---- !u!4 &142924968
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142924966}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &144613755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1326,6 +1280,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1901946303}
     m_Modifications:
+    - target: {fileID: 1131351459114168912, guid: 263ecd49964f94ca8b519bba1c960fd7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3636015375972281683, guid: 263ecd49964f94ca8b519bba1c960fd7, type: 3}
       propertyPath: m_Name
       value: Falling Wirespool 2
@@ -3844,7 +3802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &472468245
 Transform:
   m_ObjectHideFlags: 0
@@ -10640,6 +10598,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000012872891332, guid: 209226fec07ec64479cb679ca33e0425, type: 3}
   m_PrefabInstance: {fileID: 1318163340}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1323773728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1323773730}
+  - component: {fileID: 1323773729}
+  m_Layer: 0
+  m_Name: BurstCollisionWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1323773729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323773728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpans:
+    m_AlignBytes: 16
+--- !u!4 &1323773730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323773728}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1351603414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11551,6 +11555,10 @@ PrefabInstance:
     - target: {fileID: 6236778975610614952, guid: 89ee79d1d0b214cfaa5025ae848bc0a1, type: 3}
       propertyPath: m_Name
       value: Falling Pipes
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731444704995453867, guid: 89ee79d1d0b214cfaa5025ae848bc0a1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17920,6 +17928,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1901946303}
     m_Modifications:
+    - target: {fileID: 1131351459114168912, guid: 263ecd49964f94ca8b519bba1c960fd7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3636015375972281683, guid: 263ecd49964f94ca8b519bba1c960fd7, type: 3}
       propertyPath: m_Name
       value: Falling Wirespool 1
@@ -19106,7 +19118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2144300614
 Transform:
   m_ObjectHideFlags: 0
@@ -19373,11 +19385,11 @@ PrefabInstance:
     - target: {fileID: 428870035799414560, guid: db039f4c5e15e40eca3efc54f7442852, type: 3}
       propertyPath: _badRope
       value: 
-      objectReference: {fileID: 1164783700}
+      objectReference: {fileID: 1716102704}
     - target: {fileID: 428870035799414560, guid: db039f4c5e15e40eca3efc54f7442852, type: 3}
       propertyPath: _goodRope
       value: 
-      objectReference: {fileID: 652546632}
+      objectReference: {fileID: 539595723}
     - target: {fileID: 428870035799414560, guid: db039f4c5e15e40eca3efc54f7442852, type: 3}
       propertyPath: _snapZones
       value: 
@@ -19819,4 +19831,4 @@ SceneRoots:
   - {fileID: 918124732}
   - {fileID: 1612207831}
   - {fileID: 458619554}
-  - {fileID: 142924968}
+  - {fileID: 1323773730}

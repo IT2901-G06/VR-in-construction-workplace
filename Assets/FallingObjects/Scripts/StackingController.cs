@@ -102,6 +102,7 @@ public class StackingController : MonoBehaviour
                 foreach (Transform grandChild in child)
                 {
                     if (grandChild.TryGetComponent(out Grabbable _)) grandChild.gameObject.SetActive(true);
+                    if (grandChild.TryGetComponent(out SnapInteractor _)) grandChild.gameObject.SetActive(true);
                 }
             }
             if (!FallingObjectsScenarioController.Instance.IsPartTwo()) _stage2Event?.Invoke();
@@ -116,8 +117,6 @@ public class StackingController : MonoBehaviour
 
             foreach (Transform child in _stage1ItemsToStack.transform)
             {
-                child.gameObject.tag = "FallingObject";
-                child.gameObject.layer = 0;
                 foreach (Transform grandChild in child)
                 {
                     if (grandChild.TryGetComponent(out DistanceGrabInteractable distanceGrabInteractable))
@@ -153,21 +152,27 @@ public class StackingController : MonoBehaviour
             return;
         }
 
-        if (!FallingObjectsScenarioController.Instance.IsPartTwo())
+        if (FallingObjectsScenarioController.Instance.IsPartTwo())
         {
-            _badRope.SetActive(true);
+            foreach (Transform child in _goodRope.transform)
+            {
+                if (child.TryGetComponent(out SnapInteractor _)) child.gameObject.SetActive(true);
+                if (child.TryGetComponent(out Grabbable _)) child.gameObject.SetActive(true);
+            }
         }
         else
         {
-            _goodRope.SetActive(true);
+            foreach (Transform child in _badRope.transform)
+            {
+                if (child.TryGetComponent(out SnapInteractor _)) child.gameObject.SetActive(true);
+                if (child.TryGetComponent(out Grabbable _)) child.gameObject.SetActive(true);
+            }
         }
 
         CrateRopeController.Instance.SetStackedItems(_initialStackedItems, _secondaryStackedItems);
 
         foreach (Transform child in _stage2ItemsToStack.transform)
         {
-            child.gameObject.tag = "FallingObject";
-            child.gameObject.layer = 0;
             foreach (Transform grandChild in child)
             {
                 if (grandChild.TryGetComponent(out DistanceGrabInteractable distanceGrabInteractable))
