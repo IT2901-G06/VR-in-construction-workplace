@@ -27,10 +27,11 @@ public class FallingObjectsScenarioController : MonoBehaviour
     public void GoToPartTwo()
     {
         _partTwo = true;
+        Destroy(GameObject.Find("OVRCameraRig"));
         SceneManager.LoadScene("FallingObjectsScenario");
     }
 
-    public bool GetPartTwo()
+    public bool IsPartTwo()
     {
         return _partTwo;
     }

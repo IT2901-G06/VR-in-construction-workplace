@@ -5,7 +5,7 @@ public class HapticController : MonoBehaviour
 {
     [SerializeField]
     [Range(0, 100)]
-    private int _minimumMotorStrength = 10;
+    private int _fallingObjectsMotorStrength = 75;
 
     [SerializeField]
     private int _singleEventMotorRunTimeMs = 500;
@@ -23,14 +23,9 @@ public class HapticController : MonoBehaviour
         return _singleEventMotorRunTimeMs;
     }
 
-    public int GetMaxMotorStrength()
+    public int GetFallingObjectsMotorStrength()
     {
-        return 100;
-    }
-
-    public int GetMinMotorStrength()
-    {
-        return _minimumMotorStrength;
+        return _fallingObjectsMotorStrength;
     }
 
     private int[] MagnifyMotorStrengths(int[] motorValues, int magnificationFactor)
