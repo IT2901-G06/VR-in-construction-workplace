@@ -6,6 +6,12 @@ public class StopBoxController : MonoBehaviour
     [SerializeField]
     private BoxCollider _spoolsFloor;
 
+    [SerializeField]
+    private GameObject _initialSnapZones;
+
+    [SerializeField]
+    private GameObject _secondarySnapZones;
+
     private bool _craneAtTop = false;
     private string _ropeAttached = "";
     private bool _withinRange = false;
@@ -39,6 +45,8 @@ public class StopBoxController : MonoBehaviour
         // Release crates if all conditions met
         if (_craneAtTop && _ropeAttached == "Bad" && _withinRange)
         {
+            _initialSnapZones.SetActive(false);
+            _secondarySnapZones.SetActive(false);
             _spoolsFloor.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
