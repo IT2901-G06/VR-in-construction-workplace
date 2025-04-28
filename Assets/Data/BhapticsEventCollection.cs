@@ -4,6 +4,17 @@ using Bhaptics.SDK2;
 // about the Bhaptics SDK and what each motor value represents, visit https://docs.bhaptics.com/sdk/further/motor
 public class BhapticsEventCollection
 {
+    public static MotorEvent VestAll = new(PositionType.Vest, new int[] {
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+    });
     public static MotorEvent VestTop = new(PositionType.Vest, new int[] {
         1, 1, 1, 1,
         0, 0, 0, 0,

@@ -52,27 +52,13 @@ public class BodyPartTrigger : MonoBehaviour
         GetComponent<BoxCollider>().center = new(_initialCenter.x, newCenter, _initialCenter.z);
     }
 
-    private MotorEvent TranslateTriggerPositionTypeToMotorEvent(TriggerPositionType position)
-    {
-        return position switch
-        {
-            TriggerPositionType.Front => BhapticsEventCollection.VestFront,
-            TriggerPositionType.Back => BhapticsEventCollection.VestBack,
-            TriggerPositionType.Left => BhapticsEventCollection.VestFarLeft,
-            TriggerPositionType.Right => BhapticsEventCollection.VestFarLeft,
-            TriggerPositionType.Head => BhapticsEventCollection.VestTop,
-            _ => BhapticsEventCollection.VestFront,
-        };
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("FallingObject"))
         {
             HapticController hapticController = HapticController.Instance;
 
-            MotorEvent motorEvent = TranslateTriggerPositionTypeToMotorEvent(_position);
-            hapticController.RunMotors(motorEvent, hapticController.GetFallingObjectsMotorStrength(), hapticController.GetSingleEventMotorRunTimeMs());
+            hapticController.RunMotors(BhapticsEventCollection.VestAll, hapticController.GetFallingObjectsMotorStrength(), hapticController.GetSingleEventMotorRunTimeMs());
             Debug.Log(_position + ": " + hapticController.GetFallingObjectsMotorStrength());
             DeathManager.Instance.Kill();
         }
