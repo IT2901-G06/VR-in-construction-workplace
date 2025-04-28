@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using BNG;
+using Oculus.Interaction;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,19 +18,25 @@ public class StackingController : MonoBehaviour
     private GameObject _pallet;
 
     [SerializeField]
-    private SnapZone _ropeSnapZone;
+    private GameObject _ropeSnapZone;
 
     [SerializeField]
-    private Grabbable _badRope;
+    private GameObject _badRope;
 
     [SerializeField]
-    private Grabbable _goodRope;
+    private GameObject _goodRope;
+
+    [SerializeField]
+    private GameObject _initialSnapZones;
 
     [SerializeField]
     private GameObject _secondarySnapZones;
 
     [SerializeField]
-    private GameObject _itemsToStack;
+    private GameObject _stage1ItemsToStack;
+
+    [SerializeField]
+    private GameObject _stage2ItemsToStack;
 
     [Header("Events")]
     [SerializeField]
@@ -65,15 +71,15 @@ public class StackingController : MonoBehaviour
         _secondaryStackedItems = new List<GameObject>();
     }
 
-    public void IncrementStackedBoxes(Grabbable newStackedItem)
+    public void IncrementStackedBoxes(GameObject newStackedItem)
     {
         if (_stage == 0)
         {
-            _initialStackedItems.Add(newStackedItem.gameObject);
+            _initialStackedItems.Add(newStackedItem);
         }
         else if (_stage == 1)
         {
-            _secondaryStackedItems.Add(newStackedItem.gameObject);
+            _secondaryStackedItems.Add(newStackedItem);
         }
         AmtStackedItems = _initialStackedItems.Count + _secondaryStackedItems.Count;
         Debug.Log("Amt stacked items is now: " + AmtStackedItems);
@@ -82,9 +88,20 @@ public class StackingController : MonoBehaviour
         {
             _stage++;
             _secondarySnapZones.SetActive(true);
-            foreach (Transform child in _itemsToStack.transform)
+            // foreach (Transform child in _stage1ItemsToStack.transform)
+            // {
+            //     foreach (Transform grandChild in child)
+            //     {
+            //         if (grandChild.TryGetComponent(out Grabbable _)) grandChild.gameObject.SetActive(false);
+            //     }
+            // }
+
+            foreach (Transform child in _stage2ItemsToStack.transform)
             {
-                if (child.TryGetComponent(out Grabbable grabbable)) grabbable.enabled = true;
+                foreach (Transform grandChild in child)
+                {
+                    if (grandChild.TryGetComponent(out Grabbable _)) grandChild.gameObject.SetActive(true);
+                }
             }
             if (!FallingObjectsScenarioController.Instance.GetPartTwo()) _stage2Event?.Invoke();
             return;
@@ -112,17 +129,24 @@ public class StackingController : MonoBehaviour
 
         if (!FallingObjectsScenarioController.Instance.GetPartTwo())
         {
-            _badRope.enabled = true;
+            _badRope.SetActive(true);
         }
         else
         {
-            _goodRope.enabled = true;
+            _goodRope.SetActive(true);
         }
 
         CrateRopeController.Instance.SetStackedItems(_initialStackedItems, _secondaryStackedItems);
+        // foreach (Transform child in _stage2ItemsToStack.transform)
+        //     {
+        //         foreach (Transform grandChild in child)
+        //         {
+        //             if (grandChild.TryGetComponent(out Grabbable _)) grandChild.gameObject.SetActive(false);
+        //         }
+        //     }
 
         // Allow for placing rope on pallet
-        _ropeSnapZone.gameObject.SetActive(true);
+        _ropeSnapZone.SetActive(true);
         if (!FallingObjectsScenarioController.Instance.GetPartTwo()) _stage3Event?.Invoke();
     }
 }

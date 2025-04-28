@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using BNG;
 using Obi;
+using Oculus.Interaction;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -29,7 +29,7 @@ public class CrateRopeController : MonoBehaviour
     [Header("Snap Zones")]
 
     [SerializeField]
-    private SnapZone _ropeSnapZone;
+    private GameObject _ropeSnapZone;
 
     [SerializeField]
     private GameObject _initialSnapZones;
@@ -53,9 +53,6 @@ public class CrateRopeController : MonoBehaviour
     private BoxCollider _spoolsFloor;
 
     [SerializeField]
-    private Grabbable _hinge;
-
-    [SerializeField]
     private GameObject _crateBoundaries;
 
 
@@ -75,14 +72,8 @@ public class CrateRopeController : MonoBehaviour
         _stackedItems.AddRange(secondaryStackedItems);
     }
 
-    public void AttachedRope()
+    public void AttachedRope(GameObject rope)
     {
-        GameObject attachedRopeGameObject = _ropeSnapZone.HeldItem.gameObject;
-
-        // Hide ring helper for snap zone
-        _ropeSnapZone.transform.GetChild(0).gameObject.SetActive(false);
-
-
         if (_ropeSnapZone == null)
         {
             Debug.LogWarning("Crate Rope Manager must have an assigned Rope Snap Zone to properly function.");
@@ -113,11 +104,6 @@ public class CrateRopeController : MonoBehaviour
             Debug.LogWarning("Crate Rope Manager must have an assigned Spools Attachment Plane GameObject to properly function.");
             return;
         }
-        if (_hinge == null)
-        {
-            Debug.LogWarning("Crate Rope Manager must have an assigned Hinge GameObject to properly function.");
-            return;
-        }
         if (_initialSnapZones == null)
         {
             Debug.LogWarning("Crate Rope Manager must have an assigned Initial Snap Zones GameObject to properly function.");
@@ -129,13 +115,19 @@ public class CrateRopeController : MonoBehaviour
             return;
         }
 
-        // Hide rope moved over to snap zone
-        attachedRopeGameObject.SetActive(false);
-        attachedRopeGameObject.transform.GetChild(0).GetComponent<ObiParticleAttachment>().enabled = false;
-        _stopBoxController.SetRopeAttached(attachedRopeGameObject.name.Contains("Bad"));
+        _ropeSnapZone.SetActive(false);
 
-        // Enable the lever
-        _hinge.enabled = true;
+        // Hide rope moved over to snap zone
+        foreach (Transform child in rope.transform)
+        {
+            if (child.TryGetComponent(out ObiParticleAttachment attachment))
+            {
+                attachment.enabled = false;
+                break;
+            }
+        }
+        rope.SetActive(false);
+        _stopBoxController.SetRopeAttached(rope.name.Contains("Bad"));
 
         // Enable plane for rope around crates to attach itself to
         _pipesAttachmentPlane.gameObject.SetActive(true);
@@ -151,18 +143,17 @@ public class CrateRopeController : MonoBehaviour
         // Release boxes from crate
         foreach (Transform child in _initialSnapZones.transform)
         {
-            if (child.TryGetComponent(out SnapZone snapZone)) snapZone.ReleaseAll();
+            // if (child.TryGetComponent(out SnapZone snapZone)) snapZone.ReleaseAll();
         }
 
         foreach (Transform child in _secondarySnapZones.transform)
         {
-            if (child.TryGetComponent(out SnapZone snapZone)) snapZone.ReleaseAll();
+            // if (child.TryGetComponent(out SnapZone snapZone)) snapZone.ReleaseAll();
         }
 
 
         foreach (GameObject stackedBox in _stackedItems)
         {
-            if (stackedBox.TryGetComponent(out Grabbable grabbable)) grabbable.enabled = false;
             stackedBox.tag = "FallingObject";
             stackedBox.layer = 0;
         }
@@ -170,7 +161,7 @@ public class CrateRopeController : MonoBehaviour
         // Enable rope around crates, and thicken if Good rope selected
         _ropeObiSolver.gameObject.SetActive(true);
         _craneRopeObiSolver.gameObject.SetActive(true);
-        if (attachedRopeGameObject.name.Contains("Good"))
+        if (rope.name.Contains("Good"))
         {
             foreach (Transform child in _ropeObiSolver.transform)
             {

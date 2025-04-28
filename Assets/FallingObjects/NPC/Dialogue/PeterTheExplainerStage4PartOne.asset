@@ -16,7 +16,7 @@ MonoBehaviour:
   speakButtonOnExit: 1
   sections:
   - dialogue:
-    - Great! Now you can pull the lever to lift the pallet.
+    - Great! Now you can push the button to lift the pallet.
     endAfterDialogue: 1
     branchPoint:
       question: 

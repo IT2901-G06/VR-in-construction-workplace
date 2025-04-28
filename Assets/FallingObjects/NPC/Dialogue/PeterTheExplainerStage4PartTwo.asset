@@ -16,8 +16,8 @@ MonoBehaviour:
   speakButtonOnExit: 1
   sections:
   - dialogue:
-    - 'Perfect! This rope is strong, and the pallet is properly secured. Now pull
-      the lever to lift the pallet!
+    - 'Perfect! This rope is strong, and the pallet is properly secured. Now push
+      the button to lift the pallet!
 
 '
     endAfterDialogue: 1

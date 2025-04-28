@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1461168139099548362}
   - component: {fileID: 3146476359612403253}
   - component: {fileID: 2365024690157444166}
+  - component: {fileID: 3631261690561296582}
   m_Layer: 4
   m_Name: SnapInteractor
   m_TagString: Untagged
@@ -86,9 +87,9 @@ MonoBehaviour:
   _whenSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BoxSnapZoneScript, Assembly-CSharp
-        m_MethodName: AddBox
+      - m_Target: {fileID: 3631261690561296582}
+        m_TargetAssemblyTypeName: StackableItemSnapScript, Assembly-CSharp
+        m_MethodName: AddItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -100,19 +101,7 @@ MonoBehaviour:
         m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RotatePlanet, Assembly-CSharp
-        m_MethodName: ChangeRotation
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: -450
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _whenPreprocessed:
     m_PersistentCalls:
       m_Calls: []
@@ -140,6 +129,18 @@ MonoBehaviour:
   _hoverColor: {r: 0, g: 0, b: 1, a: 0.19607843}
   _selectColor: {r: 0, g: 1, b: 0, a: 0.19607843}
   _disabledColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &3631261690561296582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697180968570417902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1aae12c71d4e44eeb17585fd9009b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3912330914374942483
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 492900, guid: ac1e57da7eccaa44a8c5b369ce7a5043, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 492900, guid: ac1e57da7eccaa44a8c5b369ce7a5043, type: 3}
       propertyPath: m_LocalRotation.w
