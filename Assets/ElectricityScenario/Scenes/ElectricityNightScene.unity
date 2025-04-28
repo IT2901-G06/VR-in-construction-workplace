@@ -49360,6 +49360,18 @@ PrefabInstance:
       propertyPath: handTransform
       value: 
       objectReference: {fileID: 748362222}
+    - target: {fileID: 9094024503301872781, guid: 82e3e5db7fd0a1c40a0dee96be25c1d5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.081
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094024503301872781, guid: 82e3e5db7fd0a1c40a0dee96be25c1d5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.089
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094024503301872781, guid: 82e3e5db7fd0a1c40a0dee96be25c1d5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.024
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
