@@ -10838,6 +10838,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Haptic Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 4907945705439645683, guid: aad00055ead01864a8080d7f65295adc, type: 3}
+      propertyPath: _fallingObjectsMotorStrength
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
