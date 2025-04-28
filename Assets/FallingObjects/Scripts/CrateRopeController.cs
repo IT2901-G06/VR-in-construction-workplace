@@ -139,22 +139,6 @@ public class CrateRopeController : MonoBehaviour
         // Start dialogue
         _stage4Event?.Invoke();
 
-        foreach (Transform snapZone in _initialSnapZones.transform)
-        {
-            if (snapZone.childCount > 0)
-            {
-                snapZone.GetChild(snapZone.childCount - 1).gameObject.SetActive(false);
-            }
-        }
-
-        foreach (Transform snapZone in _secondarySnapZones.transform)
-        {
-            if (snapZone.childCount > 0)
-            {
-                snapZone.GetChild(snapZone.childCount - 1).gameObject.SetActive(false);
-            }
-        }
-
         // Enable rope around crates, and thicken if Good rope selected
         _ropeObiSolver.gameObject.SetActive(true);
         _craneRopeObiSolver.gameObject.SetActive(true);

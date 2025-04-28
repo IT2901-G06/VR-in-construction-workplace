@@ -105,7 +105,31 @@ public class StackingController : MonoBehaviour
                 }
             }
             if (!FallingObjectsScenarioController.Instance.IsPartTwo()) _stage2Event?.Invoke();
-            StartCoroutine(DisableInitialGrabbables());
+
+            foreach (Transform snapZone in _initialSnapZones.transform)
+            {
+                if (snapZone.childCount > 0)
+                {
+                    snapZone.GetChild(snapZone.childCount - 1).gameObject.SetActive(false);
+                }
+            }
+
+            foreach (Transform child in _stage1ItemsToStack.transform)
+            {
+                child.gameObject.tag = "FallingObject";
+                child.gameObject.layer = 0;
+                foreach (Transform grandChild in child)
+                {
+                    if (grandChild.TryGetComponent(out DistanceGrabInteractable distanceGrabInteractable))
+                    {
+                        distanceGrabInteractable.enabled = false;
+                    }
+                    if (grandChild.TryGetComponent(out DistanceHandGrabInteractable distanceHandGrabInteractable))
+                    {
+                        distanceHandGrabInteractable.enabled = false;
+                    }
+                }
+            }
             return;
         }
 
@@ -139,38 +163,7 @@ public class StackingController : MonoBehaviour
         }
 
         CrateRopeController.Instance.SetStackedItems(_initialStackedItems, _secondaryStackedItems);
-        StartCoroutine(DisableSecondaryGrabbables());
 
-        // Allow for placing rope on pallet
-        _ropeSnapZone.SetActive(true);
-        if (!FallingObjectsScenarioController.Instance.IsPartTwo()) _stage3Event?.Invoke();
-    }
-
-    private IEnumerator DisableInitialGrabbables()
-    {
-        yield return new WaitForSeconds(_raceConditionWaitTime);
-        foreach (Transform child in _stage1ItemsToStack.transform)
-        {
-            child.gameObject.tag = "FallingObject";
-            child.gameObject.layer = 0;
-            foreach (Transform grandChild in child)
-            {
-                if (grandChild.TryGetComponent(out DistanceGrabInteractable distanceGrabInteractable))
-                {
-                    distanceGrabInteractable.enabled = false;
-                }
-                if (grandChild.TryGetComponent(out DistanceHandGrabInteractable distanceHandGrabInteractable))
-                {
-                    distanceHandGrabInteractable.enabled = false;
-                }
-            }
-        }
-        yield break;
-    }
-
-    private IEnumerator DisableSecondaryGrabbables()
-    {
-        yield return new WaitForSeconds(_raceConditionWaitTime);
         foreach (Transform child in _stage2ItemsToStack.transform)
         {
             child.gameObject.tag = "FallingObject";
@@ -187,7 +180,18 @@ public class StackingController : MonoBehaviour
                 }
             }
         }
-        yield break;
+
+        foreach (Transform snapZone in _secondarySnapZones.transform)
+        {
+            if (snapZone.childCount > 0)
+            {
+                snapZone.GetChild(snapZone.childCount - 1).gameObject.SetActive(false);
+            }
+        }
+
+        // Allow for placing rope on pallet
+        _ropeSnapZone.SetActive(true);
+        if (!FallingObjectsScenarioController.Instance.IsPartTwo()) _stage3Event?.Invoke();
     }
 
     public void DecrementStackedBoxes(GameObject oldStackedItem)
