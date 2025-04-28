@@ -7,15 +7,17 @@ public class HandMenuController : MonoBehaviour
     [SerializeField]
     private GameObject handMenuCanvas;
     [SerializeField]
-    private float threshold = 0.8f;
+    private float lowerThreshold = 140f;
+    private float higherThreshold = 210f;
 
     void Update()
     {
-        Vector3 handPosition = handTransform.up;
+        float zRotation = handTransform.localEulerAngles.z;
 
-        if (handPosition.z > threshold)
+        if (zRotation > lowerThreshold && zRotation < higherThreshold)
         {
             handMenuCanvas.SetActive(true);
+            Debug.Log("Hand menu activated" + zRotation);
         }
         else
         {

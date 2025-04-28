@@ -49353,6 +49353,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8311512083227756748, guid: 82e3e5db7fd0a1c40a0dee96be25c1d5, type: 3}
+      propertyPath: threshold
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311512083227756748, guid: 82e3e5db7fd0a1c40a0dee96be25c1d5, type: 3}
       propertyPath: handTransform
       value: 
       objectReference: {fileID: 748362222}
