@@ -17342,7 +17342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7107078636017153396, guid: a11e85b0f7c0d4e409539ba1e795bac0, type: 3}
       propertyPath: _trackingOriginType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
