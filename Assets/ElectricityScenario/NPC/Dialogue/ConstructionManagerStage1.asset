@@ -18,7 +18,7 @@ MonoBehaviour:
   hasNextButton: 0
   sections:
   - dialogue:
-    - This is stage one of construction manager!
+    - Next time you should come over to me so I can report the electrical issue
     endAfterDialogue: 1
     branchPoint:
       question: 

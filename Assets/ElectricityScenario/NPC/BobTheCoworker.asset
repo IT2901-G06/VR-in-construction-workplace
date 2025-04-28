@@ -17,7 +17,7 @@ MonoBehaviour:
   CharacterModel: {fileID: 919132149155446097, guid: 8e28746bec22d7747b484758390ef5e5, type: 3}
   CharacterAvatar: {fileID: 9000000, guid: 8e28746bec22d7747b484758390ef5e5, type: 3}
   VoicePresetId: 3
-  SpawnPosition: {x: -16, y: 0, z: 5.5}
+  SpawnPosition: {x: -1.694, y: 0, z: 2.418}
   SpawnRotation: {x: 0, y: 0, z: 0}
   ShouldFollow: 1
   ShouldRotateTowardsPlayerWhenStandingStill: 1
