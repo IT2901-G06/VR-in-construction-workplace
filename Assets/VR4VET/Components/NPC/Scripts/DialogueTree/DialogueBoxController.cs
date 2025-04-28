@@ -128,8 +128,10 @@ public class DialogueBoxController : MonoBehaviour
         OnDialogueStarted?.Invoke(name);
         _activatedCount = 0;
         _runDialogueCoroutine = StartCoroutine(RunDialogue(dialogueTree, startSection, name));
-        _exitButton.SetActive(true);
-
+        if (dialogueTree.hasExitButton)
+        {
+            _exitButton.SetActive(true);
+        }
     }
 
     public void OnSpeakEndedHandler(string name)
@@ -172,8 +174,14 @@ public class DialogueBoxController : MonoBehaviour
 
             while (!_skipLineTriggered)
             {
-                _skipLineButton.SetActive(true);
-                _exitButton.SetActive(true);
+                if (dialogueTree.hasNextButton)
+                {
+                    _skipLineButton.SetActive(true);
+                }
+                if (dialogueTree.hasExitButton)
+                {
+                    _exitButton.SetActive(true);
+                }
                 yield return null;
             }
             _skipLineTriggered = false;

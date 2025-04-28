@@ -52,7 +52,7 @@ public class PeterTheExplainer : MonoBehaviour
             _followThePlayerController.StartFollowingRadius = 4;
         }
 
-        _isPartTwo = FallingObjectsScenarioController.Instance.GetPartTwo();
+        _isPartTwo = FallingObjectsScenarioController.Instance.IsPartTwo();
         _partSuffix = "Part" + (!_isPartTwo ? "One" : "Two");
         if (_isPartTwo)
         {
@@ -81,6 +81,8 @@ public class PeterTheExplainer : MonoBehaviour
         }
         else if (name == _peterPrefix + "6PartTwo")
         {
+            Destroy(GameObject.Find("OVRCameraRig"));
+            Destroy(FallingObjectsScenarioController.Instance);
             SceneManager.LoadScene("MainMenu");
         }
 

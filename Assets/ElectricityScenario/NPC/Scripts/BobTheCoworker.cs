@@ -52,21 +52,23 @@ public class BobTheCoworker : MonoBehaviour
         {
             _followThePlayerController.PersonalSpaceFactor = 2;
             _followThePlayerController.StartFollowingRadius = 2;
-        }        
+        }
     }
 
-    public void OnElectricitySparkTrigger()
+    public void OnElectricitySparkTrigger(int runAfterSeconds = 0)
     {
         Debug.Log("Electricity spark triggered");
 
         // Perform Bob The Coworker stage 2
-        PerformBobTheCoworkerStage2();
+        StartCoroutine(PerformBobTheCoworkerStage2(runAfterSeconds));
     }
 
-    private void PerformBobTheCoworkerStage2()
+    private IEnumerator PerformBobTheCoworkerStage2(int runAfterSeconds = 0)
     {
         // Perform Bob The Coworker stage 2
         Debug.Log("Performing Bob The Coworker stage 2");
+
+        yield return new WaitForSeconds(runAfterSeconds);
 
         _conversationController.NextDialogueTree();
 

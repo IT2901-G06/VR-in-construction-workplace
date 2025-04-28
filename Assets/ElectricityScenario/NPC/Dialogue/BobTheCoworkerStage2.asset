@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldTriggerOnProximity: 1
   speakButtonOnExit: 1
+  hasExitButton: 0
+  hasNextButton: 0
   sections:
   - dialogue:
     - Oh no! The electricity seems to have been overloaded. Maybe there is somewhere

@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldTriggerOnProximity: 1
   speakButtonOnExit: 1
+  hasExitButton: 0
+  hasNextButton: 0
   sections:
   - dialogue:
-    - Maybe try grabbing both levers and pulling them at the same time?
+    - Maybe try pressing both the buttons at the same time in order to turn on the
+      electricity?
     endAfterDialogue: 1
     branchPoint:
       question: 
