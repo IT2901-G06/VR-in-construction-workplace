@@ -18,9 +18,3 @@ public class DangerZoneScript : MonoBehaviour
     }
 
 }
-
-
-// fakk rigs, hater det
-// gleder meg til å bli ferdig
-// fyfaen
-// somayeh er ait i guess
