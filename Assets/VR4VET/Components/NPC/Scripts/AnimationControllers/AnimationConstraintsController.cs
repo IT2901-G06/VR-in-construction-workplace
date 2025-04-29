@@ -1,6 +1,5 @@
 using System.IO.Compression;
 using System.Linq;
-using TMPro.Examples;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;

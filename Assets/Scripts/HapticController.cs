@@ -18,12 +18,12 @@ public class HapticController : MonoBehaviour
         else Destroy(this);
     }
 
-    public int GetSingleEventMotorRunTimeMs()
+    public virtual int GetSingleEventMotorRunTimeMs()
     {
         return _singleEventMotorRunTimeMs;
     }
 
-    public int GetFallingObjectsMotorStrength()
+    public virtual int GetFallingObjectsMotorStrength()
     {
         return _fallingObjectsMotorStrength;
     }
@@ -38,7 +38,7 @@ public class HapticController : MonoBehaviour
         return newMotorValues;
     }
 
-    public int RunMotors(MotorEvent bhapticsEvent, int motorStrength, int durationMs)
+    public virtual int RunMotors(MotorEvent bhapticsEvent, int motorStrength, int durationMs)
     {
         return BhapticsLibrary.PlayMotors((int)bhapticsEvent.PositionType, MagnifyMotorStrengths(bhapticsEvent.MotorValues, motorStrength), durationMs);
     }

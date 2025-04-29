@@ -71,7 +71,7 @@ public class NPCSpawner : MonoBehaviour
     {
         // Instantiate the NPC prefab at the defined location
         GameObject newNPC = Instantiate(npcSO.NpcPrefab, npcSO.SpawnPosition, Quaternion.identity);
-        // Rotate the NPC 
+        // Rotate the NPC
         newNPC.transform.Rotate(npcSO.SpawnRotation);
         // Attach the Text-To-Speech componenets
         AttachTTSComponents(newNPC, npcSO.SpatialBlend, npcSO.MinDistance);
@@ -103,7 +103,7 @@ public class NPCSpawner : MonoBehaviour
             // Instantiate the TTS prefab and parent it under the NPC
             GameObject ttsObject = Instantiate(ttsPrefab, npc.transform);
 
-            // Assuming the TTSSpeaker component is either on the TTS prefab 
+            // Assuming the TTSSpeaker component is either on the TTS prefab
             // or one of its children, we find it and set it on the DialogueBoxController
             TTSSpeaker ttsSpeaker = ttsObject.GetComponentInChildren<TTSSpeaker>();
             DialogueBoxController dialogueController = npc.GetComponent<DialogueBoxController>();
