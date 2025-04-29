@@ -1,10 +1,9 @@
 using System.Collections;
-using UnityEngine;
 
 public class SliderController : MonoBehaviour
 {
-    // [Tooltip("Reference to the BNG.Slider component")]
-    // public Slider targetSlider;
+    [Tooltip("Reference to the BNG.Slider component")]
+    public SliderHelper targetSlider;
 
     [Tooltip("Current slider value (0-100)")]
     [SerializeField] private float currentValue;
@@ -23,9 +22,9 @@ public class SliderController : MonoBehaviour
     void Start()
     {
         // If slider wasn't assigned in inspector, try to find it
-        // if (targetSlider == null)
-        // {
-        //     targetSlider = GetComponent<Slider>();
+        if (targetSlider == null)
+        {
+            targetSlider = GetComponent<SliderHelper>();
 
         //     if (targetSlider == null)
         //     {
