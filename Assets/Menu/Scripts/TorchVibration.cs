@@ -1,203 +1,143 @@
-using System.Collections.Generic;
 using UnityEngine;
+
+// Add this at the top of your file outside the class
+public enum FingerType
+{
+    LeftThumb,
+    LeftIndex,
+    LeftMiddle,
+    LeftRing,
+    LeftPinky,
+    RightThumb,
+    RightIndex,
+    RightMiddle,
+    RightRing,
+    RightPinky
+}
 
 public class TorchVibration : MonoBehaviour
 {
+    [Header("References")]
+    public FingerTracker fingerTracker;
+    public GameObject touchTarget;
 
-    public GameObject leftHand;
-    public GameObject rightHand;
-    public GameObject torchFlameArea;
+    [Header("Settings")]
+    public float touchDistance = 0.02f;
+    [Range(1, 10)]
+    public float dropoffRate = 2.5f; // Higher values = faster dropoff
 
-    private List<Collider> createdColliders = new List<Collider>();
+    [Header("Offset Fix")]
+    public Vector3 handPositionOffset = Vector3.zero;
+    public bool useOffsetCorrection = true;
 
-
-    [Header("Colliders")]
-    public Vector3 handColliderSize = new Vector3(0.1f, 0.1f, 0.1f); // Size of the hand colliders
-    public Vector3 handColliderOffset = Vector3.zero; // Offset for the hand colliders
-
-    [Header("Debug")]
-    public bool visualizeColliders = true;
-    public Color colliderColor = Color.red;
-
-    private GameObject leftHandVisualizer;
-    private GameObject rightHandVisualizer;
-
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        AddColliders(); // Add colliders to hands and torch flame area
-        VisualizeHandColliders(); // Visualize the colliders for debugging
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Check for hand collision with the torch flame area
-        CheckHandCollision();
-
+        // Check for touch every frame
+        CheckForTouch();
     }
 
 
-    public void AddColliders()
+    public void CheckForTouch()
     {
-        // Add box colliders if not already present
-        if (leftHand != null && leftHand.GetComponent<Collider>() == null)
-        {
-            BoxCollider leftCollider = leftHand.AddComponent<BoxCollider>();
-            leftCollider.size = handColliderSize;       // Use Vector3 for custom dimensions
-            leftCollider.center = handColliderOffset;   // Set position offset
-            leftCollider.isTrigger = true;
-            createdColliders.Add(leftCollider); // Add to the list of created colliders
-        }
-
-        if (rightHand != null && rightHand.GetComponent<Collider>() == null)
-        {
-            BoxCollider rightCollider = rightHand.AddComponent<BoxCollider>();
-            rightCollider.size = handColliderSize;      // Use Vector3 for custom dimensions
-            rightCollider.center = handColliderOffset;  // Set position offset
-            rightCollider.isTrigger = true;
-            createdColliders.Add(rightCollider); // Add to the list of created colliders
-        }
-
-        // Make sure torch flame is also a trigger
-        if (torchFlameArea != null)
-        {
-            Collider flameCollider = torchFlameArea.GetComponent<Collider>();
-            if (flameCollider != null)
-                flameCollider.isTrigger = true;
-        }
-    }
-
-    public void TriggerLeftHandHaptic()
-    {
-        Debug.Log("Left Hand Haptic Triggered");
-
-        HapticController hapticController = HapticController.Instance;
-
-        if (hapticController != null)
-        {
-            Debug.Log("Haptic Controller is not null");
-
-            int motorStrength = 50;
-            int duration = hapticController.GetSingleEventMotorRunTimeMs();
-
-            // Left hand
-            hapticController.RunMotors(BhapticsEventCollection.GloveFingersLeft, motorStrength, duration);
-            hapticController.RunMotors(BhapticsEventCollection.GlovePalmLeft, motorStrength, duration);
-        }
-        else
-        {
-            Debug.Log("Haptic Controller is null");
-        }
-    }
-
-    public void TriggerRightHandHaptic()
-    {
-        Debug.Log("Right Hand Haptic Triggered");
-
-        HapticController hapticController = HapticController.Instance;
-
-        if (hapticController != null)
-        {
-            Debug.Log("Haptic Controller is not null");
-
-            int motorStrength = 50;
-            int duration = hapticController.GetSingleEventMotorRunTimeMs();
-
-            // Right hand
-            hapticController.RunMotors(BhapticsEventCollection.GloveFingersRight, motorStrength, duration);
-            hapticController.RunMotors(BhapticsEventCollection.GlovePalmRight, motorStrength, duration);
-        }
-        else
-        {
-            Debug.Log("Haptic Controller is null");
-        }
-    }
-
-    public void CheckHandCollision()
-    {
-        if (leftHand.GetComponent<Collider>().bounds.Intersects(torchFlameArea.GetComponent<Collider>().bounds))
-        {
-            TriggerLeftHandHaptic();
-        }
-
-        if (rightHand.GetComponent<Collider>().bounds.Intersects(torchFlameArea.GetComponent<Collider>().bounds))
-        {
-            TriggerRightHandHaptic();
-        }
-    }
-
-    public void VisualizeHandColliders()
-    {
-        // Remove existing visualizers
-        if (leftHandVisualizer != null)
-            Destroy(leftHandVisualizer);
-        if (rightHandVisualizer != null)
-            Destroy(rightHandVisualizer);
-
-        if (!visualizeColliders)
+        if (fingerTracker == null || touchTarget == null)
             return;
 
-        // Create left hand visualizer
-        if (leftHand != null)
-        {
-            Collider collider = leftHand.GetComponent<Collider>();
-            if (collider != null && collider is BoxCollider)
-            {
-                BoxCollider boxCol = collider as BoxCollider;
-                leftHandVisualizer = CreateBoxVisualizer("LeftHandVisual", leftHand, boxCol.size);
-            }
-        }
 
-        // Create right hand visualizer
-        if (rightHand != null)
-        {
-            Collider collider = rightHand.GetComponent<Collider>();
-            if (collider != null && collider is BoxCollider)
-            {
-                BoxCollider boxCol = collider as BoxCollider;
-                rightHandVisualizer = CreateBoxVisualizer("RightHandVisual", rightHand, boxCol.size);
-            }
-        }
+        CheckFingerTouch(fingerTracker.LeftIndexTip, FingerType.LeftIndex);
+        CheckFingerTouch(fingerTracker.LeftMiddleTip, FingerType.LeftMiddle);
+        CheckFingerTouch(fingerTracker.LeftRingTip, FingerType.LeftRing);
+        CheckFingerTouch(fingerTracker.LeftPinkyTip, FingerType.LeftPinky);
+        CheckFingerTouch(fingerTracker.LeftThumbTip, FingerType.LeftThumb);
+        CheckFingerTouch(fingerTracker.RightIndexTip, FingerType.RightIndex);
+        CheckFingerTouch(fingerTracker.RightMiddleTip, FingerType.RightMiddle);
+        CheckFingerTouch(fingerTracker.RightRingTip, FingerType.RightRing);
+        CheckFingerTouch(fingerTracker.RightPinkyTip, FingerType.RightPinky);
+        CheckFingerTouch(fingerTracker.RightThumbTip, FingerType.RightThumb);
     }
 
-    private GameObject CreateBoxVisualizer(string name, GameObject parent, Vector3 size)
+    private void CheckFingerTouch(Transform fingerTip, FingerType fingerType)
     {
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.name = name;
+        if (fingerTip == null || touchTarget == null)
+            return;
 
-        // Remove the collider component (we just want visual)
-        Destroy(cube.GetComponent<Collider>());
+        // Get torch's "up" direction
+        Vector3 torchUpDirection = touchTarget.transform.up;
 
-        // Make it a child of the hand
-        cube.transform.SetParent(parent.transform);
+        // Get vector from torch to finger
+        Vector3 torchToFinger = fingerTip.position - touchTarget.transform.position;
 
-        // Set position to match collider's offset
-        cube.transform.localPosition = handColliderOffset;
+        // Check if finger is "below" the torch
+        float dotProduct = Vector3.Dot(torchUpDirection, torchToFinger);
 
-        // Set size to match collider's dimensions
-        cube.transform.localScale = size;
+        if (dotProduct < 0)
+            return;
 
-        // Set solid color for debugging
-        Renderer renderer = cube.GetComponent<Renderer>();
-        if (renderer != null)
+        float distance = Vector3.Distance(fingerTip.position, touchTarget.transform.position);
+
+        if (distance < touchDistance)
         {
-            Material mat = new Material(Shader.Find("Standard"));
-            mat.color = colliderColor;
-            renderer.material = mat;
+            Debug.Log($"{fingerType} is touching the target!");
+            TriggerHapticEvents(distance, fingerType);
         }
-
-        return cube;
     }
 
-    public void OnDestroy()
+
+    public void TriggerHapticEvents(float fingerDistance, FingerType fingerType)
     {
-        // Clean up only the colliders we created
-        foreach (var collider in createdColliders)
+        HapticController hapticController = HapticController.Instance;
+
+        if (hapticController == null)
         {
-            if (collider != null)
-                Destroy(collider);
+            Debug.LogError("No HapticController found!");
+            return;
         }
-        createdColliders.Clear();
+
+        // Calculate the strength based on the distance to the target using a power function
+        float normalizedDistance = 1 - (fingerDistance / touchDistance);
+        float motorStrength = Mathf.Clamp01(Mathf.Pow(normalizedDistance, dropoffRate)) * 35f;
+
+        // Select the appropriate motor based on finger type
+        MotorEvent motorId = GetMotorIdForFinger(fingerType);
+
+        // Run the appropriate motor
+        hapticController.RunMotors(motorId, Mathf.RoundToInt(motorStrength), 200);
     }
 
+    private MotorEvent GetMotorIdForFinger(FingerType fingerType)
+    {
+        switch (fingerType)
+        {
+            case FingerType.LeftThumb:
+                return BhapticsEventCollection.ThumbLeft;
+            case FingerType.LeftIndex:
+                return BhapticsEventCollection.IndexFingerLeft;
+            case FingerType.LeftMiddle:
+                return BhapticsEventCollection.MiddleFingerLeft;
+            case FingerType.LeftRing:
+                return BhapticsEventCollection.RingFingerLeft;
+            case FingerType.LeftPinky:
+                return BhapticsEventCollection.PinkyFingerLeft;
+            case FingerType.RightThumb:
+                return BhapticsEventCollection.ThumbRight;
+            case FingerType.RightIndex:
+                return BhapticsEventCollection.IndexFingerRight;
+            case FingerType.RightMiddle:
+                return BhapticsEventCollection.MiddleFingerRight;
+            case FingerType.RightRing:
+                return BhapticsEventCollection.RingFingerRight;
+            case FingerType.RightPinky:
+                return BhapticsEventCollection.PinkyFingerRight;
+
+            // Add other cases for right hand fingers
+            default:
+                return BhapticsEventCollection.IndexFingerLeft;
+        }
+    }
 }
