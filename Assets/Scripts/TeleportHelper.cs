@@ -1,37 +1,35 @@
+using System.Collections;
 using UnityEngine;
 
 public class TeleportHelper : MonoBehaviour
 {
-    private OVRCameraRig _cameraRig;
+    [SerializeField] private bool _teleportToInitialPositionOnLoad = true;
+    [SerializeField] private Vector3 _initialPosition;
 
-    public static TeleportHelper Instance { get; private set; }
-
-    private void Awake()
+    public void Start()
     {
-        if (Instance == null)
+        if (_teleportToInitialPositionOnLoad)
         {
-            Instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
-
-    void Start()
-    {
-        _cameraRig = GetComponent<OVRCameraRig>();
-        if (_cameraRig == null)
-        {
-            Debug.LogError("OVRCameraRig component not found on this GameObject.");
+            StartCoroutine(TeleportToInitialPosition());
         }
     }
 
     public void Teleport(Vector3 targetPosition)
     {
-        Vector3 headLocalPosition = _cameraRig.centerEyeAnchor.localPosition;
+        if (!TryGetComponent<OVRCameraRig>(out var cameraRig))
+        {
+            Debug.LogError("OVRCameraRig component not found on TeleportHelper.");
+            return;
+        }
+
+        Vector3 headLocalPosition = cameraRig.centerEyeAnchor.localPosition;
         Vector3 newRigPosition = targetPosition - new Vector3(headLocalPosition.x, 0, headLocalPosition.z);
-        _cameraRig.transform.position = newRigPosition;
+        cameraRig.transform.position = newRigPosition;
+    }
+
+    public IEnumerator TeleportToInitialPosition()
+    {
+        yield return null; // wait one frame
+        Teleport(_initialPosition);
     }
 }
