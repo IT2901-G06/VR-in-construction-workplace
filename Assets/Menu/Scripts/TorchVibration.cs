@@ -23,8 +23,6 @@ public class TorchVibration : MonoBehaviour
 
     [Header("Settings")]
     public float touchDistance = 0.02f;
-    [Range(1, 10)]
-    public float dropoffRate = 2.5f; // Higher values = faster dropoff
 
     [Header("Offset Fix")]
     public Vector3 handPositionOffset = Vector3.zero;
@@ -99,9 +97,8 @@ public class TorchVibration : MonoBehaviour
             return;
         }
 
-        // Calculate the strength based on the distance to the target using a power function
-        float normalizedDistance = 1 - (fingerDistance / touchDistance);
-        float motorStrength = Mathf.Clamp01(Mathf.Pow(normalizedDistance, dropoffRate)) * 35f;
+        // Calculate the strength based on the distance to the target
+        float motorStrength = Mathf.Clamp01(1 - (fingerDistance / touchDistance)) * 35f;
 
         // Select the appropriate motor based on finger type
         MotorEvent motorId = GetMotorIdForFinger(fingerType);
