@@ -1,12 +1,15 @@
 {
-    "name": "Tests",
+    "name": "PlayMode",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "ElectricityScripts",
         "FallingObjectsScripts",
-        "CommonScripts"
+        "Meta.WitAi.TTS",
+        "Unity.TextMeshPro",
+        "CommonScripts",
+        "Oculus.Interaction",
+        "Data"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

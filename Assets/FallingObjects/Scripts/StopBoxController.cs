@@ -38,7 +38,7 @@ public class StopBoxController : MonoBehaviour
         _withinRange = withinRange;
     }
 
-    public void LookedUp()
+    public virtual void LookedUp()
     {
         Debug.Log("Looked up! | Crane at top: " + _craneAtTop + " | Bad rope attached: " + (_ropeAttached == "Bad") + " | Player within range: " + _withinRange);
 

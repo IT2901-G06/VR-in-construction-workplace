@@ -91,7 +91,7 @@ public class DeathManager : MonoBehaviour
         }
     }
 
-    public void Kill()
+    public virtual void Kill()
     {
         if (_isDead || FadeEffect.Instance == null) return;
 
