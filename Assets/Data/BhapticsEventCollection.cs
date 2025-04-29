@@ -103,6 +103,13 @@ public class BhapticsEventCollection
         0, 0, 0, 1,
         0, 0, 0, 1,
     });
+
+    public static MotorEvent AllLeft = new(PositionType.GloveL, new int[] {
+        1, 1, 1, 1, 1, 1,
+    });
+    public static MotorEvent AllRight = new(PositionType.GloveL, new int[] {
+        1, 1, 1, 1, 1, 1,
+    });
     public static MotorEvent GloveFingersLeft = new(PositionType.GloveL, new int[] {
         1, 1, 1, 1, 1, 0,
     });

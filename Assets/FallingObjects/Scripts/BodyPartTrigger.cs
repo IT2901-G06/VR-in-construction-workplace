@@ -16,23 +16,21 @@ public class BodyPartTrigger : MonoBehaviour
         Back,
         Left,
         Right,
-        Head
+        Head,
+        LeftHand,
+        RightHand
     }
 
     private Vector3 _initialCenter;
     private float _initialRigY;
     private Oculus.Interaction.Locomotion.CharacterController _cameraCharController;
 
-    void Awake()
+    void Start()
     {
         if (_position == TriggerPositionType.Head)
         {
             _percentOfHeightToFill = 1 - _percentOfPlayerHeightForBody;
         }
-    }
-
-    void Start()
-    {
         _initialCenter = GetComponent<BoxCollider>().center;
         _initialRigY = GameObject.FindGameObjectWithTag("Player").transform.position.y / 2;
         _cameraCharController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Oculus.Interaction.Locomotion.CharacterController>();
@@ -40,6 +38,8 @@ public class BodyPartTrigger : MonoBehaviour
 
     void Update()
     {
+        if (_position == TriggerPositionType.LeftHand || _position == TriggerPositionType.RightHand) return;
+
         float newHeight = (_cameraCharController.transform.position.y + _initialRigY) * _percentOfHeightToFill;
         Vector3 currentSize = GetComponent<BoxCollider>().size;
         GetComponent<BoxCollider>().size = new(currentSize.x, newHeight, currentSize.z);
@@ -58,7 +58,18 @@ public class BodyPartTrigger : MonoBehaviour
         {
             HapticController hapticController = HapticController.Instance;
 
-            hapticController.RunMotors(BhapticsEventCollection.VestAll, hapticController.GetFallingObjectsMotorStrength(), hapticController.GetSingleEventMotorRunTimeMs());
+            MotorEvent motorEvent = BhapticsEventCollection.VestAll;
+            switch (_position)
+            {
+                case TriggerPositionType.LeftHand:
+                    motorEvent = BhapticsEventCollection.AllLeft;
+                    break;
+                case TriggerPositionType.RightHand:
+                    motorEvent = BhapticsEventCollection.AllRight;
+                    break;
+            }
+
+            hapticController.RunMotors(motorEvent, hapticController.GetFallingObjectsMotorStrength(), hapticController.GetSingleEventMotorRunTimeMs());
             Debug.Log(_position + ": " + hapticController.GetFallingObjectsMotorStrength());
             DeathManager.Instance.Kill();
         }
