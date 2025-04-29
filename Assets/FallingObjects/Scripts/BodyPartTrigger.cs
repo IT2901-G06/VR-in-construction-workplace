@@ -32,8 +32,8 @@ public class BodyPartTrigger : MonoBehaviour
             _percentOfHeightToFill = 1 - _percentOfPlayerHeightForBody;
         }
         _initialCenter = GetComponent<BoxCollider>().center;
-        _initialRigY = GameObject.FindGameObjectWithTag("Player").transform.position.y / 2;
-        _cameraCharController = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Oculus.Interaction.Locomotion.CharacterController>();
+        _initialRigY = GameObject.Find("PlayerController").transform.position.y / 2;
+        _cameraCharController = GameObject.Find("PlayerController").GetComponent<Oculus.Interaction.Locomotion.CharacterController>();
     }
 
     void Update()
