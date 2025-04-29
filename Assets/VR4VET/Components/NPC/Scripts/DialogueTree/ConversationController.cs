@@ -83,7 +83,7 @@ public class ConversationController : MonoBehaviour
             //_dialogueBoxController.startSpeakCanvas(_dialogueTree);
             _oldDialogueTree = _dialogueTree;
             if (_dialogueTree != null) {
-                _dialogueBoxController.StartDialogue(_dialogueTree, 0, "NPC");
+                _dialogueBoxController.StartDialogue(_dialogueTree, 0, _dialogueTree.name);
             } else {
                 // Commented out because not all NPC's should have a dialogue tree, therefor not an error
 
@@ -102,7 +102,7 @@ public class ConversationController : MonoBehaviour
             // Change the old tree to be the current tree, to ensure no repeats
             _oldDialogueTree = _dialogueTree;
             if (_dialogueTree != null) {
-                _dialogueBoxController.StartDialogue(_dialogueTree, 0, "NPC");
+                _dialogueBoxController.StartDialogue(_dialogueTree, 0, _dialogueTree.name);
             } else {
                 Debug.LogError("The dialogueTree of the NPC is null");
             }
@@ -116,7 +116,7 @@ public class ConversationController : MonoBehaviour
     /// </summary>
     public void DialogueTriggerAbsolute() {
         if (_dialogueTree != null) {
-            _dialogueBoxController.StartDialogue(_dialogueTree, 0, "NPC");
+            _dialogueBoxController.StartDialogue(_dialogueTree, 0, _dialogueTree.name);
         } else {
             Debug.LogError("The dialogueTree of the NPC is null");
         }
@@ -131,7 +131,7 @@ public class ConversationController : MonoBehaviour
     /// </summary>
     public void CommentTrigger(int section = 0) {
         if (_dialogueTree != null) {
-            _dialogueBoxController.StartComment(_dialogueTree,  section, "NPC");
+            _dialogueBoxController.StartComment(_dialogueTree,  section, _dialogueTree.name);
         } else {
             Debug.LogError("The dialogueTree of the NPC is null (COMMENT)");
         }
