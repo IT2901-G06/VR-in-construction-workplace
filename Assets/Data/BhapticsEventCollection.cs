@@ -107,7 +107,7 @@ public class BhapticsEventCollection
     public static MotorEvent AllLeft = new(PositionType.GloveL, new int[] {
         1, 1, 1, 1, 1, 1,
     });
-    public static MotorEvent AllRight = new(PositionType.GloveL, new int[] {
+    public static MotorEvent AllRight = new(PositionType.GloveR, new int[] {
         1, 1, 1, 1, 1, 1,
     });
     public static MotorEvent GloveFingersLeft = new(PositionType.GloveL, new int[] {
