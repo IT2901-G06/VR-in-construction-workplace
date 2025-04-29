@@ -87,7 +87,7 @@ public class PeterTheExplainer : MonoBehaviour
 
         if (_isPartTwo) return;
 
-        if (name == "NPC")
+        if (name == _peterPrefix + "1_1" + _partSuffix)
         {
             _conversationController.NextDialogueTree();
             _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, _peterPrefix + "1_2PartOne");
