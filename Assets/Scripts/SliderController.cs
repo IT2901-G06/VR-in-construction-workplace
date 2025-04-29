@@ -1,11 +1,10 @@
-using UnityEngine;
 using System.Collections;
-using BNG; // Import the BNG namespace to access Slider
+using UnityEngine;
 
 public class SliderController : MonoBehaviour
 {
-    [Tooltip("Reference to the BNG.Slider component")]
-    public Slider targetSlider;
+    // [Tooltip("Reference to the BNG.Slider component")]
+    // public Slider targetSlider;
 
     [Tooltip("Current slider value (0-100)")]
     [SerializeField] private float currentValue;
@@ -24,26 +23,26 @@ public class SliderController : MonoBehaviour
     void Start()
     {
         // If slider wasn't assigned in inspector, try to find it
-        if (targetSlider == null)
-        {
-            targetSlider = GetComponent<Slider>();
+        // if (targetSlider == null)
+        // {
+        //     targetSlider = GetComponent<Slider>();
 
-            if (targetSlider == null)
-            {
-                Debug.LogWarning("No Slider component assigned or found. SliderController won't function.");
-                return;
-            }
-        }
+        //     if (targetSlider == null)
+        //     {
+        //         Debug.LogWarning("No Slider component assigned or found. SliderController won't function.");
+        //         return;
+        //     }
+        // }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (targetSlider != null)
-        {
-            // Get the current slider value
-            currentValue = targetSlider.SlidePercentage;
-        }
+        // if (targetSlider != null)
+        // {
+        //     // Get the current slider value
+        //     currentValue = targetSlider.SlidePercentage;
+        // }
     }
 
     // Method that can be called by Slider's onSliderChange event
@@ -67,38 +66,38 @@ public class SliderController : MonoBehaviour
     // Set the slider to a specific value (0-100)
     public void SetSliderValue(float targetValue)
     {
-        if (targetSlider == null) return;
+        // if (targetSlider == null) return;
 
-        // Get the ConfigurableJoint that controls the slider's movement
-        ConfigurableJoint joint = targetSlider.GetComponent<ConfigurableJoint>();
-        if (joint == null)
-        {
-            Debug.LogWarning("Slider has no ConfigurableJoint - cannot set position");
-            return;
-        }
+        // // Get the ConfigurableJoint that controls the slider's movement
+        // ConfigurableJoint joint = targetSlider.GetComponent<ConfigurableJoint>();
+        // if (joint == null)
+        // {
+        //     Debug.LogWarning("Slider has no ConfigurableJoint - cannot set position");
+        //     return;
+        // }
 
-        // Calculate the target local position based on the desired percentage
-        float slideRange = joint.linearLimit.limit * 2; // Total movement range
-        float minPosition = -joint.linearLimit.limit;   // Leftmost position
+        // // Calculate the target local position based on the desired percentage
+        // float slideRange = joint.linearLimit.limit * 2; // Total movement range
+        // float minPosition = -joint.linearLimit.limit;   // Leftmost position
 
-        // Convert percentage (0-100) to position
-        float normalizedValue = Mathf.Clamp01(targetValue / 100f);
-        float targetPosition = minPosition + (normalizedValue * slideRange);
+        // // Convert percentage (0-100) to position
+        // float normalizedValue = Mathf.Clamp01(targetValue / 100f);
+        // float targetPosition = minPosition + (normalizedValue * slideRange);
 
-        // Set the position
-        Vector3 newLocalPosition = targetSlider.transform.localPosition;
-        newLocalPosition.x = targetPosition;
+        // // Set the position
+        // Vector3 newLocalPosition = targetSlider.transform.localPosition;
+        // newLocalPosition.x = targetPosition;
 
-        // Set the physical position of the slider
-        targetSlider.transform.localPosition = newLocalPosition;
+        // // Set the physical position of the slider
+        // targetSlider.transform.localPosition = newLocalPosition;
 
-        // If there's a Rigidbody, reset its velocity
-        Rigidbody rb = targetSlider.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
+        // // If there's a Rigidbody, reset its velocity
+        // Rigidbody rb = targetSlider.GetComponent<Rigidbody>();
+        // if (rb != null)
+        // {
+        //     rb.linearVelocity = Vector3.zero;
+        //     rb.angularVelocity = Vector3.zero;
+        // }
     }
 
     // Reset the slider to zero after a delay

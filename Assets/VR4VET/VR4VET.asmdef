@@ -1,0 +1,25 @@
+{
+    "name": "VR4VET",
+    "rootNamespace": "",
+    "references": [
+        "GUID:831409e8f9d13b5479a3baef9822ad34",
+        "GUID:d62e4537d6f8ca64c8d2affe565a5cd1",
+        "GUID:fe685ec1767f73d42b749ea8045bfe43",
+        "GUID:57c32fc907df0f54e8e6e8f0d2488336",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:dc960734dc080426fa6612f1c5fe95f3",
+        "GUID:7f7d1af65c2641843945d409d28f2e20",
+        "GUID:8bbcefc153e1f1b4a98680670797dd16",
+        "GUID:1c28d8b71ced07540b7c271537363cc6",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

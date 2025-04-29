@@ -1,0 +1,17 @@
+{
+    "name": "MenuScripts",
+    "rootNamespace": "",
+    "references": [
+        "GUID:700e0bc10bfc947a086a592c54f6aaea",
+        "GUID:50872f4f3a34842d78062bc4043dbe36"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

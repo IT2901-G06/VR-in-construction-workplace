@@ -154,7 +154,6 @@ public class DeathManager : MonoBehaviour
         {
             // Debug with player position
             Debug.Log("Respawning player at initial position: " + _initialPlayerPosition);
-            TeleportHelper.Instance.Teleport(_initialPlayerPosition);
         }
 
         FadeEffect.Instance.Fade(_isDead, _fadeDelay);
