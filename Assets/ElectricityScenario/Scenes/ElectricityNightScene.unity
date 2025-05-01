@@ -49700,7 +49700,7 @@ PrefabInstance:
       objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 7107078636017153396, guid: a11e85b0f7c0d4e409539ba1e795bac0, type: 3}
       propertyPath: _trackingOriginType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7528383365211471377, guid: a11e85b0f7c0d4e409539ba1e795bac0, type: 3}
       propertyPath: m_Pivot.x
