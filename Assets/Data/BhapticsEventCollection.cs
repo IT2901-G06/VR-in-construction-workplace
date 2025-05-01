@@ -130,4 +130,36 @@ public class BhapticsEventCollection
     public static MotorEvent IndexFingerRight = new(PositionType.GloveR, new int[] {
         0, 1, 0, 0, 0, 0,
     });
+
+    public static MotorEvent MiddleFingerLeft = new(PositionType.GloveL, new int[] {
+        0, 0, 1, 0, 0, 0,
+    });
+
+    public static MotorEvent MiddleFingerRight = new(PositionType.GloveR, new int[] {
+        0, 0, 1, 0, 0, 0,
+    });
+
+    public static MotorEvent RingFingerLeft = new(PositionType.GloveL, new int[] {
+        0, 0, 0, 1, 0, 0,
+    });
+
+    public static MotorEvent RingFingerRight = new(PositionType.GloveR, new int[] {
+        0, 0, 0, 1, 0, 0,
+    });
+
+    public static MotorEvent PinkyFingerLeft = new(PositionType.GloveL, new int[] {
+        0, 0, 0, 0, 1, 0,
+    });
+
+    public static MotorEvent PinkyFingerRight = new(PositionType.GloveR, new int[] {
+        0, 0, 0, 0, 1, 0,
+    });
+
+    public static MotorEvent ThumbLeft = new(PositionType.GloveL, new int[] {
+        1, 0, 0, 0, 0, 0,
+    });
+
+    public static MotorEvent ThumbRight = new(PositionType.GloveR, new int[] {
+        1, 0, 0, 0, 0, 0,
+    });
 }

@@ -57,6 +57,7 @@ public class PeterTheExplainer : MonoBehaviour
         {
             _conversationController.SetDialogueTreeList(FallingObjectsScenarioController.Instance.GetDialogueTrees());
         }
+        _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, _conversationController.GetActiveDialogueTree().name);
     }
 
     public void ExecuteDialogueStage(int number)

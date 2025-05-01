@@ -63,7 +63,7 @@ public class FadeEffect : MonoBehaviour
         float remainingTime = fadeDelay * Mathf.Abs(endAlpha - startAlpha);
 
         // Get initial alpha
-        // float startTextAlpha = _text.color.a;
+        float startTextAlpha = _text.color.a;
 
         float elapsedTime = 0;
         while (elapsedTime < fadeDelay)
@@ -72,24 +72,23 @@ public class FadeEffect : MonoBehaviour
             float tempVal = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / remainingTime);
             _material.SetFloat("_Alpha", tempVal);
 
-            // float textDelay = fadeDelay * 0.05f;
-            // float textT = Mathf.InverseLerp(textDelay, fadeDelay, elapsedTime);
-            // textT = Mathf.Clamp01(textT);
+            float textDelay = fadeDelay * 0.05f;
+            float textT = Mathf.InverseLerp(textDelay, fadeDelay, elapsedTime);
+            textT = Mathf.Clamp01(textT);
 
-
-            // var icolor = _text.color;
-            // float newAlpha = Mathf.Lerp(startTextAlpha, endAlpha, textT);
-            // icolor.a = newAlpha;
-            // _text.color = icolor;
+            var icolor = _text.color;
+            float newAlpha = Mathf.Lerp(startTextAlpha, endAlpha, textT);
+            icolor.a = newAlpha;
+            _text.color = icolor;
 
             yield return null;
         }
 
         _material.SetFloat("_Alpha", endAlpha);
 
-        // var text = _text;
-        // var color = text.color;
-        // text.color = new Color(color.r, color.g, color.b, endAlpha);
+        var text = _text;
+        var color = text.color;
+        text.color = new Color(color.r, color.g, color.b, endAlpha);
 
         OnFadeComplete?.Invoke();
     }
