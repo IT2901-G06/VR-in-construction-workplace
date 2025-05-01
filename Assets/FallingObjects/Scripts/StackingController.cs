@@ -14,7 +14,7 @@ public class StackingController : MonoBehaviour
     private int _amtInitialStackableItems = 3;
 
     [SerializeField]
-    private int _amtSecondaryStackableItems = 2;
+    private int _amtSecondaryStackableItems = 3;
 
     [SerializeField]
     [Range(0, 1)]
@@ -65,6 +65,16 @@ public class StackingController : MonoBehaviour
 
 
     public static StackingController Instance;
+
+    public int AmtInitialStackableItems { get => _amtInitialStackableItems; set => _amtInitialStackableItems = value; }
+    public int AmtSecondaryStackableItems { get => _amtSecondaryStackableItems; set => _amtSecondaryStackableItems = value; }
+    public List<GameObject> InitialStackedItems { get => _initialStackedItems; set => _initialStackedItems = value; }
+    public List<GameObject> SecondaryStackedItems { get => _secondaryStackedItems; set => _secondaryStackedItems = value; }
+    public int Stage { get => _stage; set => _stage = value; }
+    public GameObject InitialSnapZones { get => _initialSnapZones; set => _initialSnapZones = value; }
+    public GameObject SecondarySnapZones { get => _secondarySnapZones; set => _secondarySnapZones = value; }
+    public GameObject Stage1ItemsToStack { get => _stage1ItemsToStack; set => _stage1ItemsToStack = value; }
+    public GameObject Stage2ItemsToStack { get => _stage2ItemsToStack; set => _stage2ItemsToStack = value; }
 
     void Awake()
     {

@@ -1,15 +1,9 @@
 {
-    "name": "PlayMode",
+    "name": "MainMenu.EditMode",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
-        "FallingObjectsScripts",
-        "Meta.WitAi.TTS",
-        "Unity.TextMeshPro",
-        "CommonScripts",
-        "Oculus.Interaction",
-        "Data"
+        "UnityEditor.TestRunner"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

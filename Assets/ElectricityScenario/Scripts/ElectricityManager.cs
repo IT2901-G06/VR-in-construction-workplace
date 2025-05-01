@@ -20,7 +20,7 @@ public class ElectricityManager : MonoBehaviour
     [SerializeField] private UnityEvent _onElectricityStopping;
     [SerializeField] private UnityEvent _onElectricityStopped;
 
-    private bool _electricityIsOn = false;
+    protected bool _electricityIsOn = false;
 
     private readonly List<int> _bhapticsRequestIds = new();
     private Coroutine _stopElectricityCoroutine;
@@ -28,19 +28,28 @@ public class ElectricityManager : MonoBehaviour
     private Transform _leftHandPressed;
     private Transform _rightHandPressed;
 
-    private bool IsLeftHandSelected()
+    public void SetRequiresBothHands(bool requiresBothHands) {
+        _requiresBothHands = requiresBothHands;
+    }
+
+    public bool IsElectricityOn()
+    {
+        return _electricityIsOn;
+    }
+
+    public bool IsLeftHandSelected()
     {
         return _leftHandPressed != null;
     }
-    private bool IsRightHandSelected()
+    public bool IsRightHandSelected()
     {
         return _rightHandPressed != null;
     }
-    private bool HasPressedTwoOfSameDirection()
+    public bool HasPressedTwoOfSameDirection()
     {
         return _leftHandPressed != null && _leftHandPressed.tag.Length > 0 && _leftHandPressed.CompareTag(_rightHandPressed.tag);
     }
-    private bool IsRightToLeft()
+    public bool IsRightToLeft()
     {
         return IsElectricityFromSource(_rightHandPressed) && !IsElectricityFromSource(_leftHandPressed);
     }
@@ -104,7 +113,7 @@ public class ElectricityManager : MonoBehaviour
         Debug.Log("Player killed after delay");
     }
 
-    private IEnumerator StartElectricitySequence(bool reverse = false)
+    public virtual IEnumerator StartElectricitySequence(bool reverse = false)
     {
         HapticController hapticController = HapticController.Instance;
 
@@ -113,7 +122,6 @@ public class ElectricityManager : MonoBehaviour
         _electricityIsOn = true;
 
         MotorEvent[] events = reverse ? ElectricityEventSequence.EventSteps.Reverse().ToArray() : ElectricityEventSequence.EventSteps;
-        Debug.Log("walla " + events.Count() + "");
 
         foreach (MotorEvent motorEvent in events)
         {
@@ -132,7 +140,7 @@ public class ElectricityManager : MonoBehaviour
         StartCoroutine(KillAfterDelay(0.5f));
     }
 
-    private IEnumerator StopElectricitySequence()
+    public virtual IEnumerator StopElectricitySequence()
     {
         yield return new WaitForSeconds(4f);
 
