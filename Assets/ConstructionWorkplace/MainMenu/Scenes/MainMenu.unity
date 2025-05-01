@@ -3418,6 +3418,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1441518870}
     m_Modifications:
+    - target: {fileID: 7597927799449061387, guid: 0f50f6c994c01194195f0b739e15686d, type: 3}
+      propertyPath: m_Name
+      value: BlockYellow (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 1000011531534662, guid: 209226fec07ec64479cb679ca33e0425, type: 3}
       propertyPath: m_Name
       value: scp_cy_fence (51)
@@ -3465,10 +3469,6 @@ PrefabInstance:
     - target: {fileID: 4000012872891332, guid: 209226fec07ec64479cb679ca33e0425, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7597927799449061387, guid: 0f50f6c994c01194195f0b739e15686d, type: 3}
-      propertyPath: m_Name
-      value: BlockYellow (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16305,7 +16305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7107078636017153396, guid: a11e85b0f7c0d4e409539ba1e795bac0, type: 3}
       propertyPath: _trackingOriginType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8235558845949018162, guid: a11e85b0f7c0d4e409539ba1e795bac0, type: 3}
       propertyPath: m_LocalPosition.x
