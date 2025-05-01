@@ -15,7 +15,7 @@ public enum FingerType
     RightPinky
 }
 
-public class TorchVibration : MonoBehaviour
+public class FingerTouchHaptics : MonoBehaviour
 {
     [Header("References")]
     public FingerTracker fingerTracker;
@@ -27,12 +27,6 @@ public class TorchVibration : MonoBehaviour
     [Header("Offset Fix")]
     public Vector3 handPositionOffset = Vector3.zero;
     public bool useOffsetCorrection = true;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -109,32 +103,20 @@ public class TorchVibration : MonoBehaviour
 
     private MotorEvent GetMotorIdForFinger(FingerType fingerType)
     {
-        switch (fingerType)
+        return fingerType switch
         {
-            case FingerType.LeftThumb:
-                return BhapticsEventCollection.ThumbLeft;
-            case FingerType.LeftIndex:
-                return BhapticsEventCollection.IndexFingerLeft;
-            case FingerType.LeftMiddle:
-                return BhapticsEventCollection.MiddleFingerLeft;
-            case FingerType.LeftRing:
-                return BhapticsEventCollection.RingFingerLeft;
-            case FingerType.LeftPinky:
-                return BhapticsEventCollection.PinkyFingerLeft;
-            case FingerType.RightThumb:
-                return BhapticsEventCollection.ThumbRight;
-            case FingerType.RightIndex:
-                return BhapticsEventCollection.IndexFingerRight;
-            case FingerType.RightMiddle:
-                return BhapticsEventCollection.MiddleFingerRight;
-            case FingerType.RightRing:
-                return BhapticsEventCollection.RingFingerRight;
-            case FingerType.RightPinky:
-                return BhapticsEventCollection.PinkyFingerRight;
-
+            FingerType.LeftThumb => BhapticsEventCollection.ThumbLeft,
+            FingerType.LeftIndex => BhapticsEventCollection.IndexFingerLeft,
+            FingerType.LeftMiddle => BhapticsEventCollection.MiddleFingerLeft,
+            FingerType.LeftRing => BhapticsEventCollection.RingFingerLeft,
+            FingerType.LeftPinky => BhapticsEventCollection.PinkyFingerLeft,
+            FingerType.RightThumb => BhapticsEventCollection.ThumbRight,
+            FingerType.RightIndex => BhapticsEventCollection.IndexFingerRight,
+            FingerType.RightMiddle => BhapticsEventCollection.MiddleFingerRight,
+            FingerType.RightRing => BhapticsEventCollection.RingFingerRight,
+            FingerType.RightPinky => BhapticsEventCollection.PinkyFingerRight,
             // Add other cases for right hand fingers
-            default:
-                return BhapticsEventCollection.IndexFingerLeft;
-        }
+            _ => BhapticsEventCollection.IndexFingerLeft,
+        };
     }
 }
