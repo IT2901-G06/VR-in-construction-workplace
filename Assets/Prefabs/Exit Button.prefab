@@ -275,9 +275,9 @@ MonoBehaviour:
   _interactableView: {fileID: 6388559109958756175}
   _renderer: {fileID: 1993963392939303818}
   _normalColor: {r: 0.18431371, g: 0.55080587, b: 1, a: 1}
-  _hoverColor: {r: 1, g: 1, b: 1, a: 1}
-  _selectColor: {r: 0.16142549, g: 0.38717166, b: 0.66666657, a: 1}
-  _disabledColor: {r: 0, g: 0, b: 0, a: 1}
+  _hoverColor: {r: 0.18431371, g: 0.55080587, b: 1, a: 1}
+  _selectColor: {r: 0.16153437, g: 0.36885396, b: 0.6226415, a: 1}
+  _disabledColor: {r: 0.06505874, g: 0.17938435, b: 0.3207547, a: 1}
 --- !u!1 &2214428051334850173
 GameObject:
   m_ObjectHideFlags: 0
