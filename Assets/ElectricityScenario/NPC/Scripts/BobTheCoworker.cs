@@ -8,6 +8,9 @@ public class BobTheCoworker : MonoBehaviour
     [SerializeField] private GameObject _player;
     [HideInInspector] private NPCSpawner _npcSpawner;
 
+    [SerializeField]
+    private List<DialogueTree> _stage2DialogueTrees;
+
     private GameObject _npc;
     private FollowThePlayerController _followThePlayerController;
     private ConversationController _conversationController;
@@ -48,6 +51,12 @@ public class BobTheCoworker : MonoBehaviour
         _dialogueBoxController = _npc.GetComponentInChildren<DialogueBoxController>();
         _conversationController = _npc.GetComponentInChildren<ConversationController>();
         _waypointWalker = _npc.GetComponentInChildren<WaypointWalker>();
+
+        if (ElectricityScenarioManager.Instance.IsPartTwo())
+        {
+            _conversationController.SetDialogueTreeList(_stage2DialogueTrees);
+        }
+
         if (_followThePlayerController != null)
         {
             _followThePlayerController.PersonalSpaceFactor = 2;
@@ -73,7 +82,8 @@ public class BobTheCoworker : MonoBehaviour
         _conversationController.NextDialogueTree();
 
         DialogueTree activeDialogueTree = _conversationController.GetActiveDialogueTree();
-        _dialogueBoxController.StartDialogue(activeDialogueTree, 0, "BobTheCoworkerStage2");
+        string dialogueName = ElectricityScenarioManager.Instance.IsPartTwo() ? "BobTheCoworkerPart2Stage2" : "BobTheCoworkerStage2";
+        _dialogueBoxController.StartDialogue(activeDialogueTree, 0, dialogueName);
         _conversationController.AddOldDialogueTree(activeDialogueTree);
     }
 
@@ -95,6 +105,11 @@ public class BobTheCoworker : MonoBehaviour
 
             _npcSpawner.SetWaypointWalkingBehavior(_npc, true, waypoints, false);
             _waypointWalker.OnFinalDestinationReached.AddListener(OnFinalDestinationReached);
+        }
+        else if (name == "BobTheCoworkerPart2Stage2")
+        {
+            _followThePlayerController.ShouldFollow = false;
+            GameObject.Find("NPCSpawner").GetComponent<NPCSpawner>().GetComponent<ConstructionManager>().StartPart2Stage1();
         }
     }
 

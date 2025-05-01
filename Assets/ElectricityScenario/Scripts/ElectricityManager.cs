@@ -25,37 +25,37 @@ public class ElectricityManager : MonoBehaviour
     private readonly List<int> _bhapticsRequestIds = new();
     private Coroutine _stopElectricityCoroutine;
 
-    private Transform _leftHandGrabbed;
-    private Transform _rightHandGrabbed;
+    private Transform _leftHandPressed;
+    private Transform _rightHandPressed;
 
     private bool IsLeftHandSelected()
     {
-        return _leftHandGrabbed != null;
+        return _leftHandPressed != null;
     }
     private bool IsRightHandSelected()
     {
-        return _rightHandGrabbed != null;
+        return _rightHandPressed != null;
     }
-    private bool HasGrabbedTwoOfSameDirection()
+    private bool HasPressedTwoOfSameDirection()
     {
-        return _leftHandGrabbed != null && _leftHandGrabbed.tag.Length > 0 && _leftHandGrabbed.CompareTag(_rightHandGrabbed.tag);
+        return _leftHandPressed != null && _leftHandPressed.tag.Length > 0 && _leftHandPressed.CompareTag(_rightHandPressed.tag);
     }
     private bool IsRightToLeft()
     {
-        return IsElectricityFromSource(_rightHandGrabbed) && !IsElectricityFromSource(_leftHandGrabbed);
+        return IsElectricityFromSource(_rightHandPressed) && !IsElectricityFromSource(_leftHandPressed);
     }
 
-    public void OnGrabFromChild(Transform leverGrabbed, bool isLeftHand)
+    public void OnPressFromChild(Transform buttonPressed, bool isLeftHand)
     {
         if (isLeftHand)
         {
-            _leftHandGrabbed = leverGrabbed;
-            Debug.Log("Left hand grabbed");
+            _leftHandPressed = buttonPressed;
+            Debug.Log("Left hand pressed");
         }
         else
         {
-            _rightHandGrabbed = leverGrabbed;
-            Debug.Log("Right hand grabbed");
+            _rightHandPressed = buttonPressed;
+            Debug.Log("Right hand pressed");
         }
 
         if (_electricityIsOn) return;
@@ -66,23 +66,23 @@ public class ElectricityManager : MonoBehaviour
         }
         else
         {
-            if (IsLeftHandSelected() && IsRightHandSelected() && !HasGrabbedTwoOfSameDirection())
+            if (IsLeftHandSelected() && IsRightHandSelected() && !HasPressedTwoOfSameDirection())
             {
                 StartCoroutine(StartElectricitySequence(!IsRightToLeft()));
             }
         }
     }
 
-    public void OnReleaseFromChild(Transform leverReleased)
+    public void OnReleaseFromChild(Transform buttonReleased)
     {
-        if (_leftHandGrabbed == leverReleased)
+        if (_leftHandPressed == buttonReleased)
         {
-            _leftHandGrabbed = null;
+            _leftHandPressed = null;
             Debug.Log("Left hand released");
         }
-        else if (_rightHandGrabbed == leverReleased)
+        else if (_rightHandPressed == buttonReleased)
         {
-            _rightHandGrabbed = null;
+            _rightHandPressed = null;
             Debug.Log("Right hand released");
         }
 

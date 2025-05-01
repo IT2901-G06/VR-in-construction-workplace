@@ -16,6 +16,7 @@ public class ProximityTrigger : MonoBehaviour
 
     private bool _hasTriggered = false;
     private bool _hasExited = false;
+    private float _startTime = 0;
 
     void Start()
     {
@@ -25,6 +26,13 @@ public class ProximityTrigger : MonoBehaviour
 
     void Update()
     {
+        // Return if the player is inside the proximity during the first second of the scene
+        _startTime += Time.deltaTime;
+        if (_startTime < 1)
+        {
+            return;
+        }
+
         if (_canTriggerOnlyOnce && _hasTriggered && _hasExited)
         {
             return;

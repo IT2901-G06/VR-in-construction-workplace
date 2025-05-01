@@ -2,13 +2,34 @@ using UnityEngine;
 using Meta.WitAi.TTS.Utilities;
 using System;
 using System.Collections.Generic;
+using UnityEngine.Events;
+using Unity.VisualScripting;
 public class NPCSpawner : MonoBehaviour
 {
     [SerializeField] private NPC[] _activeNPCs;
     [SerializeField] private NPC[] _inactiveNPCs;
+
+    public UnityEvent<GameObject> OnNPCSpawned;
+    public UnityEvent<GameObject> OnNPCDestroyed;
+
     [HideInInspector] public List<GameObject> ActiveNPCInstances;
-    [HideInInspector] public List<NPC> InactiveNPCInstances;
     private GameObject spawnedNpc;
+
+    public GameObject GetNPCByName(string name)
+    {
+        return ActiveNPCInstances.Find(npc => npc.name == name && !npc.IsDestroyed());
+    }
+
+    public List<NPC> GetInactiveNPCs()
+    {
+        // Return copy of the inactive NPCs
+        List<NPC> inactiveNPCsCopy = new();
+        foreach (var npc in _inactiveNPCs)
+        {
+            inactiveNPCsCopy.Add(npc);
+        }
+        return inactiveNPCsCopy;
+    }
 
     private void Awake()
     {
@@ -17,7 +38,7 @@ public class NPCSpawner : MonoBehaviour
             ActiveNPCInstances.Add(SpawnNPC(npcSO));
         }
 
-        InactiveNPCInstances = new List<NPC>(_inactiveNPCs);
+        // InactiveNPCInstances = new List<NPC>(_inactiveNPCs);
     }
 
     public void DestroyAndRemoveAllNPCs()
@@ -25,6 +46,7 @@ public class NPCSpawner : MonoBehaviour
         foreach (var npc in ActiveNPCInstances)
         {
             Destroy(npc);
+            OnNPCDestroyed?.Invoke(npc);
         }
         ActiveNPCInstances.Clear();
     }
@@ -37,6 +59,7 @@ public class NPCSpawner : MonoBehaviour
             ActiveNPCInstances.Remove(npc);
             // Destroy the NPC GameObject
             Destroy(npc);
+            OnNPCDestroyed?.Invoke(npc);
         }
         else
         {
@@ -48,8 +71,8 @@ public class NPCSpawner : MonoBehaviour
     {
         // Instantiate the NPC prefab at the defined location
         GameObject newNPC = Instantiate(npcSO.NpcPrefab, npcSO.SpawnPosition, Quaternion.identity);
-        // Rotate the NPC 
-        newNPC.transform.rotation = Quaternion.Euler(npcSO.SpawnRotation);
+        // Rotate the NPC
+        newNPC.transform.Rotate(npcSO.SpawnRotation);
         // Attach the Text-To-Speech componenets
         AttachTTSComponents(newNPC, npcSO.SpatialBlend, npcSO.MinDistance);
         // change the apperance, animation avatar and voice from the deafult one, to a specific one
@@ -63,6 +86,9 @@ public class NPCSpawner : MonoBehaviour
 
         SetWaypointWalkingBehavior(newNPC, npcSO.ShouldWalkWaypoints, npcSO.Waypoints, npcSO.ShouldWalkWaypointsInCircle);
         spawnedNpc = newNPC;
+
+        OnNPCSpawned?.Invoke(newNPC);
+
         // return the NPC
         return newNPC;
     }
@@ -77,7 +103,7 @@ public class NPCSpawner : MonoBehaviour
             // Instantiate the TTS prefab and parent it under the NPC
             GameObject ttsObject = Instantiate(ttsPrefab, npc.transform);
 
-            // Assuming the TTSSpeaker component is either on the TTS prefab 
+            // Assuming the TTSSpeaker component is either on the TTS prefab
             // or one of its children, we find it and set it on the DialogueBoxController
             TTSSpeaker ttsSpeaker = ttsObject.GetComponentInChildren<TTSSpeaker>();
             DialogueBoxController dialogueController = npc.GetComponent<DialogueBoxController>();

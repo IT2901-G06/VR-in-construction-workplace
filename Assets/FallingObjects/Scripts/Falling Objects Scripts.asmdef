@@ -1,0 +1,20 @@
+{
+    "name": "FallingObjectsScripts",
+    "rootNamespace": "",
+    "references": [
+        "GUID:50872f4f3a34842d78062bc4043dbe36",
+        "GUID:700e0bc10bfc947a086a592c54f6aaea",
+        "GUID:2a230cb87a1d3ba4a98bdc0ddae76e6c",
+        "GUID:da7abd44cdeea48609605c1c2c9609c0",
+        "GUID:1adebfe87b4544906b2258eb1c900b79"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -8769,6 +8769,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8090420016154904585, guid: 99f47e11765001245a11dc1219c90ca0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8090420016154904585, guid: 99f47e11765001245a11dc1219c90ca0, type: 3}
       propertyPath: onSliderChange.m_PersistentCalls.m_Calls.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -8920,7 +8924,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8090420016154904585, guid: 99f47e11765001245a11dc1219c90ca0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8090420016693408349, guid: 99f47e11765001245a11dc1219c90ca0, type: 3}
@@ -8936,6 +8941,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8090420016648448677, guid: 99f47e11765001245a11dc1219c90ca0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1915113807}
+    - targetCorrespondingSourceObject: {fileID: 8090420016237831653, guid: 99f47e11765001245a11dc1219c90ca0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1492336359}
   m_SourcePrefab: {fileID: 100100000, guid: 99f47e11765001245a11dc1219c90ca0, type: 3}
 --- !u!1 &989589182
 GameObject:
@@ -10900,17 +10908,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250185871}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1255722223 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8090420016154904585, guid: 99f47e11765001245a11dc1219c90ca0, type: 3}
-  m_PrefabInstance: {fileID: 984834385}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d64e4b00523f7494da7698d0bf06e02f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &1255722229 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 8090420016237831648, guid: 99f47e11765001245a11dc1219c90ca0, type: 3}
@@ -13643,7 +13640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38b6fba166ab7749b37f4867ad8dbdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSlider: {fileID: 1255722223}
+  targetSlider: {fileID: 0}
   currentValue: 0
   autoResetEnabled: 1
   resetDelay: 3
@@ -14301,6 +14298,62 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 414452378}
   m_SourcePrefab: {fileID: 100100000, guid: 0da5ba4128d40da46b901faf2397741d, type: 3}
+--- !u!1 &1492336358 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8090420016237831653, guid: 99f47e11765001245a11dc1219c90ca0, type: 3}
+  m_PrefabInstance: {fileID: 984834385}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1492336359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492336358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d26599bd8fe74299969bcca3bd8a986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSliderChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1915113807}
+        m_TargetAssemblyTypeName: TextUpdate, Assembly-CSharp
+        m_MethodName: UpdateTextValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1388560855}
+        m_TargetAssemblyTypeName: MotorStrengthManager, Assembly-CSharp
+        m_MethodName: UpdateMotorStrength
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1423937408}
+        m_TargetAssemblyTypeName: SliderController, Assembly-CSharp
+        m_MethodName: OnSliderValueChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1496654583
 GameObject:
   m_ObjectHideFlags: 0

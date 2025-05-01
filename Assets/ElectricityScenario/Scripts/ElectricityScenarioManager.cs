@@ -1,32 +1,34 @@
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class ElectricityScenarioManager : MonoBehaviour
 {
     [SerializeField]
-    private NPCSpawner _npcSpawner;
+    private bool _partTwo;
 
-    [Header("Events")]
-    public UnityEvent OnScenarioStart;
-    public UnityEvent OnScenarioEnd;
-
-    public void StartPartTwo()
+    public static ElectricityScenarioManager Instance;
+    void Awake()
     {
-        if (_npcSpawner == null)
+        if (Instance == null)
         {
-            Debug.LogError("NPCSpawner not found");
-            return;
+            Instance = this;
+            DontDestroyOnLoad(this);
         }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
-        // Logic to start part two of the scenario
-        Debug.Log("Starting Part Two of the Scenario");
+    public void GoToPartTwo()
+    {
+        _partTwo = true;
+        Destroy(GameObject.Find("OVRCameraRig"));
+        SceneManager.LoadScene("ElectricityNightScene");
+    }
 
-        // Remove all active NPCs
-        _npcSpawner.DestroyAndRemoveAllNPCs();
-
-        NPC constructionManager = _npcSpawner.InactiveNPCInstances.Find((npc) => npc.name == "ConstructionManager");
-        _npcSpawner.SpawnNPC(constructionManager);
-
-        DeathManager.Instance.Revive();
+    public bool IsPartTwo()
+    {
+        return _partTwo;
     }
 }
