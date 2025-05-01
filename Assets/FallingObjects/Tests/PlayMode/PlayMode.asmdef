@@ -1,14 +1,12 @@
 {
-    "name": "PlayMode",
+    "name": "FallingObjects.PlayMode",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "FallingObjectsScripts",
-        "Meta.WitAi.TTS",
-        "Unity.TextMeshPro",
-        "CommonScripts",
         "Oculus.Interaction",
+        "CommonScripts",
         "Data"
     ],
     "includePlatforms": [],

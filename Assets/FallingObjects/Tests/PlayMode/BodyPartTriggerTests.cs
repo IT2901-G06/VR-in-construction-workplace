@@ -16,7 +16,7 @@ public class BodyPartTriggerTests
         player = new GameObject("Player") { tag = "Player" };
         player.transform.position = new Vector3(0, 2f, 0); // Simulate player at height
 
-        GameObject camRig = new GameObject("CameraRig");
+        GameObject camRig = new("PlayerController");
         CapsuleCollider capsule = camRig.AddComponent<CapsuleCollider>();
         Oculus.Interaction.Locomotion.CharacterController charController = camRig.AddComponent<Oculus.Interaction.Locomotion.CharacterController>();
 
