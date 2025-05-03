@@ -28,7 +28,7 @@ public class FallingObjectsScenarioManager : MonoBehaviour
     {
         _partTwo = true;
         Destroy(GameObject.Find("OVRCameraRig"));
-        SceneManager.LoadScene("FallingObjectsScenario");
+        SceneManager.LoadScene("FallingObjects");
     }
 
     public bool IsPartTwo()
