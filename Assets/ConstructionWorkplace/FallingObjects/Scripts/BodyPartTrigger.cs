@@ -56,7 +56,7 @@ public class BodyPartTrigger : MonoBehaviour
     {
         if (other.CompareTag("FallingObject"))
         {
-            HapticController hapticController = HapticController.Instance;
+            HapticManager hapticManager = HapticManager.Instance;
 
             MotorEvent motorEvent = BhapticsEventCollection.VestAll;
             switch (_position)
@@ -69,8 +69,8 @@ public class BodyPartTrigger : MonoBehaviour
                     break;
             }
 
-            hapticController.RunMotors(motorEvent, hapticController.GetFallingObjectsMotorStrength(), hapticController.GetSingleEventMotorRunTimeMs());
-            Debug.Log(_position + ": " + hapticController.GetFallingObjectsMotorStrength());
+            hapticManager.RunMotors(motorEvent, hapticManager.GetFallingObjectsMotorStrength(), hapticManager.GetSingleEventMotorRunTimeMs());
+            Debug.Log(_position + ": " + hapticManager.GetFallingObjectsMotorStrength());
             DeathManager.Instance.Kill();
         }
     }

@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class CameraRotationController : MonoBehaviour
+public class CameraRotationManager : MonoBehaviour
 {
     [SerializeField]
-    private StopBoxController _stopBoxController;
+    private StopBoxManager _stopBoxManager;
 
     void Update()
     {
         float xRotation = transform.eulerAngles.x;
         if (xRotation >= 240f && xRotation <= 300f)
         {
-            _stopBoxController.LookedUp();
+            _stopBoxManager.LookedUp();
         }
     }
 }

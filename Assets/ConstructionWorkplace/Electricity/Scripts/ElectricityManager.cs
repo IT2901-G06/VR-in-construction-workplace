@@ -28,7 +28,8 @@ public class ElectricityManager : MonoBehaviour
     private Transform _leftHandPressed;
     private Transform _rightHandPressed;
 
-    public void SetRequiresBothHands(bool requiresBothHands) {
+    public void SetRequiresBothHands(bool requiresBothHands)
+    {
         _requiresBothHands = requiresBothHands;
     }
 
@@ -115,7 +116,7 @@ public class ElectricityManager : MonoBehaviour
 
     public virtual IEnumerator StartElectricitySequence(bool reverse = false)
     {
-        HapticController hapticController = HapticController.Instance;
+        HapticManager hapticManager = HapticManager.Instance;
 
         Debug.Log("Electricity starting!");
         _onElectricityStarting?.Invoke();
@@ -129,7 +130,7 @@ public class ElectricityManager : MonoBehaviour
             // not be able to stop requests that hasn't already started.
             if (_stopElectricityCoroutine != null) break;
 
-            int requestId = hapticController.RunMotors(motorEvent, _motorStrength, 99999999);
+            int requestId = hapticManager.RunMotors(motorEvent, _motorStrength, 99999999);
             _bhapticsRequestIds.Add(requestId);
             yield return new WaitForSeconds(_secondsBetweenElectricitySteps);
         }
@@ -144,7 +145,7 @@ public class ElectricityManager : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
 
-        HapticController hapticController = HapticController.Instance;
+        HapticManager hapticManager = HapticManager.Instance;
 
         Debug.Log("Electricity off is starting!");
         _onElectricityStopping?.Invoke();
@@ -157,7 +158,7 @@ public class ElectricityManager : MonoBehaviour
 
         foreach (int requestId in copiedRequestIds)
         {
-            hapticController.StopByRequestId(requestId);
+            hapticManager.StopByRequestId(requestId);
             yield return new WaitForSeconds(_secondsBetweenElectricitySteps);
         }
 

@@ -11912,7 +11912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9652c302717684c27b2f7cb5e7d155c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stopBoxController: {fileID: 1832178728}
+  _stopBoxManager: {fileID: 1832178728}
 --- !u!65 &1411562578
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14088,7 +14088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd3875491d544dbabb6e89a8244441f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stopBoxController: {fileID: 1832178728}
+  _stopBoxManager: {fileID: 1832178728}
 --- !u!1001 &1727425290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16349,7 +16349,7 @@ PrefabInstance:
     - target: {fileID: 8935378693693997962, guid: 0d174f7b2c89b4fc1aa1409e2a29e484, type: 3}
       propertyPath: _player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 999168621}
     - target: {fileID: 8935378693693997962, guid: 0d174f7b2c89b4fc1aa1409e2a29e484, type: 3}
       propertyPath: _deathMessage
       value: Always make sure anything being lifted is properly secured with equipment
@@ -17749,7 +17749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89769e0d56bb140fa84a1d855dbfcb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stopBoxController: {fileID: 1832178728}
+  _stopBoxManager: {fileID: 1832178728}
 --- !u!4 &1936533649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5964854041892538581, guid: a11e85b0f7c0d4e409539ba1e795bac0, type: 3}
@@ -20090,6 +20090,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1242093006}
     - target: {fileID: 7483704082165872469, guid: 217b78d5040874b8d9be8ee4a72f3110, type: 3}
+      propertyPath: _stopBoxManager
+      value: 
+      objectReference: {fileID: 1832178728}
+    - target: {fileID: 7483704082165872469, guid: 217b78d5040874b8d9be8ee4a72f3110, type: 3}
       propertyPath: _crateBoundaries
       value: 
       objectReference: {fileID: 1495656455}
@@ -20174,6 +20178,10 @@ PrefabInstance:
       propertyPath: _crane
       value: 
       objectReference: {fileID: 1722143707}
+    - target: {fileID: 1731438740501165723, guid: 869898e40f87b408182f7330699f09c2, type: 3}
+      propertyPath: _stopBoxManager
+      value: 
+      objectReference: {fileID: 1832178728}
     - target: {fileID: 1731438740501165723, guid: 869898e40f87b408182f7330699f09c2, type: 3}
       propertyPath: _stopBoxController
       value: 

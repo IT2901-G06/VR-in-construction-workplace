@@ -1,7 +1,7 @@
 using Bhaptics.SDK2;
 using UnityEngine;
 
-public class HapticController : MonoBehaviour
+public class HapticManager : MonoBehaviour
 {
     [SerializeField]
     [Range(0, 100)]
@@ -10,7 +10,7 @@ public class HapticController : MonoBehaviour
     [SerializeField]
     private int _singleEventMotorRunTimeMs = 500;
 
-    public static HapticController Instance;
+    public static HapticManager Instance;
 
     void Awake()
     {

@@ -9,11 +9,11 @@ public class ConstructionManager : MonoBehaviour
     [SerializeField]
     private List<DialogueTree> _stage2DialogueTrees;
 
-    private NPCSpawner _npcSpawner => GameObject.Find("NPCSpawner").GetComponent<NPCSpawner>();
-    private GameObject _npc => _npcSpawner.GetNPCByName("Construction Manager");
-    private FollowThePlayerController _followThePlayerController => _npc.GetComponent<FollowThePlayerController>();
-    private ConversationController _conversationController => _npc.GetComponentInChildren<ConversationController>();
-    private DialogueBoxController _dialogueBoxController => _npc.GetComponentInChildren<DialogueBoxController>();
+    private NPCSpawner NpcSpawner => GameObject.Find("NPCSpawner").GetComponent<NPCSpawner>();
+    private GameObject Npc => NpcSpawner.GetNPCByName("Construction Manager");
+    private FollowThePlayerController FollowThePlayerController => Npc.GetComponent<FollowThePlayerController>();
+    private ConversationController ConversationController => Npc.GetComponentInChildren<ConversationController>();
+    private DialogueBoxController DialogueBoxController => Npc.GetComponentInChildren<DialogueBoxController>();
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class ConstructionManager : MonoBehaviour
 
     void OnDestroy()
     {
-        DialogueBoxController.OnSpeakEnded -= OnSpeakEnded;        
+        DialogueBoxController.OnSpeakEnded -= OnSpeakEnded;
     }
 
     void OnSpeakEnded(string name)
@@ -34,8 +34,8 @@ public class ConstructionManager : MonoBehaviour
 
         if (name == "ConstructionManagerPart2Stage1")
         {
-            _conversationController.NextDialogueTree();
-            _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, "ConstructionManagerPart2Stage2");
+            ConversationController.NextDialogueTree();
+            DialogueBoxController.StartDialogue(ConversationController.GetActiveDialogueTree(), 0, "ConstructionManagerPart2Stage2");
         }
         else if (name == "ConstructionManagerPart2Stage2")
         {
@@ -47,13 +47,13 @@ public class ConstructionManager : MonoBehaviour
 
     public void StartPart2Stage1()
     {
-        _conversationController.SetDialogueTreeList(_stage2DialogueTrees);
+        ConversationController.SetDialogueTreeList(_stage2DialogueTrees);
 
-        if (_followThePlayerController != null)
+        if (FollowThePlayerController != null)
         {
-            _followThePlayerController.PersonalSpaceFactor = 2;
-            _followThePlayerController.ShouldRotateTowardsPlayerWhenStandingStill = true;
-            _followThePlayerController.StartFollowingRadius = 2;
+            FollowThePlayerController.PersonalSpaceFactor = 2;
+            FollowThePlayerController.ShouldRotateTowardsPlayerWhenStandingStill = true;
+            FollowThePlayerController.StartFollowingRadius = 2;
         }
     }
 

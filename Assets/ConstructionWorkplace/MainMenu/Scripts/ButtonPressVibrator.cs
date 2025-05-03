@@ -16,9 +16,9 @@ public class ButtonPressVibrator : MonoBehaviour
 
     public void HandleButtonPress()
     {
-        HapticController hapticController = HapticController.Instance;
+        HapticManager hapticManager = HapticManager.Instance;
 
-        if (hapticController == null || fingerTracker == null || buttonTarget == null)
+        if (hapticManager == null || fingerTracker == null || buttonTarget == null)
             return;
 
 
@@ -27,26 +27,26 @@ public class ButtonPressVibrator : MonoBehaviour
 
         if (leftDistance < rightDistance)
         {
-            VibrateLeftHand(hapticController, intensity, Mathf.RoundToInt(duration * 1000));
+            VibrateLeftHand(hapticManager, intensity, Mathf.RoundToInt(duration * 1000));
         }
         else if (rightDistance < leftDistance)
         {
-            VibrateRightHand(hapticController, intensity, Mathf.RoundToInt(duration * 1000));
+            VibrateRightHand(hapticManager, intensity, Mathf.RoundToInt(duration * 1000));
         }
 
     }
 
-    public void VibrateLeftHand(HapticController hapticController, int motorStrength, int durationMs)
+    public void VibrateLeftHand(HapticManager hapticManager, int motorStrength, int durationMs)
     {
-        hapticController.RunMotors(BhapticsEventCollection.IndexFingerLeft, motorStrength, durationMs);
-        hapticController.RunMotors(BhapticsEventCollection.MiddleFingerLeft, Mathf.RoundToInt(motorStrength / 2), durationMs);
-        hapticController.RunMotors(BhapticsEventCollection.RingFingerLeft, Mathf.RoundToInt(motorStrength / 3), durationMs);
+        hapticManager.RunMotors(BhapticsEventCollection.IndexFingerLeft, motorStrength, durationMs);
+        hapticManager.RunMotors(BhapticsEventCollection.MiddleFingerLeft, Mathf.RoundToInt(motorStrength / 2), durationMs);
+        hapticManager.RunMotors(BhapticsEventCollection.RingFingerLeft, Mathf.RoundToInt(motorStrength / 3), durationMs);
     }
 
-    public void VibrateRightHand(HapticController hapticController, int motorStrength, int durationMs)
+    public void VibrateRightHand(HapticManager hapticManager, int motorStrength, int durationMs)
     {
-        hapticController.RunMotors(BhapticsEventCollection.AllRight, motorStrength, durationMs);
-        hapticController.RunMotors(BhapticsEventCollection.MiddleFingerRight, Mathf.RoundToInt(motorStrength / 2), durationMs);
-        hapticController.RunMotors(BhapticsEventCollection.RingFingerRight, Mathf.RoundToInt(motorStrength / 3), durationMs);
+        hapticManager.RunMotors(BhapticsEventCollection.AllRight, motorStrength, durationMs);
+        hapticManager.RunMotors(BhapticsEventCollection.MiddleFingerRight, Mathf.RoundToInt(motorStrength / 2), durationMs);
+        hapticManager.RunMotors(BhapticsEventCollection.RingFingerRight, Mathf.RoundToInt(motorStrength / 3), durationMs);
     }
 }
