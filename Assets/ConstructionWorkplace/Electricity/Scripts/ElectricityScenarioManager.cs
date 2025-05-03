@@ -24,7 +24,7 @@ public class ElectricityScenarioManager : MonoBehaviour
     {
         _partTwo = true;
         Destroy(GameObject.Find("OVRCameraRig"));
-        SceneManager.LoadScene("ElectricityNightScene");
+        SceneManager.LoadScene("Electricity");
     }
 
     public bool IsPartTwo()
