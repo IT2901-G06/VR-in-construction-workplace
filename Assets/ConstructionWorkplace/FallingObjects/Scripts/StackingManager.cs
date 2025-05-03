@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Oculus.Interaction;
 using Oculus.Interaction.HandGrab;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class StackingController : MonoBehaviour
+public class StackingManager : MonoBehaviour
 {
     [Header("Settings")]
 
@@ -64,7 +63,7 @@ public class StackingController : MonoBehaviour
     private int _stage;
 
 
-    public static StackingController Instance;
+    public static StackingManager Instance;
 
     public int AmtInitialStackableItems { get => _amtInitialStackableItems; set => _amtInitialStackableItems = value; }
     public int AmtSecondaryStackableItems { get => _amtSecondaryStackableItems; set => _amtSecondaryStackableItems = value; }
@@ -115,7 +114,7 @@ public class StackingController : MonoBehaviour
                     if (grandChild.TryGetComponent(out SnapInteractor _)) grandChild.gameObject.SetActive(true);
                 }
             }
-            if (!FallingObjectsScenarioController.Instance.IsPartTwo()) _stage2Event?.Invoke();
+            if (!FallingObjectsScenarioManager.Instance.IsPartTwo()) _stage2Event?.Invoke();
 
             foreach (Transform snapZone in _initialSnapZones.transform)
             {
@@ -148,21 +147,21 @@ public class StackingController : MonoBehaviour
         Debug.Log("Enough items stacked!");
         if (_pallet == null)
         {
-            Debug.LogWarning("Stacking Controller must have an assigned Pallet GameObject to properly function.");
+            Debug.LogWarning("Stacking Manager must have an assigned Pallet GameObject to properly function.");
             return;
         }
         if (_ropeSnapZone == null)
         {
-            Debug.LogWarning("Stacking Controller must have an assigned Rope Snap Zone GameObject to properly function.");
+            Debug.LogWarning("Stacking Manager must have an assigned Rope Snap Zone GameObject to properly function.");
             return;
         }
         if (_secondarySnapZones == null)
         {
-            Debug.LogWarning("Stacking Controller must have an assigned Secondary Snap Zones GameObject to properly function.");
+            Debug.LogWarning("Stacking Manager must have an assigned Secondary Snap Zones GameObject to properly function.");
             return;
         }
 
-        if (FallingObjectsScenarioController.Instance.IsPartTwo())
+        if (FallingObjectsScenarioManager.Instance.IsPartTwo())
         {
             foreach (Transform child in _goodRope.transform)
             {
@@ -179,7 +178,7 @@ public class StackingController : MonoBehaviour
             }
         }
 
-        CrateRopeController.Instance.SetStackedItems(_initialStackedItems, _secondaryStackedItems);
+        CrateRopeManager.Instance.SetStackedItems(_initialStackedItems, _secondaryStackedItems);
 
         foreach (Transform child in _stage2ItemsToStack.transform)
         {
@@ -206,7 +205,7 @@ public class StackingController : MonoBehaviour
 
         // Allow for placing rope on pallet
         _ropeSnapZone.SetActive(true);
-        if (!FallingObjectsScenarioController.Instance.IsPartTwo()) _stage3Event?.Invoke();
+        if (!FallingObjectsScenarioManager.Instance.IsPartTwo()) _stage3Event?.Invoke();
     }
 
     public void DecrementStackedBoxes(GameObject oldStackedItem)

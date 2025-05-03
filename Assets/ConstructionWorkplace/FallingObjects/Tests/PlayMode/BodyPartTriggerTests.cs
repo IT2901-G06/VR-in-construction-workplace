@@ -41,11 +41,11 @@ public class BodyPartTriggerTests
     [UnityTest]
     public IEnumerator OnTriggerEnter_KillsPlayerAndRunsHaptics()
     {
-        MockDeathManager mockDeathManager = new GameObject("DeathManager").AddComponent<MockDeathManager>();
+        MockDeathManager mockDeathManager = new GameObject("Death Manager").AddComponent<MockDeathManager>();
         DeathManager.Instance = mockDeathManager;
 
-        MockHapticController mockHapticController = new GameObject("HapticController").AddComponent<MockHapticController>();
-        HapticController.Instance = mockHapticController;
+        MockHapticManager mockHapticManager = new GameObject("Haptic Manager").AddComponent<MockHapticManager>();
+        HapticManager.Instance = mockHapticManager;
 
         GameObject fallingObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
         fallingObject.tag = "FallingObject";
@@ -60,7 +60,7 @@ public class BodyPartTriggerTests
         yield return new WaitForFixedUpdate(); // Let trigger event happen
 
         Assert.IsTrue(mockDeathManager.Killed);
-        Assert.IsTrue(mockHapticController.MotorsRun);
+        Assert.IsTrue(mockHapticManager.MotorsRun);
     }
 
     class MockDeathManager : DeathManager
@@ -69,7 +69,7 @@ public class BodyPartTriggerTests
         public override void Kill() => Killed = true;
     }
 
-    class MockHapticController : HapticController
+    class MockHapticManager : HapticManager
     {
         public bool MotorsRun = false;
         public override int RunMotors(MotorEvent e, int strength, int duration)

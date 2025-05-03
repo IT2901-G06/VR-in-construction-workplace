@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StopBoxController : MonoBehaviour
+public class StopBoxManager : MonoBehaviour
 {
 
     [SerializeField]

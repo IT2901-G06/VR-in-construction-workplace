@@ -51,11 +51,11 @@ public class PeterTheExplainer : MonoBehaviour
             _followThePlayerController.StartFollowingRadius = 4;
         }
 
-        _isPartTwo = FallingObjectsScenarioController.Instance.IsPartTwo();
+        _isPartTwo = FallingObjectsScenarioManager.Instance.IsPartTwo();
         _partSuffix = "Part" + (!_isPartTwo ? "One" : "Two");
         if (_isPartTwo)
         {
-            _conversationController.SetDialogueTreeList(FallingObjectsScenarioController.Instance.GetDialogueTrees());
+            _conversationController.SetDialogueTreeList(FallingObjectsScenarioManager.Instance.GetDialogueTrees());
         }
         _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, _conversationController.GetActiveDialogueTree().name);
     }
@@ -82,7 +82,7 @@ public class PeterTheExplainer : MonoBehaviour
         else if (name == _peterPrefix + "6PartTwo")
         {
             Destroy(GameObject.Find("OVRCameraRig"));
-            Destroy(FallingObjectsScenarioController.Instance);
+            Destroy(FallingObjectsScenarioManager.Instance);
             SceneManager.LoadScene("MainMenu");
         }
 

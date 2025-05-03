@@ -84,11 +84,11 @@ public class MotorStrengthManager : MonoBehaviour
     // Coroutine that keeps vibrating at the current strength
     private IEnumerator ContinuousVibration()
     {
-        HapticController hapticController = HapticController.Instance;
+        HapticManager hapticManager = HapticManager.Instance;
 
-        if (hapticController == null)
+        if (hapticManager == null)
         {
-            Debug.LogError("No HapticController found!");
+            Debug.LogError("No Haptic Manager found!");
             yield break;
         }
 
@@ -100,18 +100,18 @@ public class MotorStrengthManager : MonoBehaviour
             // Trigger vest vibrations
             if (useVest)
             {
-                hapticController.RunMotors(BhapticsEventCollection.VestFront, motorStrength, vibrationDuration);
-                hapticController.RunMotors(BhapticsEventCollection.VestBack, motorStrength, vibrationDuration);
+                hapticManager.RunMotors(BhapticsEventCollection.VestFront, motorStrength, vibrationDuration);
+                hapticManager.RunMotors(BhapticsEventCollection.VestBack, motorStrength, vibrationDuration);
             }
 
             // Trigger glove vibrations
             if (useGloves)
             {
-                hapticController.RunMotors(BhapticsEventCollection.GloveFingersLeft, motorStrength, vibrationDuration);
-                hapticController.RunMotors(BhapticsEventCollection.GlovePalmLeft, motorStrength, vibrationDuration);
+                hapticManager.RunMotors(BhapticsEventCollection.GloveFingersLeft, motorStrength, vibrationDuration);
+                hapticManager.RunMotors(BhapticsEventCollection.GlovePalmLeft, motorStrength, vibrationDuration);
 
-                hapticController.RunMotors(BhapticsEventCollection.GloveFingersRight, motorStrength, vibrationDuration);
-                hapticController.RunMotors(BhapticsEventCollection.GlovePalmRight, motorStrength, vibrationDuration);
+                hapticManager.RunMotors(BhapticsEventCollection.GloveFingersRight, motorStrength, vibrationDuration);
+                hapticManager.RunMotors(BhapticsEventCollection.GlovePalmRight, motorStrength, vibrationDuration);
             }
 
             // Wait slightly less than the duration to ensure continuous feeling

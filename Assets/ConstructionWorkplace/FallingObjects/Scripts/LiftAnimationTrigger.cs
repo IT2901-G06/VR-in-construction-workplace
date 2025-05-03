@@ -10,7 +10,7 @@ public class LiftAnimationTrigger : MonoBehaviour
     private GameObject _crateWithFallingObjects;
 
     [SerializeField]
-    private StopBoxController _stopBoxController;
+    private StopBoxManager _stopBoxManager;
 
     [SerializeField]
     private UnityEvent _stage5Event;
@@ -20,7 +20,7 @@ public class LiftAnimationTrigger : MonoBehaviour
         Animator craneAnimator = _crane.GetComponent<Animator>();
         Animator crateWithFallingObjectsAnimator = _crateWithFallingObjects.GetComponent<Animator>();
 
-        if (craneAnimator != null && crateWithFallingObjectsAnimator != null && _stopBoxController.GetRopeAttached() != "")
+        if (craneAnimator != null && crateWithFallingObjectsAnimator != null && _stopBoxManager.GetRopeAttached() != "")
         {
             craneAnimator.SetTrigger("PullLiftLeverCrane");
             crateWithFallingObjectsAnimator.SetTrigger("PullLiftLeverBoxes");

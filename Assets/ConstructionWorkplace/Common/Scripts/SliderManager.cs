@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class SliderController : MonoBehaviour
+public class SliderManager : MonoBehaviour
 {
     [Tooltip("Reference to the BNG.Slider component")]
     public SliderHelper targetSlider;
@@ -29,7 +29,7 @@ public class SliderController : MonoBehaviour
 
             if (targetSlider == null)
             {
-                Debug.LogWarning("No Slider component assigned or found. SliderController won't function.");
+                Debug.LogWarning("No Slider component assigned or found. SliderManager won't function.");
                 return;
             }
         }

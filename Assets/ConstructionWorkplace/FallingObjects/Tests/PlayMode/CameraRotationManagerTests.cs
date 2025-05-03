@@ -4,9 +4,9 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class CameraRotationControllerTests
+public class CameraRotationManagerTests
 {
-    private class TestStopBoxController : StopBoxController
+    private class TestStopBoxManager : StopBoxManager
     {
         public bool LookedUpCalled { get; private set; } = false;
 
@@ -21,14 +21,14 @@ public class CameraRotationControllerTests
     {
         GameObject cameraObj = new("Camera");
         GameObject stopBoxObj = new("StopBox");
-        TestStopBoxController stopBox = stopBoxObj.AddComponent<TestStopBoxController>();
+        TestStopBoxManager stopBox = stopBoxObj.AddComponent<TestStopBoxManager>();
 
-        CameraRotationController controller = cameraObj.AddComponent<CameraRotationController>();
+        CameraRotationManager manager = cameraObj.AddComponent<CameraRotationManager>();
 
-        // Assign _stopBoxController via reflection
-        FieldInfo field = typeof(CameraRotationController)
-            .GetField("_stopBoxController", BindingFlags.NonPublic | BindingFlags.Instance);
-        field.SetValue(controller, stopBox);
+        // Assign _stopBoxManager via reflection
+        FieldInfo field = typeof(CameraRotationManager)
+            .GetField("_stopBoxManager", BindingFlags.NonPublic | BindingFlags.Instance);
+        field.SetValue(manager, stopBox);
 
         // Set camera rotation within target range
         cameraObj.transform.eulerAngles = new Vector3(250f, 0f, 0f);
@@ -43,13 +43,13 @@ public class CameraRotationControllerTests
     {
         GameObject cameraObj = new("Camera");
         GameObject stopBoxObj = new("StopBox");
-        TestStopBoxController stopBox = stopBoxObj.AddComponent<TestStopBoxController>();
+        TestStopBoxManager stopBox = stopBoxObj.AddComponent<TestStopBoxManager>();
 
-        CameraRotationController controller = cameraObj.AddComponent<CameraRotationController>();
+        CameraRotationManager manager = cameraObj.AddComponent<CameraRotationManager>();
 
-        FieldInfo field = typeof(CameraRotationController)
-            .GetField("_stopBoxController", BindingFlags.NonPublic | BindingFlags.Instance);
-        field.SetValue(controller, stopBox);
+        FieldInfo field = typeof(CameraRotationManager)
+            .GetField("_stopBoxManager", BindingFlags.NonPublic | BindingFlags.Instance);
+        field.SetValue(manager, stopBox);
 
         cameraObj.transform.eulerAngles = new Vector3(100f, 0f, 0f);
 

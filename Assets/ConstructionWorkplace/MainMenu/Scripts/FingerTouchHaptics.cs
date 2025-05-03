@@ -83,11 +83,11 @@ public class FingerTouchHaptics : MonoBehaviour
 
     public void TriggerHapticEvents(float fingerDistance, FingerType fingerType)
     {
-        HapticController hapticController = HapticController.Instance;
+        HapticManager hapticManager = HapticManager.Instance;
 
-        if (hapticController == null)
+        if (hapticManager == null)
         {
-            Debug.LogError("No HapticController found!");
+            Debug.LogError("No Haptic Manager found!");
             return;
         }
 
@@ -98,7 +98,7 @@ public class FingerTouchHaptics : MonoBehaviour
         MotorEvent motorId = GetMotorIdForFinger(fingerType);
 
         // Run the appropriate motor
-        hapticController.RunMotors(motorId, Mathf.RoundToInt(motorStrength), 200);
+        hapticManager.RunMotors(motorId, Mathf.RoundToInt(motorStrength), 200);
     }
 
     private MotorEvent GetMotorIdForFinger(FingerType fingerType)

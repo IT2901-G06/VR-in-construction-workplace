@@ -3,7 +3,7 @@ using Obi;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CrateRopeController : MonoBehaviour
+public class CrateRopeManager : MonoBehaviour
 {
 
     [Header("Settings")]
@@ -40,7 +40,7 @@ public class CrateRopeController : MonoBehaviour
     [Header("Game Objects")]
 
     [SerializeField]
-    private StopBoxController _stopBoxController;
+    private StopBoxManager _stopBoxManager;
 
     [SerializeField]
     private BoxCollider _pipesAttachmentPlane;
@@ -57,7 +57,7 @@ public class CrateRopeController : MonoBehaviour
 
     private List<GameObject> _stackedItems;
 
-    public static CrateRopeController Instance;
+    public static CrateRopeManager Instance;
 
     void Awake()
     {
@@ -78,9 +78,9 @@ public class CrateRopeController : MonoBehaviour
             Debug.LogWarning("Crate Rope Manager must have an assigned Rope Snap Zone to properly function.");
             return;
         }
-        if (_stopBoxController == null)
+        if (_stopBoxManager == null)
         {
-            Debug.LogWarning("Crate Rope Manager must have an assigned Stop Box Controller to properly function.");
+            Debug.LogWarning("Crate Rope Manager must have an assigned Stop Box Manager to properly function.");
             return;
         }
         if (_ropeObiSolver == null)
@@ -126,7 +126,7 @@ public class CrateRopeController : MonoBehaviour
             }
         }
         rope.SetActive(false);
-        _stopBoxController.SetRopeAttached(rope.name.Contains("Bad"));
+        _stopBoxManager.SetRopeAttached(rope.name.Contains("Bad"));
 
         // Enable plane for rope around crates to attach itself to
         _pipesAttachmentPlane.gameObject.SetActive(true);

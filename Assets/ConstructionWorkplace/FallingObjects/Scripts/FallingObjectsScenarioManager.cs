@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class FallingObjectsScenarioController : MonoBehaviour
+public class FallingObjectsScenarioManager : MonoBehaviour
 {
     [SerializeField]
     private bool _partTwo;
@@ -10,7 +10,7 @@ public class FallingObjectsScenarioController : MonoBehaviour
     [SerializeField]
     private List<DialogueTree> _dialogueTrees;
 
-    public static FallingObjectsScenarioController Instance;
+    public static FallingObjectsScenarioManager Instance;
     void Awake()
     {
         if (Instance == null)

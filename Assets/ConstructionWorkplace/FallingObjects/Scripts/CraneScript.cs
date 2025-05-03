@@ -3,10 +3,10 @@ using UnityEngine;
 public class CraneScript : MonoBehaviour
 {
     [SerializeField]
-    private StopBoxController _stopBoxController;
+    private StopBoxManager _stopBoxManager;
 
     public void CraneAtTop()
     {
-        _stopBoxController.SetCraneAtTop(true);
+        _stopBoxManager.SetCraneAtTop(true);
     }
 }
