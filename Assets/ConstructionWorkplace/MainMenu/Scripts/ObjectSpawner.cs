@@ -1,5 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class spawns objects in the scene.
+/// It allows for random offsets, velocity, and limits on the number of spawned objects.
+/// </summary>
 public class ObjectSpawner : MonoBehaviour
 {
     [Header("Spawn Settings")]
@@ -42,7 +47,7 @@ public class ObjectSpawner : MonoBehaviour
     public bool destroyOldestWhenLimitReached = true;
 
     // Track spawned objects
-    private System.Collections.Generic.List<GameObject> spawnedObjects = new System.Collections.Generic.List<GameObject>();
+    private List<GameObject> spawnedObjects = new List<GameObject>();
 
     /// <summary>
     /// Spawn an object. Can be called from UI button events.
@@ -99,16 +104,13 @@ public class ObjectSpawner : MonoBehaviour
             );
         }
 
-        // Instantiate the object
         GameObject newObject = Instantiate(objectToSpawn, position, rotation);
 
-        // Apply velocity if enabled
         if (addVelocity)
         {
             Rigidbody rb = newObject.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                // Get the velocity direction
                 Vector3 direction;
 
                 if (useSpawnDirectionForVelocity)
@@ -150,7 +152,6 @@ public class ObjectSpawner : MonoBehaviour
             }
         }
 
-        // Add to our list of spawned objects
         spawnedObjects.Add(newObject);
 
         Debug.Log($"Spawned {objectToSpawn.name} at {position}");

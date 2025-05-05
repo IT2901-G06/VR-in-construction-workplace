@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// This class handles the color flicker effect for a button press.
+/// </summary>
 public class ColorFlicker : MonoBehaviour
 {
     [Header("References")]

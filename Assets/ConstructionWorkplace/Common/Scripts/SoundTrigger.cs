@@ -2,6 +2,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
+/// <summary>
+/// This script plays a sound when the object collides with another object at a high vertical speed.
+/// </summary>
 public class SoundTrigger : MonoBehaviour
 {
     private AudioSource audioSource;

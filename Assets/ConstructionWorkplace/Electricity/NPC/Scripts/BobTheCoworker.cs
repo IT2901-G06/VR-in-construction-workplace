@@ -3,12 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class handles the behavior of Bob The Coworker in the Electricity scenario.
+/// </summary>
 public class BobTheCoworker : MonoBehaviour
 {
-    [SerializeField] private GameObject _player;
-    [HideInInspector] private NPCSpawner _npcSpawner;
+    [SerializeField]
+    [Tooltip("The player object. An attempt will be made to find it by its tag if not set.")]
+    private GameObject _player;
+
+    [HideInInspector]
+    private NPCSpawner _npcSpawner;
 
     [SerializeField]
+    [Tooltip("The list of dialogue trees for stage 2. Leave empty if not needed.")]
     private List<DialogueTree> _stage2DialogueTrees;
 
     private GameObject _npc;
@@ -21,16 +29,15 @@ public class BobTheCoworker : MonoBehaviour
     private bool _playerInElectricityBoxProximity = false;
     private bool _hasPlayedStage3 = false;
 
-    // Individual NPCs
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Find the player if not set
         if (_player == null)
         {
             Debug.LogError("Player not found");
         }
 
+        // Find the NPCSpawner
         _npcSpawner = GameObject.Find("NPCSpawner").GetComponent<NPCSpawner>();
         if (_npcSpawner == null)
         {
@@ -52,6 +59,8 @@ public class BobTheCoworker : MonoBehaviour
         _conversationController = _npc.GetComponentInChildren<ConversationController>();
         _waypointWalker = _npc.GetComponentInChildren<WaypointWalker>();
 
+        // Start might be called for a second time. In that case, check if part 2 is currently playing
+        // and set the dialogue tree list accordingly.
         if (ElectricityScenarioManager.Instance.IsPartTwo())
         {
             _conversationController.SetDialogueTreeList(_stage2DialogueTrees);
@@ -59,11 +68,15 @@ public class BobTheCoworker : MonoBehaviour
 
         if (_followThePlayerController != null)
         {
+            // Set the follow behavior
             _followThePlayerController.PersonalSpaceFactor = 2;
             _followThePlayerController.StartFollowingRadius = 2;
         }
     }
 
+    /// <summary>
+    /// Called when the electricity spark is triggered.
+    /// </summary>
     public void OnElectricitySparkTrigger(int runAfterSeconds = 0)
     {
         Debug.Log("Electricity spark triggered");
@@ -72,6 +85,11 @@ public class BobTheCoworker : MonoBehaviour
         StartCoroutine(PerformBobTheCoworkerStage2(runAfterSeconds));
     }
 
+    /// <summary>
+    /// Performs the Bob The Coworker stage 2 dialogue.
+    /// </summary>
+    /// <param name="runAfterSeconds">The delay before starting the dialogue.</param>
+    /// <returns>An IEnumerator for coroutine.</returns>
     private IEnumerator PerformBobTheCoworkerStage2(int runAfterSeconds = 0)
     {
         // Perform Bob The Coworker stage 2
@@ -87,6 +105,10 @@ public class BobTheCoworker : MonoBehaviour
         _conversationController.AddOldDialogueTree(activeDialogueTree);
     }
 
+    /// <summary>
+    /// Called when the TTS dialogue ends.
+    /// </summary>
+    /// <param name="name">The name of the dialogue that has finished.</param>
     private void OnSpeakEnded(string name)
     {
         Debug.Log("Speak ended: " + name);
@@ -109,16 +131,24 @@ public class BobTheCoworker : MonoBehaviour
         else if (name == "BobTheCoworkerPart2Stage2")
         {
             _followThePlayerController.ShouldFollow = false;
+
+            // Start the next stage of the scenario
             GameObject.Find("NPCSpawner").GetComponent<NPCSpawner>().GetComponent<ConstructionManager>().StartPart2Stage1();
         }
     }
 
+    /// <summary>
+    /// Called when the final destination is reached.
+    /// </summary>
     private void OnFinalDestinationReached()
     {
         _hasReachedElectricityBox = true;
         TryRunStage3();
     }
 
+    /// <summary>
+    /// Called when the player enters the electricity box proximity.
+    /// </summary>
     public void OnPlayerElectricityBoxProximityEnter()
     {
         Debug.Log("Player reached electricity box");
@@ -126,12 +156,18 @@ public class BobTheCoworker : MonoBehaviour
         TryRunStage3();
     }
 
+    /// <summary>
+    /// Called when the player exits the electricity box proximity.
+    /// </summary>
     public void OnPlayerElectricityBoxProximityExit()
     {
         Debug.Log("Player left electricity box");
         _playerInElectricityBoxProximity = false;
     }
 
+    /// <summary>
+    /// Attempts to run stage 3 of Bob The Coworker.
+    /// </summary>
     private void TryRunStage3()
     {
         if (!_hasPlayedStage3 && _hasReachedElectricityBox && _playerInElectricityBoxProximity)
@@ -140,14 +176,18 @@ public class BobTheCoworker : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Runs stage 3 of Bob The Coworker after a delay of 1 second.
+    /// </summary>
+    /// <returns>An IEnumerator for coroutine.</returns>
     private IEnumerator RunStage3Coroutine()
     {
-        // _followThePlayerController.TurnNPCTowardsVector3(_player.transform.position);
-
         yield return new WaitForSeconds(1f);
 
         Debug.Log("Starting Bob The Coworker stage 3");
         _hasPlayedStage3 = true;
+
+        // Force next dialogue tree and start the dialogue
         _conversationController.NextDialogueTree();
         _dialogueBoxController.StartDialogue(_conversationController.GetActiveDialogueTree(), 0, "BobTheCoworkerStage3");
     }

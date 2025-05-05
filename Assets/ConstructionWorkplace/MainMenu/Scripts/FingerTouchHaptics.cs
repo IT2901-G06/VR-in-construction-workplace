@@ -1,6 +1,8 @@
 using UnityEngine;
 
-// Add this at the top of your file outside the class
+/// <summary>
+/// Enum to represent different finger types.
+/// </summary>
 public enum FingerType
 {
     LeftThumb,
@@ -15,6 +17,10 @@ public enum FingerType
     RightPinky
 }
 
+/// <summary>
+/// This class handles haptic feedback for finger touches.
+/// It checks if the finger tips are touching a target and triggers haptic events accordingly.
+/// </summary>
 public class FingerTouchHaptics : MonoBehaviour
 {
     [Header("References")]
@@ -35,13 +41,15 @@ public class FingerTouchHaptics : MonoBehaviour
         CheckForTouch();
     }
 
-
+    /// <summary>
+    /// Checks if any finger is touching the target and triggers haptic feedback if so.
+    /// </summary>
     public void CheckForTouch()
     {
         if (fingerTracker == null || touchTarget == null)
             return;
 
-
+        // Check all fingers
         CheckFingerTouch(fingerTracker.LeftIndexTip, FingerType.LeftIndex);
         CheckFingerTouch(fingerTracker.LeftMiddleTip, FingerType.LeftMiddle);
         CheckFingerTouch(fingerTracker.LeftRingTip, FingerType.LeftRing);
@@ -54,6 +62,11 @@ public class FingerTouchHaptics : MonoBehaviour
         CheckFingerTouch(fingerTracker.RightThumbTip, FingerType.RightThumb);
     }
 
+    /// <summary>
+    /// Checks if a specific finger is touching the target and triggers haptic feedback if so.
+    /// </summary>
+    /// <param name="fingerTip">The transform of the finger tip.</param>
+    /// <param name="fingerType">The type of finger.</param>
     private void CheckFingerTouch(Transform fingerTip, FingerType fingerType)
     {
         if (fingerTip == null || touchTarget == null)
@@ -65,7 +78,7 @@ public class FingerTouchHaptics : MonoBehaviour
         // Get vector from torch to finger
         Vector3 torchToFinger = fingerTip.position - touchTarget.transform.position;
 
-        // Check if finger is "below" the torch
+        // Check if finger is below the torch
         float dotProduct = Vector3.Dot(torchUpDirection, torchToFinger);
 
         if (dotProduct < 0)
@@ -80,7 +93,11 @@ public class FingerTouchHaptics : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Triggers haptic feedback events based on finger distance and type.
+    /// </summary>
+    /// <param name="fingerDistance">The distance of the finger from the target.</param>
+    /// <param name="fingerType">The type of finger.</param>
     public void TriggerHapticEvents(float fingerDistance, FingerType fingerType)
     {
         HapticManager hapticManager = HapticManager.Instance;
@@ -101,6 +118,11 @@ public class FingerTouchHaptics : MonoBehaviour
         hapticManager.RunMotors(motorId, Mathf.RoundToInt(motorStrength), 200);
     }
 
+    /// <summary>
+    /// Gets the MotorEvent for the specified finger type.
+    /// </summary>
+    /// <param name="fingerType">The type of finger.</param>
+    /// <returns>The corresponding MotorEvent.</returns>
     private MotorEvent GetMotorIdForFinger(FingerType fingerType)
     {
         return fingerType switch
