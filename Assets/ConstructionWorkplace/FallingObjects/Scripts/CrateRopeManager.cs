@@ -3,55 +3,70 @@ using Obi;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// This class manages the rope and crtne interactions in the game.
+/// It handles the attachment of ropes to snap zones, enabling the rope Obi solver,
+/// and setting up the environment for the rope to function properly.
+/// </summary>
 public class CrateRopeManager : MonoBehaviour
 {
 
     [Header("Settings")]
     [SerializeField]
+    [Tooltip("Multiplier for the thickness of the good rope")]
     private float _goodRopeThicknessMultiplier = 2f;
-
-
 
     [Header("Obi Solvers")]
 
     [SerializeField]
+    [Tooltip("Reference to the Obi solver for the rope")]
     private ObiSolver _ropeObiSolver;
 
     [SerializeField]
+    [Tooltip("Reference to the Obi solver for the crane rope")]
     private ObiSolver _craneRopeObiSolver;
 
     [Header("Events")]
     [SerializeField]
+    [Tooltip("Event triggered when the rope is attached")]
     private UnityEvent _stage4Event;
 
 
     [Header("Snap Zones")]
 
     [SerializeField]
+    [Tooltip("Reference to the snap zone for the rope")]
     private GameObject _ropeSnapZone;
 
     [SerializeField]
+    [Tooltip("Reference to the initial snap zones for stacked items")]
     private GameObject _initialSnapZones;
 
     [SerializeField]
+    [Tooltip("Reference to the secondary snap zones for stacked items")]
     private GameObject _secondarySnapZones;
 
 
     [Header("Game Objects")]
 
     [SerializeField]
+    [Tooltip("Reference to the Stop Box Manager")]
     private StopBoxManager _stopBoxManager;
 
     [SerializeField]
+    [Tooltip("Reference to the plane for pipes attachment")]
     private BoxCollider _pipesAttachmentPlane;
 
     [SerializeField]
+    [Tooltip("Reference to the plane for spools attachment")]
     private BoxCollider _spoolsAttachmentPlane;
 
     [SerializeField]
+    [Tooltip("Reference to the floor for spools attachment")]
     private BoxCollider _spoolsFloor;
 
     [SerializeField]
+    [Tooltip("Reference to the boundaries around the crate")]
     private GameObject _crateBoundaries;
 
 
@@ -65,12 +80,21 @@ public class CrateRopeManager : MonoBehaviour
         else Destroy(this);
     }
 
+    /// <summary>
+    /// Sets the stacked items.
+    /// </summary>
+    /// <param name="initialStackedItems">List of initial stacked items</param>
+    /// <param name="secondaryStackedItems">List of secondary stacked items</param>
     public void SetStackedItems(List<GameObject> initialStackedItems, List<GameObject> secondaryStackedItems)
     {
         _stackedItems = new List<GameObject>(initialStackedItems);
         _stackedItems.AddRange(secondaryStackedItems);
     }
 
+    /// <summary>
+    /// Handler for when a rope is attached to the snap zone.
+    /// </summary>
+    /// <param name="rope">The rope GameObject that is attached</param>
     public void AttachedRope(GameObject rope)
     {
         if (_ropeSnapZone == null)

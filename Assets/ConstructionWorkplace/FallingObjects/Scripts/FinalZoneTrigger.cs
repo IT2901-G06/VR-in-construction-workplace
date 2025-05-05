@@ -1,6 +1,10 @@
 using UnityEngine;
 
-public class FinalZoneTriggerScript : MonoBehaviour
+/// <summary>
+/// This class manages the final zone trigger for the player.
+/// It triggers events when the player enters or exits the final zone.
+/// </summary>
+public class FinalZoneTrigger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {

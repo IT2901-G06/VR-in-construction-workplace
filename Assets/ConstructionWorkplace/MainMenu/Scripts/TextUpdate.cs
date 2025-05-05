@@ -1,6 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;  // Required for UI Text
+using UnityEngine.UI;
 
+/// <summary>
+/// This class updates a UI Text component with a formatted string.
+/// </summary>
 public class TextUpdate : MonoBehaviour
 {
     [Tooltip("Format string for displaying values (e.g. '{0}%' or 'Value: {0:F1}')")]
@@ -19,7 +22,10 @@ public class TextUpdate : MonoBehaviour
         }
     }
 
-    // This method will be called by the slider's onSliderChange event
+    /// <summary>
+    /// Updates the text value with the specified float value.
+    /// </summary>
+    /// <param name="value">The float value to display.</param>
     public void UpdateTextValue(float value)
     {
         if (textComponent != null)

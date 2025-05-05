@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This class manages the slider functionality.
+/// It allows for setting the slider value, resetting it, and handling auto-reset functionality.
+/// </summary>
 public class SliderManager : MonoBehaviour
 {
     [Tooltip("Reference to the BNG.Slider component")]
@@ -19,7 +23,6 @@ public class SliderManager : MonoBehaviour
 
     private Coroutine resetCoroutine;
 
-    // Start is called once before the first execution of Update
     void Start()
     {
         // If slider wasn't assigned in inspector, try to find it
@@ -35,7 +38,6 @@ public class SliderManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (targetSlider != null)
@@ -45,7 +47,10 @@ public class SliderManager : MonoBehaviour
         }
     }
 
-    // Method that can be called by Slider's onSliderChange event
+    /// <summary>
+    /// Called when the slider value changes.
+    /// </summary>
+    /// <param name="newValue">The new value of the slider (0-100).</param>
     public void OnSliderValueChanged(float newValue)
     {
         Debug.Log($"Slider value changed to: {newValue}");
@@ -63,7 +68,10 @@ public class SliderManager : MonoBehaviour
         }
     }
 
-    // Set the slider to a specific value (0-100)
+    /// <summary>
+    /// Sets the slider value to a specific percentage (0-100).
+    /// </summary>
+    /// <param name="targetValue">The target value (0-100).</param>
     public void SetSliderValue(float targetValue)
     {
         if (targetSlider == null) return;
@@ -100,16 +108,15 @@ public class SliderManager : MonoBehaviour
         }
     }
 
-    // Reset the slider to zero after a delay
+    /// <summary>
+    /// Resets the slider value to zero after a specified delay.
+    /// </summary>
     private IEnumerator ResetSliderAfterDelay()
     {
         // Wait for the specified delay before resetting
         yield return new WaitForSeconds(resetDelay);
 
-        // Instantly set slider to zero
         SetSliderValue(0);
-
-        // Log for debugging
         Debug.Log("Slider reset to zero");
     }
 }

@@ -2,7 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-
+/// <summary>
+/// This class is used to handle the slider percentage of a ConfigurableJoint.
+/// It calculates the percentage of the slider based on the local position of the object.
+/// </summary>
 public class SliderHelper : MonoBehaviour
 {
     public float SlidePercentage
@@ -14,6 +17,9 @@ public class SliderHelper : MonoBehaviour
     }
     private float _slidePercentage;
 
+    /// <summary>
+    /// Event triggered when the slider percentage changes.
+    /// </summary>
     public UnityEvent<float> onSliderChange;
 
     float lastSliderPercentage;
@@ -35,10 +41,12 @@ public class SliderHelper : MonoBehaviour
 
     void Update()
     {
-
         _slidePercentage = (transform.localPosition.x - 0.001f + slideRangeHigh) / slideRange;
+
+        // Limit the percentage to 0-100.
         _slidePercentage = Math.Max(Math.Min(Mathf.Ceil(_slidePercentage * 100), 100), 0);
 
+        // If the percentage has changed, trigger the event.
         if (_slidePercentage != lastSliderPercentage)
         {
             OnSliderChange(_slidePercentage);
@@ -47,7 +55,10 @@ public class SliderHelper : MonoBehaviour
         lastSliderPercentage = _slidePercentage;
     }
 
-    // Callback for lever percentage change
+    /// <summary>
+    /// Triggers the onSliderChange event.
+    /// </summary>
+    /// <param name="percentage">The percentage of the slider.</param>
     public virtual void OnSliderChange(float percentage)
     {
         onSliderChange?.Invoke(percentage);

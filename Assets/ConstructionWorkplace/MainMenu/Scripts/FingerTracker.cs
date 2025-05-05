@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Class to track finger positions using OVRHand and OVRSkeleton (handtracking)
+/// <summary>
+/// This class tracks finger positions using OVRHand and OVRSkeleton (hand tracking).
+/// </summary>
 public class FingerTracker : MonoBehaviour
 {
     [Header("Hand References")]
@@ -10,7 +12,6 @@ public class FingerTracker : MonoBehaviour
 
     [Header("Debug")]
     public bool showDebugInfo = true;
-
 
     private Dictionary<OVRSkeleton.BoneId, Transform> leftFingerBones = new Dictionary<OVRSkeleton.BoneId, Transform>();
     private Dictionary<OVRSkeleton.BoneId, Transform> rightFingerBones = new Dictionary<OVRSkeleton.BoneId, Transform>();
@@ -21,6 +22,9 @@ public class FingerTracker : MonoBehaviour
         Invoke(nameof(FindHandBones), 1.0f);
     }
 
+    /// <summary>
+    /// Finds the hand bones in the OVR camera rig and sets up the finger bones dictionaries.
+    /// </summary>
     public void FindHandBones()
     {
         // Find the OVR camera rig in the scene
@@ -82,8 +86,6 @@ public class FingerTracker : MonoBehaviour
 
         if (showDebugInfo) Debug.Log("Hand tracking setup complete!");
     }
-
-
 
     // Variables for easy access in other scripts
     // Left hand finger bones

@@ -1,6 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// This class manages the motor strength for haptic feedback.
+/// It allows for dynamic adjustment of motor strength based on user input.
+/// It also handles the activation and deactivation of haptic devices.
+/// </summary>
 public class MotorStrengthManager : MonoBehaviour
 {
     // Singleton instance for easy access
@@ -8,16 +13,22 @@ public class MotorStrengthManager : MonoBehaviour
 
     // Current motor strength value
     [Range(0, 100)]
-    [SerializeField] private int motorStrength = 0;
-
+    [SerializeField]
+    [Tooltip("Motor strength value (0-100)")]
+    private int motorStrength = 0;
 
     // Vibration control variables
     private bool isVibrating = false;
     private Coroutine vibrationCoroutine;
 
     // Which haptic devices to activate
-    [SerializeField] private bool useVest = true;
-    [SerializeField] private bool useGloves = true;
+    [SerializeField]
+    [Tooltip("Use vest for haptic feedback")]
+    private bool useVest = true;
+
+    [SerializeField]
+    [Tooltip("Use gloves for haptic feedback")]
+    private bool useGloves = true;
 
     private void Awake()
     {
@@ -33,7 +44,13 @@ public class MotorStrengthManager : MonoBehaviour
         }
     }
 
-    // Called by the slider's onSliderChange event
+    /// <summary>
+    /// Handler for updating motor strength based on slider input.
+    /// </summary>
+    /// <param name="sliderValue"></param>
+    /// <remarks>
+    /// Called by the slider's onSliderChange event
+    /// </remarks>
     public void UpdateMotorStrength(float sliderValue)
     {
         // Convert slider value to integer (0-55)
@@ -52,13 +69,18 @@ public class MotorStrengthManager : MonoBehaviour
         }
     }
 
-    // Method for other scripts to get the current motor strength
+    /// <summary>
+    /// Get the current motor strength value.
+    /// </summary>
+    /// <returns>Current motor strength (0-100)</returns>
     public int GetMotorStrength()
     {
         return motorStrength;
     }
 
-    // Start the continuous vibration
+    /// <summary>
+    /// Start the continuous vibration.
+    /// </summary>
     private void StartVibration()
     {
         if (isVibrating) return;
@@ -68,7 +90,9 @@ public class MotorStrengthManager : MonoBehaviour
         Debug.Log("Starting continuous vibration");
     }
 
-    // Stop the continuous vibration
+    /// <summary>
+    /// Stop the continuous vibration.
+    /// </summary>
     private void StopVibration()
     {
         if (!isVibrating) return;
@@ -81,7 +105,10 @@ public class MotorStrengthManager : MonoBehaviour
         Debug.Log("Stopping continuous vibration");
     }
 
-    // Coroutine that keeps vibrating at the current strength
+    /// <summary>
+    /// Coroutine to handle continuous vibration based on motor strength.
+    /// </summary>
+    /// <returns>IEnumerator for coroutine</returns>
     private IEnumerator ContinuousVibration()
     {
         HapticManager hapticManager = HapticManager.Instance;
@@ -121,9 +148,9 @@ public class MotorStrengthManager : MonoBehaviour
         isVibrating = false;
     }
 
-    // Optional: Stop vibrations when this component is disabled/destroyed
     private void OnDisable()
     {
+        // Stop vibration when the object is disabled
         StopVibration();
     }
 }

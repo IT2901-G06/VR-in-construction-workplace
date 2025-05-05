@@ -39,8 +39,7 @@ OR
 2. Select all materials
 3. Navigate to: **Edit → Rendering → Materials → Convert Selected Built-in Materials to URP**
     
-
-> The prefabs should now display correctly in the scenes!! 🤯
+The prefabs should now display correctly in the scenes!! 🤯
 
 ### 5. Generate Lightmap UVs for SimpliCity Package
 To correctly generate shadows for the **SimpliCity Construction Yard** package:
@@ -50,4 +49,55 @@ To correctly generate shadows for the **SimpliCity Construction Yard** package:
 3. Click on **Generate Lightmap UVs** in the inspector tab
 4. Click **Apply**
 
-> The project should now be fully set up and ready to use! 🚀
+### 6. (Optional) Connect bHaptics developer account and API key
+
+In order to feel haptic feedback through bHaptics equipment when using Unity, you must link your bHaptics developer portal account through an API key.
+
+1. Create an account for the "bHaptics Developer Portal" [here](https://auth.bhaptics.com/login?success-url=https://developer.bhaptics.com/applications)
+2. Follow the "Create the App" section from [this](https://docs.bhaptics.com/portal/app-and-event) guide.
+3. Follow [this](https://docs.bhaptics.com/portal/deploy-the-app#create-api-key) guide in order to link your app. Follow the guide up to and including this section "Link to the Game".
+
+After finishing these steps, the bHaptics equipment should work. To confirm this, add a new event in the developer portal, create a new deploy, then click bHaptics in the Unity application toolbar, then play the event from the popup window.
+
+---
+
+The project should now be fully set up and ready to use! 🚀
+
+## How to run
+
+> ⚠️ **Warning:** In order to use the bHaptics equipment, the running operating system MUST be Windows. The project however works fine without the equipment connected.
+
+Although you are free to run any scenario directly, you should run the scene `MainMenu` to experience the full application.
+
+### Using Meta Quest headset
+
+> ⚠️ **Warning:** To use the headset you need to be running the Windows operating system.
+
+1. Make sure you have Meta Quest Link downloaded.
+2. Make sure your Quest 2/3 headset is connected to the link app, either through cable or via airlink. Quest 3 is preferred for hand tracking.
+3. (Optional, but must for haptic feedback) Make sure you have bHaptics Player downloaded, and that the equipment is connected.
+
+### Using Meta XR Simulator
+
+1. Set the `Tracking Origin Type` according to the explanation in [Simulator crashing / showing black screen](#simulator-crashing--showing-black-screen).
+2. Toggle the Meta XR Simulator button just to the left of the Unity play button.
+
+## Common pitfalls
+
+### Meta XR Simulator
+
+The project requires the meta XR simulator in order to simulate the usage of the meta quest headsets. Throughout development we have found some issues with this simulator. This subsection highlights them.
+
+#### Simulator crashing / showing black screen
+
+This is caused by the OVRManager's tracking type being set to the wrong type based on the operating system used. This value can be changed by clicking the `OVRCameraRig` prefab, and adjusting `Tracking Origin Type` under the `OVRManager` script.  
+
+If using:  
+**Windows** - `Floor Level`  
+**MacOS** - `Stage`
+
+#### Simulator moving / clicking things uncontrollably
+
+For some reason the simulator never fully closes between simulation runs. And for some mystical reason it decides to track all keyboard inputs even when the simulator window is not focused. These inputs are replayed when the simulator is opened automatically when pressing "Play" in Unity. 
+
+The solution to this issue is to just let the simulator play out keyboard events. Then just exit the simulator and start the scene by clicking "Play" again. Alternatively you could also completely reopen Unity to force a complete restart of the simulator.

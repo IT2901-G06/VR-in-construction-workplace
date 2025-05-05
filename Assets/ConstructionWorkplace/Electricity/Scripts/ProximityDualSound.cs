@@ -1,12 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Plays a sound when the player enters a trigger area and loops it with random delays.
+/// </summary>
 public class ProximityDualSound : MonoBehaviour
 {
     public Transform player;
     public float triggerDistance = 10f;
-    public AudioClip enterSound;           // Spilles én gang når spilleren går inn
-    public AudioClip loopSound;            // Spilles i loop med random delay
+    public AudioClip enterSound;
+    public AudioClip loopSound;
     public ParticleSystem[] particles;
     public bool playLoopSound = true;
 
@@ -27,7 +30,7 @@ public class ProximityDualSound : MonoBehaviour
 
         if (audioSource == null)
         {
-            Debug.LogWarning("AudioSource mangler på objektet!");
+            Debug.LogWarning("AudioSource missing");
         }
     }
 
@@ -37,6 +40,7 @@ public class ProximityDualSound : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
 
+        // Trigger if player is within the trigger distance
         if (distance <= triggerDistance)
         {
             if (!hasPlayedEnterSound && enterSound != null)
@@ -52,7 +56,7 @@ public class ProximityDualSound : MonoBehaviour
         }
         else
         {
-            // Hvis spilleren går ut av rekkevidde, stopp loopen
+            // Reset the flag when the player exits the trigger area
             if (loopCoroutine != null)
             {
                 StopCoroutine(loopCoroutine);
@@ -61,6 +65,10 @@ public class ProximityDualSound : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loops the sound with random delays and plays all particles.
+    /// </summary>
+    /// <returns>Enumerator for coroutine.</returns>
     IEnumerator LoopWithRandomDelay()
     {
         while (true)
@@ -68,7 +76,7 @@ public class ProximityDualSound : MonoBehaviour
             audioSource.clip = loopSound;
             audioSource.Play();
 
-            // Start alle particles
+            // Start all particles
             foreach (var ps in particles)
             {
                 if (ps != null)
@@ -80,7 +88,7 @@ public class ProximityDualSound : MonoBehaviour
 
             audioSource.Stop();
 
-            // Stopp alle particles
+            // Stop all particles
             foreach (var ps in particles)
             {
                 if (ps != null)
@@ -91,7 +99,4 @@ public class ProximityDualSound : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
     }
-
-
-
 }
