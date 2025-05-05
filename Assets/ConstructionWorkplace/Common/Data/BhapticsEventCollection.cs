@@ -1,7 +1,5 @@
 using Bhaptics.SDK2;
 
-// This class exists solely to 
-
 /// <summary>
 /// Holds information about common haptic events. For more information about the Bhaptics SDK and what
 /// each motor value represents, visit https://docs.bhaptics.com/sdk/further/motor.
