@@ -14,15 +14,16 @@ How to install Android Build Support
 7. Reopen the Unity editor if its already running
 
 ### 2. Clone the Project
-Clone the repository and open it in **Unity (editor version 6000.0.36f1)**
+Clone the repository and open it in **Unity (editor version 6000.0.36f1)**. This will likely start the project in Unity Safe Mode. This is to be expected as you are missing Unity assets that are required for the project to run.
 
 ### 3. Import Required Packages
-Make sure to import the following packages:
-- [SimpliCity Construction Yard](https://assetstore.unity.com/packages/3d/environments/industrial/simplicity-construction-yard-72569)
-- [Big Warehouse Pack](https://assetstore.unity.com/packages/3d/environments/industrial/big-warehouse-pack-96082)
-- [Terrain Sample Asset Pack](https://assetstore.unity.com/packages/3d/environments/landscapes/terrain-sample-asset-pack-145808)
-- [Obi Rope](https://assetstore.unity.com/packages/tools/physics/obi-rope-55579)
-- [VR Interaction Framework](https://assetstore.unity.com/packages/templates/systems/vr-interaction-framework-161066)
+
+Import the following packages:
+- [Terrain Sample Asset Pack (free)](https://assetstore.unity.com/packages/3d/environments/landscapes/terrain-sample-asset-pack-145808)
+- [SimpliCity Construction Yard (paid)](https://assetstore.unity.com/packages/3d/environments/industrial/simplicity-construction-yard-72569)
+- [Big Warehouse Pack (paid)](https://assetstore.unity.com/packages/3d/environments/industrial/big-warehouse-pack-96082)
+- [Obi Rope (paid)](https://assetstore.unity.com/packages/tools/physics/obi-rope-55579)
+- [VR Interaction Framework (paid)](https://assetstore.unity.com/packages/templates/systems/vr-interaction-framework-161066)
 
 ### 4. Fix Pink Prefabs caused by Missing Materials
 If you did not have the packages downloaded beforehand, prefabs will appear **pink** due to missing materials.
@@ -30,13 +31,11 @@ If you did not have the packages downloaded beforehand, prefabs will appear **pi
 For the **SimpliCity Construction Yard**, **Big Warehouse**, and **VR Interaction Framework** packages:
 1. Navigate to the `Materials` folder
     - `Assets/SimpliCity_Construction_Yard/- Materials`    
-OR
+AND
     - `Assets/IGBlocks/IG_Warehouse/Models/Materials`   
-OR
+AND
     - `Assets\BNG Framework\Materials`
-OR
-    - `Assets\BNG Framework\Models\Hands`
-2. Select all materials
+2. Select all materials (be careful only to select the materials and not other stuff that lies in those folders)
 3. Navigate to: **Edit → Rendering → Materials → Convert Selected Built-in Materials to URP**
     
 The prefabs should now display correctly in the scenes!! 🤯
@@ -49,7 +48,15 @@ To correctly generate shadows for the **SimpliCity Construction Yard** package:
 3. Click on **Generate Lightmap UVs** in the inspector tab
 4. Click **Apply**
 
-### 6. (Optional) Connect bHaptics developer account and API key
+### 6. Fix rope attachment
+
+The Falling Objects scene requires an obi collider to be fixed. This is because it is initially broken when you first setup the project. If this is not fixed, then ropes will fall through the table.
+
+1. Open the `Falling Objects` scene
+2. In the left sidebar, open `Rope Table` -> `BNG_Table_Wood_01` -> `Tablet_Body`
+3. In the inspector, under `Obi Collider (Script)`, click "Fix Now".
+
+### 7. (Optional) Connect bHaptics developer account and API key
 
 In order to feel haptic feedback through bHaptics equipment when using Unity, you must link your bHaptics developer portal account through an API key.
 
@@ -81,6 +88,15 @@ Although you are free to run any scenario directly, you should run the scene `Ma
 
 1. Set the `Tracking Origin Type` according to the explanation in [Simulator crashing / showing black screen](#simulator-crashing--showing-black-screen).
 2. Toggle the Meta XR Simulator button just to the left of the Unity play button.
+3. When you have clicked play and the simulator is running, be sure to change from using controllers to hands.
+
+## How to run tests
+
+> ⚠️ **Warning:** Disable the Meta XR Simulator when running tests. 
+
+1. In the application toolbar, click `Window` -> `General` -> `Test Runner`.
+2. In the popup window including the test runner, you can choose from running "Edit Mode" tests and "Play Mode" tests.
+3. Either run the specific tests you want by selecting one or more and then clicking "Run Selected", or click "Run All" to run all tests.
 
 ## Common pitfalls
 
@@ -101,3 +117,10 @@ If using:
 For some reason the simulator never fully closes between simulation runs. And for some mystical reason it decides to track all keyboard inputs even when the simulator window is not focused. These inputs are replayed when the simulator is opened automatically when pressing "Play" in Unity. 
 
 The solution to this issue is to just let the simulator play out keyboard events. Then just exit the simulator and start the scene by clicking "Play" again. Alternatively you could also completely reopen Unity to force a complete restart of the simulator.
+
+## Known bugs
+
+### Falling objects
+
+- Very rarely, when looking up at the boxes when standing in the red X spot, it doesn't register the player as being in the correct spot and therefore doesn't drop the boxes. To fix, restart play mode.
+- The weak rope doesn't seem to want to stay still on the table. This is a very small issue as one end of the rope always stays attached and therefore the player is able to grab it.
